@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  ListDetailsViewController.h
 //  Notebook
 //
 //  Created by Smbat Tumasyan on 12/22/15.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface ListDetailsViewController : UIViewController
 
 @end
-

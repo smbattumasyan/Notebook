@@ -9,13 +9,15 @@
 /* Begin PBXBuildFile section */
 		17F45AA81C29674F00B26B9C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F45AA71C29674F00B26B9C /* main.m */; };
 		17F45AAB1C29674F00B26B9C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F45AAA1C29674F00B26B9C /* AppDelegate.m */; };
-		17F45AAE1C29674F00B26B9C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F45AAD1C29674F00B26B9C /* ViewController.m */; };
 		17F45AB11C29674F00B26B9C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17F45AAF1C29674F00B26B9C /* Main.storyboard */; };
 		17F45AB41C29674F00B26B9C /* Notebook.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 17F45AB21C29674F00B26B9C /* Notebook.xcdatamodeld */; };
 		17F45AB61C29674F00B26B9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17F45AB51C29674F00B26B9C /* Assets.xcassets */; };
 		17F45AB91C29674F00B26B9C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17F45AB71C29674F00B26B9C /* LaunchScreen.storyboard */; };
 		17F45AC41C29674F00B26B9C /* NotebookTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F45AC31C29674F00B26B9C /* NotebookTests.m */; };
 		17F45ACF1C29674F00B26B9C /* NotebookUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F45ACE1C29674F00B26B9C /* NotebookUITests.m */; };
+		17F45AE11C29721900B26B9C /* NoteListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F45AE01C29721900B26B9C /* NoteListViewController.m */; };
+		17F45B291C297F8600B26B9C /* ListDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F45B281C297F8600B26B9C /* ListDetailsViewController.m */; };
+		17F45B301C2997FD00B26B9C /* NoteListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F45B2F1C2997FD00B26B9C /* NoteListViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,8 +42,6 @@
 		17F45AA71C29674F00B26B9C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		17F45AA91C29674F00B26B9C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		17F45AAA1C29674F00B26B9C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		17F45AAC1C29674F00B26B9C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		17F45AAD1C29674F00B26B9C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		17F45AB01C29674F00B26B9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		17F45AB31C29674F00B26B9C /* Notebook.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Notebook.xcdatamodel; sourceTree = "<group>"; };
 		17F45AB51C29674F00B26B9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -53,6 +53,12 @@
 		17F45ACA1C29674F00B26B9C /* NotebookUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotebookUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		17F45ACE1C29674F00B26B9C /* NotebookUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotebookUITests.m; sourceTree = "<group>"; };
 		17F45AD01C29674F00B26B9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17F45ADF1C29721900B26B9C /* NoteListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteListViewController.h; sourceTree = "<group>"; };
+		17F45AE01C29721900B26B9C /* NoteListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteListViewController.m; sourceTree = "<group>"; };
+		17F45B271C297F8600B26B9C /* ListDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListDetailsViewController.h; sourceTree = "<group>"; };
+		17F45B281C297F8600B26B9C /* ListDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListDetailsViewController.m; sourceTree = "<group>"; };
+		17F45B2E1C2997FD00B26B9C /* NoteListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteListViewCell.h; sourceTree = "<group>"; };
+		17F45B2F1C2997FD00B26B9C /* NoteListViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteListViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,8 +111,7 @@
 			children = (
 				17F45AA91C29674F00B26B9C /* AppDelegate.h */,
 				17F45AAA1C29674F00B26B9C /* AppDelegate.m */,
-				17F45AAC1C29674F00B26B9C /* ViewController.h */,
-				17F45AAD1C29674F00B26B9C /* ViewController.m */,
+				17F45B2A1C297F9E00B26B9C /* Controller */,
 				17F45AAF1C29674F00B26B9C /* Main.storyboard */,
 				17F45AB51C29674F00B26B9C /* Assets.xcassets */,
 				17F45AB71C29674F00B26B9C /* LaunchScreen.storyboard */,
@@ -141,6 +146,43 @@
 				17F45AD01C29674F00B26B9C /* Info.plist */,
 			);
 			path = NotebookUITests;
+			sourceTree = "<group>";
+		};
+		17F45B2A1C297F9E00B26B9C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				17F45B2B1C29978500B26B9C /* NoteListViewController */,
+				17F45B2C1C29979900B26B9C /* ListDetailsViewController */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		17F45B2B1C29978500B26B9C /* NoteListViewController */ = {
+			isa = PBXGroup;
+			children = (
+				17F45B2D1C2997BD00B26B9C /* Cells */,
+				17F45ADF1C29721900B26B9C /* NoteListViewController.h */,
+				17F45AE01C29721900B26B9C /* NoteListViewController.m */,
+			);
+			name = NoteListViewController;
+			sourceTree = "<group>";
+		};
+		17F45B2C1C29979900B26B9C /* ListDetailsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				17F45B271C297F8600B26B9C /* ListDetailsViewController.h */,
+				17F45B281C297F8600B26B9C /* ListDetailsViewController.m */,
+			);
+			name = ListDetailsViewController;
+			sourceTree = "<group>";
+		};
+		17F45B2D1C2997BD00B26B9C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				17F45B2E1C2997FD00B26B9C /* NoteListViewCell.h */,
+				17F45B2F1C2997FD00B26B9C /* NoteListViewCell.m */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,10 +315,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17F45AAE1C29674F00B26B9C /* ViewController.m in Sources */,
+				17F45B301C2997FD00B26B9C /* NoteListViewCell.m in Sources */,
 				17F45AAB1C29674F00B26B9C /* AppDelegate.m in Sources */,
 				17F45AB41C29674F00B26B9C /* Notebook.xcdatamodeld in Sources */,
 				17F45AA81C29674F00B26B9C /* main.m in Sources */,
+				17F45AE11C29721900B26B9C /* NoteListViewController.m in Sources */,
+				17F45B291C297F8600B26B9C /* ListDetailsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,6 +544,7 @@
 				17F45AD51C29674F00B26B9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		17F45AD61C29674F00B26B9C /* Build configuration list for PBXNativeTarget "NotebookTests" */ = {
 			isa = XCConfigurationList;
@@ -508,6 +553,7 @@
 				17F45AD81C29674F00B26B9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		17F45AD91C29674F00B26B9C /* Build configuration list for PBXNativeTarget "NotebookUITests" */ = {
 			isa = XCConfigurationList;
@@ -516,6 +562,7 @@
 				17F45ADB1C29674F00B26B9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
