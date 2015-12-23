@@ -113,6 +113,7 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="tableView" destination="FTp-VF-aE0" id="CQg-qs-Jaj"/>
                         <segue destination="MNg-Yl-AtL" kind="show" identifier="NoteListViewController" id="YKv-kX-sd6"/>
                     </connections>
                 </viewController>

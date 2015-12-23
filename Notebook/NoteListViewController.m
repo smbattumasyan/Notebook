@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) NSArray *tableData;
 @property (nonatomic, strong) Entity *list;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 @end
 
@@ -26,16 +27,16 @@
     CoreDataWrapper *wrapper = [CoreDataWrapper sharedInstance];
    // self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
-    Entity *noteList = [wrapper createList];
-    noteList.title = @"Title";
-    noteList.date = [NSDate date];
-    noteList.details = @"aaaaaaaaa asdfs assdf ailsDetasdfsd Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details Details";
-    [wrapper saveList];
+//    Entity *noteList = [wrapper createList];
+//    noteList.title = @"Title";
+//    noteList.date = [NSDate date];
+//    noteList.details = @"hi world sdfs assdf ailsDetasdfsd Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details Details";
+//    [wrapper saveList];
     
     self.tableData = [wrapper findAllList];
-    [wrapper deleteList:self.tableData[0]];
-    
-    NSLog(@"list__%@",self.list.date);
+//    [wrapper deleteList:self.tableData[0]];
+//    
+//    NSLog(@"list__%@",self.list.date);
 }
 
 
@@ -61,11 +62,8 @@
     return cell;
 }
 
--(NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self performSegueWithIdentifier:@"NoteListViewController" sender:self];
-    self.list = self.tableData[indexPath.row];
-    return indexPath;
 }
 
 
@@ -73,9 +71,10 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
     if ([[segue identifier] isEqualToString:@"NoteListViewController"]) {
         ListDetailsViewController *vc = [segue destinationViewController];
-        vc.listDetails = self.list;
+        vc.listDetails = self.tableData[selectedIndexPath.row];
     }
 }
 
