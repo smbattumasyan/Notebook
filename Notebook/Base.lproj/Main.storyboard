@@ -109,7 +109,11 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="w8A-kk-FiR">
-                        <barButtonItem key="rightBarButtonItem" title="Add" id="Zc2-O0-g3X"/>
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="Zc2-O0-g3X">
+                            <connections>
+                                <action selector="addButtonAction:" destination="GUy-2j-vmY" id="P8C-vZ-sZY"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>

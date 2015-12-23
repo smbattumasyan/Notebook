@@ -7,12 +7,14 @@
 //
 
 #import "ListDetailsViewController.h"
+#import "CoreDataWrapper.h"
 
 @interface ListDetailsViewController ()
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *navigationItem;
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (weak, nonatomic) IBOutlet UITextView *detailsTextView;
+@property (nonatomic, strong) CoreDataWrapper *wrapper;
 
 @end
 
@@ -21,6 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.wrapper = [CoreDataWrapper sharedInstance];
     [self.titleTextField setEnabled:NO];
     [self.detailsTextView setEditable:NO];
     self.titleTextField.text = self.listDetails.title;
@@ -36,6 +39,9 @@
         sender.title = @"Done";
  
     } else {
+        [self.listDetails setValue:self.titleTextField.text forKey:@"title"];
+        [self.listDetails setValue:self.detailsTextView.text forKey:@"details"];
+        [self.wrapper saveList];
         [self.titleTextField setEnabled:NO];
         [self.detailsTextView setEditable:NO];
         sender.title = @"Edit";

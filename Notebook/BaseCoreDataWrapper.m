@@ -14,27 +14,21 @@
 - (NSManagedObjectContext *)managedObjectContext {
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    
     return appDelegate.managedObjectContext;
-    
 }
 
 
 - (NSManagedObjectModel *)managedObjectModel {
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    
     return appDelegate.managedObjectModel;
-    
 }
 
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    
-    return appDelegate.persistentStoreCoordinator;
-    
+    return appDelegate.persistentStoreCoordinator;    
 }
 
 @end

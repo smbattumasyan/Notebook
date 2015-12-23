@@ -17,6 +17,8 @@
 @property (nonatomic, strong) Entity *list;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
+@property (nonatomic, strong) CoreDataWrapper *wrapper;
+
 @end
 
 @implementation NoteListViewController
@@ -24,21 +26,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    CoreDataWrapper *wrapper = [CoreDataWrapper sharedInstance];
-   // self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    self.wrapper = [CoreDataWrapper sharedInstance];
+//    self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
-//    Entity *noteList = [wrapper createList];
-//    noteList.title = @"Title";
+//    Entity *noteList = [self.wrapper createList];
+//    noteList.title = @"MY NOte";
 //    noteList.date = [NSDate date];
 //    noteList.details = @"hi world sdfs assdf ailsDetasdfsd Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details Details";
-//    [wrapper saveList];
-    
-    self.tableData = [wrapper findAllList];
+//    noteList.title = @"my note";
+//    [self.wrapper saveList];
+    [self.tableView reloadData];
+    self.tableData = [self.wrapper findAllList];
 //    [wrapper deleteList:self.tableData[0]];
 //    
 //    NSLog(@"list__%@",self.list.date);
 }
+- (IBAction)addButtonAction:(UIBarButtonItem *)sender {
 
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -47,7 +47,6 @@
                                                inManagedObjectContext:self.managedObjectContext];
     
     return list;
-
 }
 
 
