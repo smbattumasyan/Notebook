@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Entity.h"
 
 @interface ListDetailsViewController : UIViewController
+
+@property (nonatomic, strong) Entity *listDetails;
 
 @end

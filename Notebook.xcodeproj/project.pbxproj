@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17A5F5161C2A78DB00FD2481 /* Entity+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5F5131C2A78DB00FD2481 /* Entity+CoreDataProperties.m */; };
+		17A5F5171C2A78DB00FD2481 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5F5151C2A78DB00FD2481 /* Entity.m */; };
+		17A5F51D1C2A799C00FD2481 /* BaseCoreDataWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5F51C1C2A799C00FD2481 /* BaseCoreDataWrapper.m */; };
+		17A5F5231C2A7A2100FD2481 /* CoreDataWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5F5221C2A7A2100FD2481 /* CoreDataWrapper.m */; };
 		17F45AA81C29674F00B26B9C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F45AA71C29674F00B26B9C /* main.m */; };
 		17F45AAB1C29674F00B26B9C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F45AAA1C29674F00B26B9C /* AppDelegate.m */; };
 		17F45AB11C29674F00B26B9C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17F45AAF1C29674F00B26B9C /* Main.storyboard */; };
@@ -38,6 +42,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		17A5F5121C2A78DB00FD2481 /* Entity+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Entity+CoreDataProperties.h"; sourceTree = "<group>"; };
+		17A5F5131C2A78DB00FD2481 /* Entity+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Entity+CoreDataProperties.m"; sourceTree = "<group>"; };
+		17A5F5141C2A78DB00FD2481 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
+		17A5F5151C2A78DB00FD2481 /* Entity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entity.m; sourceTree = "<group>"; };
+		17A5F51B1C2A799C00FD2481 /* BaseCoreDataWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCoreDataWrapper.h; sourceTree = "<group>"; };
+		17A5F51C1C2A799C00FD2481 /* BaseCoreDataWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCoreDataWrapper.m; sourceTree = "<group>"; };
+		17A5F5211C2A7A2100FD2481 /* CoreDataWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataWrapper.h; sourceTree = "<group>"; };
+		17A5F5221C2A7A2100FD2481 /* CoreDataWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataWrapper.m; sourceTree = "<group>"; };
 		17F45AA31C29674F00B26B9C /* Notebook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notebook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17F45AA71C29674F00B26B9C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		17F45AA91C29674F00B26B9C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -86,6 +98,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		17A5F5181C2A78EB00FD2481 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				17A5F51A1C2A795400FD2481 /* Wrapper */,
+				17A5F5191C2A791600FD2481 /* Entity Models */,
+			);
+			name = "Core Data";
+			sourceTree = "<group>";
+		};
+		17A5F5191C2A791600FD2481 /* Entity Models */ = {
+			isa = PBXGroup;
+			children = (
+				17A5F5121C2A78DB00FD2481 /* Entity+CoreDataProperties.h */,
+				17A5F5131C2A78DB00FD2481 /* Entity+CoreDataProperties.m */,
+				17A5F5141C2A78DB00FD2481 /* Entity.h */,
+				17A5F5151C2A78DB00FD2481 /* Entity.m */,
+			);
+			name = "Entity Models";
+			sourceTree = "<group>";
+		};
+		17A5F51A1C2A795400FD2481 /* Wrapper */ = {
+			isa = PBXGroup;
+			children = (
+				17A5F51B1C2A799C00FD2481 /* BaseCoreDataWrapper.h */,
+				17A5F51C1C2A799C00FD2481 /* BaseCoreDataWrapper.m */,
+				17A5F5211C2A7A2100FD2481 /* CoreDataWrapper.h */,
+				17A5F5221C2A7A2100FD2481 /* CoreDataWrapper.m */,
+			);
+			name = Wrapper;
+			sourceTree = "<group>";
+		};
 		17F45A9A1C29674E00B26B9C = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +152,7 @@
 		17F45AA51C29674F00B26B9C /* Notebook */ = {
 			isa = PBXGroup;
 			children = (
+				17A5F5181C2A78EB00FD2481 /* Core Data */,
 				17F45AA91C29674F00B26B9C /* AppDelegate.h */,
 				17F45AAA1C29674F00B26B9C /* AppDelegate.m */,
 				17F45B2A1C297F9E00B26B9C /* Controller */,
@@ -315,12 +359,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17A5F5171C2A78DB00FD2481 /* Entity.m in Sources */,
 				17F45B301C2997FD00B26B9C /* NoteListViewCell.m in Sources */,
+				17A5F5231C2A7A2100FD2481 /* CoreDataWrapper.m in Sources */,
 				17F45AAB1C29674F00B26B9C /* AppDelegate.m in Sources */,
 				17F45AB41C29674F00B26B9C /* Notebook.xcdatamodeld in Sources */,
 				17F45AA81C29674F00B26B9C /* main.m in Sources */,
 				17F45AE11C29721900B26B9C /* NoteListViewController.m in Sources */,
 				17F45B291C297F8600B26B9C /* ListDetailsViewController.m in Sources */,
+				17A5F5161C2A78DB00FD2481 /* Entity+CoreDataProperties.m in Sources */,
+				17A5F51D1C2A799C00FD2481 /* BaseCoreDataWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

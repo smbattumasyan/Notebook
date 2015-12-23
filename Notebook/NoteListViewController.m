@@ -9,10 +9,12 @@
 #import "NoteListViewController.h"
 #import "ListDetailsViewController.h"
 #import "NoteListViewCell.h"
+#import "CoreDataWrapper.h"
 
 @interface NoteListViewController ()
 
 @property (nonatomic, strong) NSArray *tableData;
+@property (nonatomic, strong) Entity *list;
 
 @end
 
@@ -21,8 +23,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.tableData = @[@"hello world", @"hi",];
+    CoreDataWrapper *wrapper = [CoreDataWrapper sharedInstance];
+   // self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+    Entity *noteList = [wrapper createList];
+    noteList.title = @"Title";
+    noteList.date = [NSDate date];
+    noteList.details = @"aaaaaaaaa asdfs assdf ailsDetasdfsd Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details Details";
+    [wrapper saveList];
+    
+    self.tableData = [wrapper findAllList];
+    [wrapper deleteList:self.tableData[0]];
+    
+    NSLog(@"list__%@",self.list.date);
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -39,22 +54,28 @@
     if (cell == nil) {
         cell = [[NoteListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tableIdentifier];
     }
-    cell.titleLabel.text = @"Title";
-    cell.detailsLabel.text = @"Detail";
-    cell.dateLabel.text = @"22/12/2015";
+    self.list = self.tableData[indexPath.row] ;
+    cell.titleLabel.text = self.list.title;
+    cell.detailsLabel.text = self.list.details;
+    cell.dateLabel.text = [NSDateFormatter localizedStringFromDate:self.list.date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+-(NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     [self performSegueWithIdentifier:@"NoteListViewController" sender:self];
+    self.list = self.tableData[indexPath.row];
+    return indexPath;
 }
+
 
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"NoteListViewController"]) {
-
+        ListDetailsViewController *vc = [segue destinationViewController];
+        vc.listDetails = self.list;
     }
 }
 

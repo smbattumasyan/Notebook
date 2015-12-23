@@ -23,6 +23,9 @@
     // Do any additional setup after loading the view.
     [self.titleTextField setEnabled:NO];
     [self.detailsTextView setEditable:NO];
+    self.titleTextField.text = self.listDetails.title;
+    self.detailsTextView.text = self.listDetails.details;
+    self.navigationItem.title = [NSDateFormatter localizedStringFromDate:self.listDetails.date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
 }
 
 - (IBAction)editButtonAction:(UIBarButtonItem *)sender {
