@@ -11,7 +11,7 @@
 
 @interface ListDetailsViewController : UIViewController
 
-@property (nonatomic, strong) NBDataModel *listDetails;
+@property (nonatomic, strong) NBDataModel *cellDetails;
 @property (nonatomic, assign) BOOL isAddButtonPressed;
 
 @end

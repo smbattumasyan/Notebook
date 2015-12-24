@@ -10,11 +10,11 @@
 
 @interface NBCoreDataManager : BaseCoreDataManager
 
-+ (nonnull instancetype)sharedInstance;
++ (nonnull instancetype)sharedManager;
 
-- (BOOL)saveList;
-- (void)deleteList:(nonnull NBDataModel *)list;
-- (nonnull NBDataModel *)createList;
-- (nullable NSArray <NBDataModel *> *)findAllList;
+- (BOOL)saveObject;
+- (void)deleteObject:(nonnull NBDataModel *)managedObject;
+- (nonnull NBDataModel *)createObject;
+- (nullable NSArray <NBDataModel *> *)requestAllObjects;
 
 @end

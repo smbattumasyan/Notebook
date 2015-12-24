@@ -10,23 +10,22 @@
 
 @implementation NBCoreDataManager
 
-+ (nonnull instancetype)sharedInstance {
++ (nonnull instancetype)sharedManager {
     
     static NBCoreDataManager *instance;
     if (!instance) {
         instance = [[NBCoreDataManager alloc] init];
     }
+    
     return instance;
 }
 
 
 
-- (BOOL)saveList{
+- (BOOL)saveObject{
     
     NSError *error = nil;
-    
-    BOOL status = [self.managedObjectContext save:&error];
-    
+    BOOL status = [self.managedObjectContext save:&error];    
     if (error) {
         NSLog(@"addList error: %@", error);
     }
@@ -34,33 +33,28 @@
     return status;
 }
 
-- (void)deleteList:(NSManagedObject *)list {
-    [self.managedObjectContext deleteObject:list];
-    [self saveList];
+- (void)deleteObject:(NBDataModel *)managedObject {
+    [self.managedObjectContext deleteObject:managedObject];
+    [self saveObject];
 }
 
-- (NBDataModel *)createList {
+- (NBDataModel *)createObject {
     
     NBDataModel *list = [NSEntityDescription insertNewObjectForEntityForName:@"NBDataModel"
                                                inManagedObjectContext:self.managedObjectContext];
-    
     return list;
 }
 
 
-- (nullable NSArray <NBDataModel *> *)findAllList; {
+- (nullable NSArray <NBDataModel *> *)requestAllObjects; {
     
     NSError *error = nil;
-    
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"NBDataModel"];
-    
     NSArray *result =  [self.managedObjectContext executeFetchRequest:request
                                                                 error:&error];
-    
     if (error) {
-        NSLog(@"findAllList error: %@", error);
+        NSLog(@"requestAllObjects error: %@", error);
     }
-    
     return result;
 }
 

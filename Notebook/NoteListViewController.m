@@ -13,20 +13,20 @@
 
 @interface NoteListViewController ()
 
-@property (nonatomic, strong) NSArray *tableData;
-@property (nonatomic, strong) NBDataModel *list;
+@property (nonatomic, strong) NSArray *nbModelAllDatas;
+@property (nonatomic, strong) NBDataModel *nbData;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, assign) BOOL isAddButtonPressed;
 
 
-@property (nonatomic, strong) NBCoreDataManager *wrapper;
+@property (nonatomic, strong) NBCoreDataManager *coreDataManager;
 
 @end
 
 @implementation NoteListViewController
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.tableData = [self.wrapper findAllList];
+    self.nbModelAllDatas = [self.coreDataManager requestAllObjects];
     [super viewWillAppear:animated];
     [self.tableView reloadData];
 }
@@ -35,7 +35,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"Notebook";
-    self.wrapper = [NBCoreDataManager sharedInstance];
+    self.coreDataManager = [NBCoreDataManager sharedManager];
 }
 - (IBAction)addButtonAction:(UIBarButtonItem *)sender {
     self.isAddButtonPressed = YES;
@@ -48,7 +48,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.tableData count];
+    return [self.nbModelAllDatas count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -57,10 +57,10 @@
     if (cell == nil) {
         cell = [[NoteListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tableIdentifier];
     }
-    self.list = self.tableData[indexPath.row] ;
-    cell.titleLabel.text = self.list.title;
-    cell.detailsLabel.text = self.list.details;
-    cell.dateLabel.text = [NSDateFormatter localizedStringFromDate:self.list.date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+    self.nbData = self.nbModelAllDatas[indexPath.row] ;
+    cell.titleLabel.text = self.nbData.title;
+    cell.detailsLabel.text = self.nbData.details;
+    cell.dateLabel.text = [NSDateFormatter localizedStringFromDate:self.nbData.date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
     return cell;
 }
 
@@ -78,7 +78,7 @@
         vc.isAddButtonPressed = YES;
         self.isAddButtonPressed = NO;
     } else if ([[segue identifier] isEqualToString:@"NoteListViewController"]) {
-        vc.listDetails = self.tableData[selectedIndexPath.row];
+        vc.cellDetails = self.nbModelAllDatas[selectedIndexPath.row];
     }
 }
 

@@ -16,8 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *detailsTextView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 
-
-@property (nonatomic, strong) NBCoreDataManager *wrapper;
+@property (nonatomic, strong) NBCoreDataManager *coreDataManager;
 
 @end
 
@@ -26,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.wrapper = [NBCoreDataManager sharedInstance];
+    self.coreDataManager = [NBCoreDataManager sharedManager];
     if (self.isAddButtonPressed) {
         [self.titleTextField setEnabled:YES];
         [self.detailsTextView setEditable:YES];
@@ -39,17 +38,17 @@
         [self.titleTextField setEnabled:NO];
         [self.detailsTextView setEditable:NO];
         self.editButton.title = @"Edit";
-        self.titleTextField.text = self.listDetails.title;
-        self.detailsTextView.text = self.listDetails.details;
-        self.navigationItem.title = [NSDateFormatter localizedStringFromDate:self.listDetails.date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+        self.titleTextField.text = self.cellDetails.title;
+        self.detailsTextView.text = self.cellDetails.details;
+        self.navigationItem.title = [NSDateFormatter localizedStringFromDate:self.cellDetails.date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
     }
     
 }
 
 - (IBAction)deleteButtonAction:(id)sender {
-    [self.wrapper deleteList:self.listDetails];
-    [self.wrapper saveList];
-    UIAlertController * alert=   [UIAlertController
+    [self.coreDataManager deleteObject:self.cellDetails];
+    [self.coreDataManager saveObject];
+    UIAlertController * alertOfDeleteButton=   [UIAlertController
                                   alertControllerWithTitle:@"Delete"
                                   message:@"Successful deleted from memory"
                                   preferredStyle:UIAlertControllerStyleAlert];
@@ -59,11 +58,11 @@
                                 handler:^(UIAlertAction * action)
                                 {
                                     //Handel your yes please button action here
-                                    [alert dismissViewControllerAnimated:YES completion:nil];
+                                    [alertOfDeleteButton dismissViewControllerAnimated:YES completion:nil];
                                     
                                 }];
-    [alert addAction:okButton];
-    [self presentViewController:alert animated:YES completion:nil];
+    [alertOfDeleteButton addAction:okButton];
+    [self presentViewController:alertOfDeleteButton animated:YES completion:nil];
 }
 
 - (IBAction)editButtonAction:(UIBarButtonItem *)sender {
@@ -75,15 +74,15 @@
  
     } else {
         if (self.isAddButtonPressed) {
-            NBDataModel *newEntity = [self.wrapper createList];
+            NBDataModel *newEntity = [self.coreDataManager createObject];
             newEntity.title = self.titleTextField.text;
             newEntity.details = self.detailsTextView.text;
             newEntity.date = [NSDate date];
-            [self.wrapper saveList];
+            [self.coreDataManager saveObject];
         }
-        [self.listDetails setValue:self.titleTextField.text forKey:@"title"];
-        [self.listDetails setValue:self.detailsTextView.text forKey:@"details"];
-        [self.wrapper saveList];
+        [self.cellDetails setValue:self.titleTextField.text forKey:@"title"];
+        [self.cellDetails setValue:self.detailsTextView.text forKey:@"details"];
+        [self.coreDataManager saveObject];
         [self.titleTextField setEnabled:NO];
         [self.detailsTextView setEditable:NO];
         sender.title = @"Edit";
