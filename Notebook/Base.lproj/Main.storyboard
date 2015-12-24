@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Note List View Controller-->
+        <!--Lists View Controller-->
         <scene sceneID="wqF-Z5-aQz">
             <objects>
-                <viewController id="GUy-2j-vmY" customClass="NoteListViewController" sceneMemberID="viewController">
+                <viewController id="GUy-2j-vmY" customClass="NBListsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yxM-Xf-Jnp"/>
                         <viewControllerLayoutGuide type="bottom" id="beo-4s-8rm"/>
@@ -118,7 +118,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="tableView" destination="FTp-VF-aE0" id="CQg-qs-Jaj"/>
-                        <segue destination="MNg-Yl-AtL" kind="show" identifier="NoteListViewController" id="YKv-kX-sd6"/>
+                        <segue destination="MNg-Yl-AtL" kind="show" identifier="NBListsViewController" id="YKv-kX-sd6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gco-bu-c8n" userLabel="First Responder" sceneMemberID="firstResponder"/>

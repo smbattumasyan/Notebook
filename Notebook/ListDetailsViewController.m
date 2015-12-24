@@ -12,9 +12,9 @@
 @interface ListDetailsViewController ()
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *navigationItem;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (weak, nonatomic) IBOutlet UITextView *detailsTextView;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 
 @property (nonatomic, strong) NBCoreDataManager *coreDataManager;
 
@@ -38,15 +38,15 @@
         [self.titleTextField setEnabled:NO];
         [self.detailsTextView setEditable:NO];
         self.editButton.title = @"Edit";
-        self.titleTextField.text = self.cellDetails.title;
-        self.detailsTextView.text = self.cellDetails.details;
-        self.navigationItem.title = [NSDateFormatter localizedStringFromDate:self.cellDetails.date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+        self.titleTextField.text = [self.detailsData title];
+        self.detailsTextView.text = [self.detailsData details];
+        self.navigationItem.title = [NSDateFormatter localizedStringFromDate:self.detailsData.date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
     }
     
 }
 
 - (IBAction)deleteButtonAction:(id)sender {
-    [self.coreDataManager deleteObject:self.cellDetails];
+    [self.coreDataManager deleteObject:self.detailsData];
     [self.coreDataManager saveObject];
     UIAlertController * alertOfDeleteButton=   [UIAlertController
                                   alertControllerWithTitle:@"Delete"
@@ -57,7 +57,6 @@
                                 style:UIAlertActionStyleDefault
                                 handler:^(UIAlertAction * action)
                                 {
-                                    //Handel your yes please button action here
                                     [alertOfDeleteButton dismissViewControllerAnimated:YES completion:nil];
                                     
                                 }];
@@ -75,13 +74,13 @@
     } else {
         if (self.isAddButtonPressed) {
             NBDataModel *newEntity = [self.coreDataManager createObject];
-            newEntity.title = self.titleTextField.text;
-            newEntity.details = self.detailsTextView.text;
+            newEntity.title = [self.titleTextField text];
+            newEntity.details = [self.detailsTextView text];
             newEntity.date = [NSDate date];
             [self.coreDataManager saveObject];
         }
-        [self.cellDetails setValue:self.titleTextField.text forKey:@"title"];
-        [self.cellDetails setValue:self.detailsTextView.text forKey:@"details"];
+        [self.detailsData setValue:[self.titleTextField text] forKey:@"title"];
+        [self.detailsData setValue:[self.detailsTextView text] forKey:@"details"];
         [self.coreDataManager saveObject];
         [self.titleTextField setEnabled:NO];
         [self.detailsTextView setEditable:NO];

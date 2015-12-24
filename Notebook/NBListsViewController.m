@@ -1,32 +1,31 @@
 //
-//  NoteListViewController.m
+//  NBListsViewController.m
 //  Notebook
 //
 //  Created by Smbat Tumasyan on 12/22/15.
 //  Copyright © 2015 EGS. All rights reserved.
 //
 
-#import "NoteListViewController.h"
+#import "NBListsViewController.h"
 #import "ListDetailsViewController.h"
 #import "NoteListViewCell.h"
 #import "NBCoreDataManager.h"
 
-@interface NoteListViewController ()
+@interface NBListsViewController ()
 
-@property (nonatomic, strong) NSArray *nbModelAllDatas;
-@property (nonatomic, strong) NBDataModel *nbData;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, assign) BOOL isAddButtonPressed;
-
+@property (nonatomic, strong) NSArray *allModelDates;
+@property (nonatomic, strong) NBDataModel *modelData;
 
 @property (nonatomic, strong) NBCoreDataManager *coreDataManager;
 
 @end
 
-@implementation NoteListViewController
+@implementation NBListsViewController
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.nbModelAllDatas = [self.coreDataManager requestAllObjects];
+    self.allModelDates = [self.coreDataManager requestAllObjects];
     [super viewWillAppear:animated];
     [self.tableView reloadData];
 }
@@ -39,7 +38,7 @@
 }
 - (IBAction)addButtonAction:(UIBarButtonItem *)sender {
     self.isAddButtonPressed = YES;
-    [self performSegueWithIdentifier:@"NoteListViewController" sender:self];
+    [self performSegueWithIdentifier:@"NBListsViewController" sender:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,7 +47,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.nbModelAllDatas count];
+    return [self.allModelDates count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -57,15 +56,15 @@
     if (cell == nil) {
         cell = [[NoteListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tableIdentifier];
     }
-    self.nbData = self.nbModelAllDatas[indexPath.row] ;
-    cell.titleLabel.text = self.nbData.title;
-    cell.detailsLabel.text = self.nbData.details;
-    cell.dateLabel.text = [NSDateFormatter localizedStringFromDate:self.nbData.date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+    self.modelData = self.allModelDates[indexPath.row] ;
+    cell.titleLabel.text = [self.modelData title];
+    cell.detailsLabel.text = [self.modelData details];
+    cell.dateLabel.text = [NSDateFormatter localizedStringFromDate:self.modelData.date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"NoteListViewController" sender:self];
+    [self performSegueWithIdentifier:@"NBListsViewController" sender:self];
 }
 
 
@@ -73,12 +72,12 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
-     ListDetailsViewController *vc = [segue destinationViewController];
+     ListDetailsViewController *listDetailsVC = [segue destinationViewController];
     if (self.isAddButtonPressed) {
-        vc.isAddButtonPressed = YES;
+        listDetailsVC.isAddButtonPressed = YES;
         self.isAddButtonPressed = NO;
-    } else if ([[segue identifier] isEqualToString:@"NoteListViewController"]) {
-        vc.cellDetails = self.nbModelAllDatas[selectedIndexPath.row];
+    } else if ([[segue identifier] isEqualToString:@"NBListsViewController"]) {
+        listDetailsVC.detailsData = self.allModelDates[selectedIndexPath.row];
     }
 }
 

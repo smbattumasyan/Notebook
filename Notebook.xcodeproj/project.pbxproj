@@ -19,7 +19,7 @@
 		17F45AB91C29674F00B26B9C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17F45AB71C29674F00B26B9C /* LaunchScreen.storyboard */; };
 		17F45AC41C29674F00B26B9C /* NotebookTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F45AC31C29674F00B26B9C /* NotebookTests.m */; };
 		17F45ACF1C29674F00B26B9C /* NotebookUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F45ACE1C29674F00B26B9C /* NotebookUITests.m */; };
-		17F45AE11C29721900B26B9C /* NoteListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F45AE01C29721900B26B9C /* NoteListViewController.m */; };
+		17F45AE11C29721900B26B9C /* NBListsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F45AE01C29721900B26B9C /* NBListsViewController.m */; };
 		17F45B291C297F8600B26B9C /* ListDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F45B281C297F8600B26B9C /* ListDetailsViewController.m */; };
 		17F45B301C2997FD00B26B9C /* NoteListViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F45B2F1C2997FD00B26B9C /* NoteListViewCell.m */; };
 /* End PBXBuildFile section */
@@ -65,8 +65,8 @@
 		17F45ACA1C29674F00B26B9C /* NotebookUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotebookUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		17F45ACE1C29674F00B26B9C /* NotebookUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotebookUITests.m; sourceTree = "<group>"; };
 		17F45AD01C29674F00B26B9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		17F45ADF1C29721900B26B9C /* NoteListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteListViewController.h; sourceTree = "<group>"; };
-		17F45AE01C29721900B26B9C /* NoteListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteListViewController.m; sourceTree = "<group>"; };
+		17F45ADF1C29721900B26B9C /* NBListsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBListsViewController.h; sourceTree = "<group>"; };
+		17F45AE01C29721900B26B9C /* NBListsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBListsViewController.m; sourceTree = "<group>"; };
 		17F45B271C297F8600B26B9C /* ListDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListDetailsViewController.h; sourceTree = "<group>"; };
 		17F45B281C297F8600B26B9C /* ListDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListDetailsViewController.m; sourceTree = "<group>"; };
 		17F45B2E1C2997FD00B26B9C /* NoteListViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteListViewCell.h; sourceTree = "<group>"; };
@@ -205,8 +205,8 @@
 			isa = PBXGroup;
 			children = (
 				17F45B2D1C2997BD00B26B9C /* Cells */,
-				17F45ADF1C29721900B26B9C /* NoteListViewController.h */,
-				17F45AE01C29721900B26B9C /* NoteListViewController.m */,
+				17F45ADF1C29721900B26B9C /* NBListsViewController.h */,
+				17F45AE01C29721900B26B9C /* NBListsViewController.m */,
 			);
 			name = NoteListViewController;
 			sourceTree = "<group>";
@@ -365,7 +365,7 @@
 				17F45AAB1C29674F00B26B9C /* AppDelegate.m in Sources */,
 				17F45AB41C29674F00B26B9C /* Notebook.xcdatamodeld in Sources */,
 				17F45AA81C29674F00B26B9C /* main.m in Sources */,
-				17F45AE11C29721900B26B9C /* NoteListViewController.m in Sources */,
+				17F45AE11C29721900B26B9C /* NBListsViewController.m in Sources */,
 				17F45B291C297F8600B26B9C /* ListDetailsViewController.m in Sources */,
 				17A5F5161C2A78DB00FD2481 /* NBDataModel+CoreDataProperties.m in Sources */,
 				17A5F51D1C2A799C00FD2481 /* BaseCoreDataManager.m in Sources */,
