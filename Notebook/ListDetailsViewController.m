@@ -49,6 +49,21 @@
 - (IBAction)deleteButtonAction:(id)sender {
     [self.wrapper deleteList:self.listDetails];
     [self.wrapper saveList];
+    UIAlertController * alert=   [UIAlertController
+                                  alertControllerWithTitle:@"Delete"
+                                  message:@"Successful deleted from memory"
+                                  preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* okButton = [UIAlertAction
+                                actionWithTitle:@"OK"
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * action)
+                                {
+                                    //Handel your yes please button action here
+                                    [alert dismissViewControllerAnimated:YES completion:nil];
+                                    
+                                }];
+    [alert addAction:okButton];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (IBAction)editButtonAction:(UIBarButtonItem *)sender {

@@ -88,6 +88,7 @@
      ListDetailsViewController *vc = [segue destinationViewController];
     if (self.isAddButtonPressed) {
         vc.isAddButtonPressed = YES;
+        self.isAddButtonPressed = NO;
     } else if ([[segue identifier] isEqualToString:@"NoteListViewController"]) {
         vc.listDetails = self.tableData[selectedIndexPath.row];
     }
