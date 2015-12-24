@@ -14,6 +14,9 @@
 @property (weak, nonatomic) IBOutlet UINavigationItem *navigationItem;
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (weak, nonatomic) IBOutlet UITextView *detailsTextView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
+
+
 @property (nonatomic, strong) CoreDataWrapper *wrapper;
 
 @end
@@ -24,11 +27,28 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.wrapper = [CoreDataWrapper sharedInstance];
-    [self.titleTextField setEnabled:NO];
-    [self.detailsTextView setEditable:NO];
-    self.titleTextField.text = self.listDetails.title;
-    self.detailsTextView.text = self.listDetails.details;
-    self.navigationItem.title = [NSDateFormatter localizedStringFromDate:self.listDetails.date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+    if (self.isAddButtonPressed) {
+        [self.titleTextField setEnabled:YES];
+        [self.detailsTextView setEditable:YES];
+        self.editButton.title = @"Done";
+        self.navigationItem.title = [NSDateFormatter localizedStringFromDate:[NSDate date]dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+        self.titleTextField.text = @"New Title";
+        self.detailsTextView.text = @"New Text";
+        
+    } else {
+        [self.titleTextField setEnabled:NO];
+        [self.detailsTextView setEditable:NO];
+        self.editButton.title = @"Edit";
+        self.titleTextField.text = self.listDetails.title;
+        self.detailsTextView.text = self.listDetails.details;
+        self.navigationItem.title = [NSDateFormatter localizedStringFromDate:self.listDetails.date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+    }
+    
+}
+
+- (IBAction)deleteButtonAction:(id)sender {
+    [self.wrapper deleteList:self.listDetails];
+    [self.wrapper saveList];
 }
 
 - (IBAction)editButtonAction:(UIBarButtonItem *)sender {
@@ -39,6 +59,13 @@
         sender.title = @"Done";
  
     } else {
+        if (self.isAddButtonPressed) {
+            Entity *newEntity = [self.wrapper createList];
+            newEntity.title = self.titleTextField.text;
+            newEntity.details = self.detailsTextView.text;
+            newEntity.date = [NSDate date];
+            [self.wrapper saveList];
+        }
         [self.listDetails setValue:self.titleTextField.text forKey:@"title"];
         [self.listDetails setValue:self.detailsTextView.text forKey:@"details"];
         [self.wrapper saveList];

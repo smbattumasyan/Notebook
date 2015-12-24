@@ -38,14 +38,14 @@
                                                         <constraint firstAttribute="height" constant="21" id="fL3-Z7-G8q"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ikz-wc-Rrg">
                                                     <rect key="frame" x="8" y="37" width="312" height="42"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22/12/2015 10.10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XeY-LX-D6r">
@@ -56,7 +56,7 @@
                                                         <constraint firstAttribute="height" constant="21" id="v8C-O8-oV3"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -148,25 +148,45 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ltx-2Z-MeO">
-                                <rect key="frame" x="12" y="110" width="296" height="450"/>
+                                <rect key="frame" x="4" y="110" width="312" height="427"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="450" id="gjQ-Gs-3Qp"/>
+                                    <constraint firstAttribute="height" constant="427" id="gjQ-Gs-3Qp"/>
                                 </constraints>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="gjQ-Gs-3Qp"/>
+                                    </mask>
+                                </variation>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DST-mW-SGt">
+                                <rect key="frame" x="130" y="545" width="60" height="15"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="4ki-c8-KmF"/>
+                                    <constraint firstAttribute="width" constant="60" id="4lk-3f-jZf"/>
+                                </constraints>
+                                <state key="normal" title="Delete"/>
+                                <connections>
+                                    <action selector="deleteButtonAction:" destination="MNg-Yl-AtL" eventType="touchUpInside" id="ZAb-Dj-f3P"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="mtH-7I-L8I" firstAttribute="top" secondItem="DST-mW-SGt" secondAttribute="bottom" constant="8" id="25i-eW-mbU"/>
                             <constraint firstItem="aJR-Hs-N37" firstAttribute="centerX" secondItem="ZQL-ks-nHg" secondAttribute="centerX" id="3AY-5u-11d"/>
                             <constraint firstItem="aJR-Hs-N37" firstAttribute="top" secondItem="fk7-6A-x1p" secondAttribute="bottom" constant="8" id="4DP-0A-b4y"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ltx-2Z-MeO" secondAttribute="trailing" constant="-4" id="6VU-1D-67c"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ltx-2Z-MeO" secondAttribute="trailing" constant="-12" id="6VU-1D-67c"/>
                             <constraint firstItem="mtH-7I-L8I" firstAttribute="top" secondItem="ltx-2Z-MeO" secondAttribute="bottom" id="OJy-xe-coO"/>
-                            <constraint firstItem="ltx-2Z-MeO" firstAttribute="leading" secondItem="ZQL-ks-nHg" secondAttribute="leadingMargin" constant="-4" id="aqO-Vd-YJN"/>
+                            <constraint firstItem="ltx-2Z-MeO" firstAttribute="leading" secondItem="ZQL-ks-nHg" secondAttribute="leadingMargin" constant="-12" id="aqO-Vd-YJN"/>
+                            <constraint firstItem="DST-mW-SGt" firstAttribute="centerX" secondItem="ZQL-ks-nHg" secondAttribute="centerX" id="duk-15-e9z"/>
+                            <constraint firstItem="DST-mW-SGt" firstAttribute="top" secondItem="ltx-2Z-MeO" secondAttribute="bottom" constant="8" id="j74-dS-jpu"/>
                             <constraint firstItem="ltx-2Z-MeO" firstAttribute="top" secondItem="aJR-Hs-N37" secondAttribute="bottom" constant="8" id="od6-z4-k4g"/>
                         </constraints>
                         <variation key="default">
@@ -185,6 +205,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="detailsTextView" destination="ltx-2Z-MeO" id="4aT-YU-ji7"/>
+                        <outlet property="editButton" destination="nFP-F6-os3" id="jsp-FK-zLS"/>
                         <outlet property="navigationItem" destination="6KB-Nv-oJA" id="cSo-cv-wzk"/>
                         <outlet property="titleTextField" destination="aJR-Hs-N37" id="Vpw-ft-fiX"/>
                     </connections>

@@ -16,12 +16,20 @@
 @property (nonatomic, strong) NSArray *tableData;
 @property (nonatomic, strong) Entity *list;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, assign) BOOL isAddButtonPressed;
+
 
 @property (nonatomic, strong) CoreDataWrapper *wrapper;
 
 @end
 
 @implementation NoteListViewController
+
+- (void)viewWillAppear:(BOOL)animated {
+    self.tableData = [self.wrapper findAllList];
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,14 +43,14 @@
 //    noteList.details = @"hi world sdfs assdf ailsDetasdfsd Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details Details";
 //    noteList.title = @"my note";
 //    [self.wrapper saveList];
-    [self.tableView reloadData];
-    self.tableData = [self.wrapper findAllList];
-//    [wrapper deleteList:self.tableData[0]];
+    
+    //[self.wrapper deleteList:self.tableData[0]];
 //    
 //    NSLog(@"list__%@",self.list.date);
 }
 - (IBAction)addButtonAction:(UIBarButtonItem *)sender {
-
+    self.isAddButtonPressed = YES;
+    [self performSegueWithIdentifier:@"NoteListViewController" sender:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -77,8 +85,10 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
-    if ([[segue identifier] isEqualToString:@"NoteListViewController"]) {
-        ListDetailsViewController *vc = [segue destinationViewController];
+     ListDetailsViewController *vc = [segue destinationViewController];
+    if (self.isAddButtonPressed) {
+        vc.isAddButtonPressed = YES;
+    } else if ([[segue identifier] isEqualToString:@"NoteListViewController"]) {
         vc.listDetails = self.tableData[selectedIndexPath.row];
     }
 }

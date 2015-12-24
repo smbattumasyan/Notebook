@@ -12,5 +12,6 @@
 @interface ListDetailsViewController : UIViewController
 
 @property (nonatomic, strong) Entity *listDetails;
+@property (nonatomic, assign) BOOL isAddButtonPressed;
 
 @end
