@@ -36,18 +36,6 @@
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"Notebook";
     self.wrapper = [CoreDataWrapper sharedInstance];
-//    self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    
-//    Entity *noteList = [self.wrapper createList];
-//    noteList.title = @"MY NOte";
-//    noteList.date = [NSDate date];
-//    noteList.details = @"hi world sdfs assdf ailsDetasdfsd Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details DetailsDetails Details Details";
-//    noteList.title = @"my note";
-//    [self.wrapper saveList];
-    
-    //[self.wrapper deleteList:self.tableData[0]];
-//    
-//    NSLog(@"list__%@",self.list.date);
 }
 - (IBAction)addButtonAction:(UIBarButtonItem *)sender {
     self.isAddButtonPressed = YES;
@@ -83,7 +71,6 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
      ListDetailsViewController *vc = [segue destinationViewController];
