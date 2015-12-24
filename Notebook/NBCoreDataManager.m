@@ -1,23 +1,21 @@
 //
-//  CoreDataWrapper.m
+//  NBCoreDataManager.m
 //  Notebook
 //
 //  Created by Smbat Tumasyan on 12/23/15.
 //  Copyright © 2015 EGS. All rights reserved.
 //
 
-#import "CoreDataWrapper.h"
+#import "NBCoreDataManager.h"
 
-@implementation CoreDataWrapper
+@implementation NBCoreDataManager
 
 + (nonnull instancetype)sharedInstance {
     
-    static CoreDataWrapper *instance;
-    
+    static NBCoreDataManager *instance;
     if (!instance) {
-        instance = [[CoreDataWrapper alloc] init];
+        instance = [[NBCoreDataManager alloc] init];
     }
-    
     return instance;
 }
 
@@ -41,20 +39,20 @@
     [self saveList];
 }
 
-- (Entity *)createList {
+- (NBDataModel *)createList {
     
-    Entity *list = [NSEntityDescription insertNewObjectForEntityForName:@"Entity"
+    NBDataModel *list = [NSEntityDescription insertNewObjectForEntityForName:@"NBDataModel"
                                                inManagedObjectContext:self.managedObjectContext];
     
     return list;
 }
 
 
-- (nullable NSArray <Entity *> *)findAllList; {
+- (nullable NSArray <NBDataModel *> *)findAllList; {
     
     NSError *error = nil;
     
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Entity"];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"NBDataModel"];
     
     NSArray *result =  [self.managedObjectContext executeFetchRequest:request
                                                                 error:&error];

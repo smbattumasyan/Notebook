@@ -1,5 +1,5 @@
 //
-//  BaseCoreDataWrapper.h
+//  BaseCoreDataManager.h
 //  Notebook
 //
 //  Created by Smbat Tumasyan on 12/23/15.
@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "Entity.h"
+#import "NBDataModel.h"
 
-@interface BaseCoreDataWrapper : NSObject
+@interface BaseCoreDataManager : NSObject
 
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;

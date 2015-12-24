@@ -7,7 +7,7 @@
 //
 
 #import "ListDetailsViewController.h"
-#import "CoreDataWrapper.h"
+#import "NBCoreDataManager.h"
 
 @interface ListDetailsViewController ()
 
@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 
 
-@property (nonatomic, strong) CoreDataWrapper *wrapper;
+@property (nonatomic, strong) NBCoreDataManager *wrapper;
 
 @end
 
@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.wrapper = [CoreDataWrapper sharedInstance];
+    self.wrapper = [NBCoreDataManager sharedInstance];
     if (self.isAddButtonPressed) {
         [self.titleTextField setEnabled:YES];
         [self.detailsTextView setEditable:YES];
@@ -75,7 +75,7 @@
  
     } else {
         if (self.isAddButtonPressed) {
-            Entity *newEntity = [self.wrapper createList];
+            NBDataModel *newEntity = [self.wrapper createList];
             newEntity.title = self.titleTextField.text;
             newEntity.details = self.detailsTextView.text;
             newEntity.date = [NSDate date];

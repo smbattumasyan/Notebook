@@ -1,5 +1,5 @@
 //
-//  Entity+CoreDataProperties.m
+//  NBDataModel+CoreDataProperties.m
 //  Notebook
 //
 //  Created by Smbat Tumasyan on 12/23/15.
@@ -9,9 +9,9 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "Entity+CoreDataProperties.h"
+#import "NBDataModel+CoreDataProperties.h"
 
-@implementation Entity (CoreDataProperties)
+@implementation NBDataModel (CoreDataProperties)
 
 @dynamic title;
 @dynamic date;

@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Entity.h"
+#import "NBDataModel.h"
 
 @interface ListDetailsViewController : UIViewController
 
-@property (nonatomic, strong) Entity *listDetails;
+@property (nonatomic, strong) NBDataModel *listDetails;
 @property (nonatomic, assign) BOOL isAddButtonPressed;
 
 @end

@@ -1,15 +1,15 @@
 //
-//  BaseCoreDataWrapper.m
+//  BaseCoreDataManager.m
 //  Notebook
 //
 //  Created by Smbat Tumasyan on 12/23/15.
 //  Copyright © 2015 EGS. All rights reserved.
 //
 
-#import "BaseCoreDataWrapper.h"
+#import "BaseCoreDataManager.h"
 #import "AppDelegate.h"
 
-@implementation BaseCoreDataWrapper
+@implementation BaseCoreDataManager
 
 - (NSManagedObjectContext *)managedObjectContext {
     

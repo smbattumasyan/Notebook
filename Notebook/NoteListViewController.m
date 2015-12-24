@@ -9,17 +9,17 @@
 #import "NoteListViewController.h"
 #import "ListDetailsViewController.h"
 #import "NoteListViewCell.h"
-#import "CoreDataWrapper.h"
+#import "NBCoreDataManager.h"
 
 @interface NoteListViewController ()
 
 @property (nonatomic, strong) NSArray *tableData;
-@property (nonatomic, strong) Entity *list;
+@property (nonatomic, strong) NBDataModel *list;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, assign) BOOL isAddButtonPressed;
 
 
-@property (nonatomic, strong) CoreDataWrapper *wrapper;
+@property (nonatomic, strong) NBCoreDataManager *wrapper;
 
 @end
 
@@ -35,7 +35,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = @"Notebook";
-    self.wrapper = [CoreDataWrapper sharedInstance];
+    self.wrapper = [NBCoreDataManager sharedInstance];
 }
 - (IBAction)addButtonAction:(UIBarButtonItem *)sender {
     self.isAddButtonPressed = YES;
