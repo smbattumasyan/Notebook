@@ -204,6 +204,7 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="deleteButton" destination="DST-mW-SGt" id="FtS-F4-nOE"/>
                         <outlet property="detailsTextView" destination="ltx-2Z-MeO" id="4aT-YU-ji7"/>
                         <outlet property="editButton" destination="nFP-F6-os3" id="jsp-FK-zLS"/>
                         <outlet property="navigationItem" destination="6KB-Nv-oJA" id="cSo-cv-wzk"/>

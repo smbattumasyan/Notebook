@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 @property (weak, nonatomic) IBOutlet UITextField *titleTextField;
 @property (weak, nonatomic) IBOutlet UITextView *detailsTextView;
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
 @property (nonatomic, strong) NBCoreDataManager *coreDataManager;
 
@@ -33,6 +34,7 @@
         self.navigationItem.title = [NSDateFormatter localizedStringFromDate:[NSDate date]dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
         self.titleTextField.text = @"New Title";
         self.detailsTextView.text = @"New Text";
+        _deleteButton.hidden = YES;
         
     } else {
         [self.titleTextField setEnabled:NO];
@@ -41,6 +43,7 @@
         self.titleTextField.text = [self.detailsData title];
         self.detailsTextView.text = [self.detailsData details];
         self.navigationItem.title = [NSDateFormatter localizedStringFromDate:self.detailsData.date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+        _deleteButton.hidden = NO;
     }
     
 }
@@ -48,7 +51,7 @@
 - (IBAction)deleteButtonAction:(id)sender {
     [self.coreDataManager deleteObject:self.detailsData];
     [self.coreDataManager saveObject];
-    UIAlertController * alertOfDeleteButton=   [UIAlertController
+    UIAlertController * deleteButtonAlert=   [UIAlertController
                                   alertControllerWithTitle:@"Delete"
                                   message:@"Successful deleted from memory"
                                   preferredStyle:UIAlertControllerStyleAlert];
@@ -57,11 +60,11 @@
                                 style:UIAlertActionStyleDefault
                                 handler:^(UIAlertAction * action)
                                 {
-                                    [alertOfDeleteButton dismissViewControllerAnimated:YES completion:nil];
+                                    [deleteButtonAlert dismissViewControllerAnimated:YES completion:nil];
                                     
                                 }];
-    [alertOfDeleteButton addAction:okButton];
-    [self presentViewController:alertOfDeleteButton animated:YES completion:nil];
+    [deleteButtonAlert addAction:okButton];
+    [self presentViewController:deleteButtonAlert animated:YES completion:nil];
 }
 
 - (IBAction)editButtonAction:(UIBarButtonItem *)sender {
@@ -73,10 +76,10 @@
  
     } else {
         if (self.isAddButtonPressed) {
-            NBDataModel *newEntity = [self.coreDataManager createObject];
-            newEntity.title = [self.titleTextField text];
-            newEntity.details = [self.detailsTextView text];
-            newEntity.date = [NSDate date];
+            NBDataModel *newModelData = [self.coreDataManager createObject];
+            newModelData.title = [self.titleTextField text];
+            newModelData.details = [self.detailsTextView text];
+            newModelData.date = [NSDate date];
             [self.coreDataManager saveObject];
         }
         [self.detailsData setValue:[self.titleTextField text] forKey:@"title"];
