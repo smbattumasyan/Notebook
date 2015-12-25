@@ -1,5 +1,5 @@
 //
-//  ListDetailsViewController.h
+//  NoteDetailsViewController.h
 //  Notebook
 //
 //  Created by Smbat Tumasyan on 12/22/15.
@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NBDataModel.h"
+#import "Note.h"
 
-@interface ListDetailsViewController : UIViewController
+@interface NoteDetailsViewController : UIViewController
 
-@property (nonatomic, strong) NBDataModel *detailsData;
+@property (nonatomic, strong) Note *aNote;
 @property (nonatomic, assign) BOOL isAddButtonPressed;
 
 @end

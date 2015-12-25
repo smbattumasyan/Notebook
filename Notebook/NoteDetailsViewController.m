@@ -1,15 +1,15 @@
 //
-//  ListDetailsViewController.m
+//  NoteDetailsViewController.m
 //  Notebook
 //
 //  Created by Smbat Tumasyan on 12/22/15.
 //  Copyright © 2015 EGS. All rights reserved.
 //
 
-#import "ListDetailsViewController.h"
+#import "NoteDetailsViewController.h"
 #import "NBCoreDataManager.h"
 
-@interface ListDetailsViewController ()
+@interface NoteDetailsViewController ()
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *navigationItem;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
@@ -21,7 +21,7 @@
 
 @end
 
-@implementation ListDetailsViewController
+@implementation NoteDetailsViewController
 
 #pragma mark - Lifecycle
 
@@ -42,9 +42,9 @@
         [self.titleTextField setEnabled:NO];
         [self.detailsTextView setEditable:NO];
         self.editButton.title = @"Edit";
-        self.titleTextField.text = [self.detailsData title];
-        self.detailsTextView.text = [self.detailsData details];
-        self.navigationItem.title = [NSDateFormatter localizedStringFromDate:self.detailsData.date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+        self.titleTextField.text = [self.aNote title];
+        self.detailsTextView.text = [self.aNote details];
+        self.navigationItem.title = [NSDateFormatter localizedStringFromDate:self.aNote.date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
         _deleteButton.hidden = NO;
     }
     
@@ -58,7 +58,7 @@
 #pragma mark - IBActions
 
 - (IBAction)deleteButtonAction:(id)sender {
-    [self.coreDataManager deleteObject:self.detailsData];
+    [self.coreDataManager deleteObject:self.aNote];
     [self.coreDataManager saveObject];
     UIAlertController * deleteButtonAlert=   [UIAlertController
                                   alertControllerWithTitle:@"Delete"
@@ -85,14 +85,14 @@
  
     } else {
         if (self.isAddButtonPressed) {
-            NBDataModel *newModelData = [self.coreDataManager createObject];
-            newModelData.title = [self.titleTextField text];
-            newModelData.details = [self.detailsTextView text];
-            newModelData.date = [NSDate date];
+            Note *newNote = [self.coreDataManager createObject];
+            newNote.title = [self.titleTextField text];
+            newNote.details = [self.detailsTextView text];
+            newNote.date = [NSDate date];
             [self.coreDataManager saveObject];
         }
-        [self.detailsData setValue:[self.titleTextField text] forKey:@"title"];
-        [self.detailsData setValue:[self.detailsTextView text] forKey:@"details"];
+        [self.aNote setValue:[self.titleTextField text] forKey:@"title"];
+        [self.aNote setValue:[self.detailsTextView text] forKey:@"details"];
         [self.coreDataManager saveObject];
         [self.titleTextField setEnabled:NO];
         [self.detailsTextView setEditable:NO];

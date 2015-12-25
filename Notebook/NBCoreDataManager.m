@@ -33,23 +33,23 @@
     return status;
 }
 
-- (void)deleteObject:(NBDataModel *)managedObject {
+- (void)deleteObject:(Note *)managedObject {
     [self.managedObjectContext deleteObject:managedObject];
     [self saveObject];
 }
 
-- (NBDataModel *)createObject {
+- (Note *)createObject {
     
-    NBDataModel *list = [NSEntityDescription insertNewObjectForEntityForName:@"NBDataModel"
+    Note *list = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
                                                inManagedObjectContext:self.managedObjectContext];
     return list;
 }
 
 
-- (nullable NSArray <NBDataModel *> *)requestAllObjects; {
+- (nullable NSArray <Note *> *)requestAllObjects; {
     
     NSError *error = nil;
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"NBDataModel"];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Note"];
     NSArray *result =  [self.managedObjectContext executeFetchRequest:request
                                                                 error:&error];
     if (error) {

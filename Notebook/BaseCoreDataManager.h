@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "NBDataModel.h"
+#import "Note.h"
 
 @interface BaseCoreDataManager : NSObject
 

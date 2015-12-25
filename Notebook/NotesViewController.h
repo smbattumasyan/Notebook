@@ -1,5 +1,5 @@
 //
-//  NBListsViewController.h
+//  NotesViewController.h
 //  Notebook
 //
 //  Created by Smbat Tumasyan on 12/22/15.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NBListsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface NotesViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 
 @end

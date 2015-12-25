@@ -1,43 +1,41 @@
 //
-//  NBListsViewController.m
+//  NotesViewController.m
 //  Notebook
 //
 //  Created by Smbat Tumasyan on 12/22/15.
 //  Copyright © 2015 EGS. All rights reserved.
 //
 
-#import "NBListsViewController.h"
-#import "ListDetailsViewController.h"
-#import "NoteListViewCell.h"
+#import "NotesViewController.h"
+#import "NoteDetailsViewController.h"
+#import "NoteViewCell.h"
 #import "NBCoreDataManager.h"
 
-@interface NBListsViewController ()
+@interface NotesViewController ()
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, assign) BOOL isAddButtonPressed;
-@property (nonatomic, strong) NSArray *allModelDates;
-@property (nonatomic, strong) NBDataModel *modelData;
+@property (nonatomic, strong) NSArray *notes;
+@property (nonatomic, strong) Note *aNote;
 
 @property (nonatomic, strong) NBCoreDataManager *coreDataManager;
 
 @end
 
-@implementation NBListsViewController
-
+@implementation NotesViewController
 
 #pragma mark - View Lifecycle
-
 - (void)viewWillAppear:(BOOL)animated {
-    self.allModelDates = [self.coreDataManager requestAllObjects];
     [super viewWillAppear:animated];
+    self.notes = [self.coreDataManager requestAllObjects];
     [self.tableView reloadData];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title = @"Notebook";
     self.coreDataManager = [NBCoreDataManager sharedManager];
+    self.navigationItem.title = @"Notebook";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,42 +46,41 @@
 #pragma mark - IBActions
 - (IBAction)addButtonAction:(UIBarButtonItem *)sender {
     self.isAddButtonPressed = YES;
-    [self performSegueWithIdentifier:@"NBListsViewController" sender:self];
+    [self performSegueWithIdentifier:@"NotesViewController" sender:self];
 }
 
 #pragma mark - Table View Data Source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.allModelDates count];
+    return [self.notes count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *tableIdentifier = @"tableIdenfier";
-    NoteListViewCell *cell = [tableView dequeueReusableCellWithIdentifier:tableIdentifier];
+    NoteViewCell *cell = [tableView dequeueReusableCellWithIdentifier:tableIdentifier];
     if (cell == nil) {
-        cell = [[NoteListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tableIdentifier];
+        cell = [[NoteViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tableIdentifier];
     }
-    self.modelData = self.allModelDates[indexPath.row];
-    cell.titleLabel.text = [self.modelData title];
-    cell.detailsLabel.text = [self.modelData details];
-    cell.dateLabel.text = [NSDateFormatter localizedStringFromDate:self.modelData.date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+    self.aNote = self.notes[indexPath.row];
+    cell.titleLabel.text = [self.aNote title];
+    cell.detailsLabel.text = [self.aNote details];
+    cell.dateLabel.text = [NSDateFormatter localizedStringFromDate:[self.aNote date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"NBListsViewController" sender:self];
+    [self performSegueWithIdentifier:@"NotesViewController" sender:self];
 }
 
 
 #pragma mark - Navigation
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
-     ListDetailsViewController *listDetailsVC = [segue destinationViewController];
+     NoteDetailsViewController *listDetailsVC = [segue destinationViewController];
     if (self.isAddButtonPressed) {
         listDetailsVC.isAddButtonPressed = YES;
         self.isAddButtonPressed = NO;
-    } else if ([[segue identifier] isEqualToString:@"NBListsViewController"]) {
-        listDetailsVC.detailsData = self.allModelDates[selectedIndexPath.row];
+    } else if ([[segue identifier] isEqualToString:@"NotesViewController"]) {
+        listDetailsVC.aNote = self.notes[selectedIndexPath.row];
     }
 }
 

@@ -13,8 +13,8 @@
 + (nonnull instancetype)sharedManager;
 
 - (BOOL)saveObject;
-- (void)deleteObject:(nonnull NBDataModel *)managedObject;
-- (nonnull NBDataModel *)createObject;
-- (nullable NSArray <NBDataModel *> *)requestAllObjects;
+- (void)deleteObject:(nonnull Note *)managedObject;
+- (nonnull Note *)createObject;
+- (nullable NSArray <Note *> *)requestAllObjects;
 
 @end

@@ -1,5 +1,5 @@
 //
-//  NBDataModel.h
+//  Note.h
 //  Notebook
 //
 //  Created by Smbat Tumasyan on 12/23/15.
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NBDataModel : NSManagedObject
+@interface Note : NSManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
 
@@ -19,4 +19,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "NBDataModel+CoreDataProperties.h"
+#import "Note+CoreDataProperties.h"

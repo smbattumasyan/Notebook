@@ -1,5 +1,5 @@
 //
-//  NoteListViewCell.h
+//  NoteViewCell.h
 //  Notebook
 //
 //  Created by Smbat Tumasyan on 12/22/15.
@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NoteListViewCell : UITableViewCell
+@interface NoteViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *detailsLabel;
 

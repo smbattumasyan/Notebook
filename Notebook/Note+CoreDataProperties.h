@@ -1,5 +1,5 @@
 //
-//  NBDataModel+CoreDataProperties.h
+//  Note+CoreDataProperties.h
 //  Notebook
 //
 //  Created by Smbat Tumasyan on 12/23/15.
@@ -9,11 +9,11 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "NBDataModel.h"
+#import "Note.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NBDataModel (CoreDataProperties)
+@interface Note (CoreDataProperties)
 
 @property (nullable, nonatomic, retain) NSString *title;
 @property (nullable, nonatomic, retain) NSDate *date;

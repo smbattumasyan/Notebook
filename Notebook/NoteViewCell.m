@@ -1,14 +1,14 @@
 //
-//  NoteListViewCell.m
+//  NoteViewCell.m
 //  Notebook
 //
 //  Created by Smbat Tumasyan on 12/22/15.
 //  Copyright © 2015 EGS. All rights reserved.
 //
 
-#import "NoteListViewCell.h"
+#import "NoteViewCell.h"
 
-@implementation NoteListViewCell
+@implementation NoteViewCell
 
 - (void)awakeFromNib {
     // Initialization code
