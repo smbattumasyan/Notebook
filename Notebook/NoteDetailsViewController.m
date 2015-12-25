@@ -58,21 +58,31 @@
 #pragma mark - IBActions
 
 - (IBAction)deleteButtonAction:(id)sender {
-    [self.coreDataManager deleteObject:self.aNote];
-    [self.coreDataManager saveObject];
     UIAlertController * deleteButtonAlert=   [UIAlertController
                                   alertControllerWithTitle:@"Delete"
-                                  message:@"Successful deleted from memory"
+                                  message:@"Are you sure to delete this Note"
                                   preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction* okButton = [UIAlertAction
-                                actionWithTitle:@"OK"
+    UIAlertAction* yesButton = [UIAlertAction
+                                actionWithTitle:@"Yes"
                                 style:UIAlertActionStyleDefault
                                 handler:^(UIAlertAction * action)
                                 {
+                                    [self.coreDataManager deleteObject:self.aNote];
+                                    [self.coreDataManager saveObject];
                                     [deleteButtonAlert dismissViewControllerAnimated:YES completion:nil];
+                                    [self.navigationController popViewControllerAnimated:YES];
                                     
                                 }];
-    [deleteButtonAlert addAction:okButton];
+    UIAlertAction* noButton = [UIAlertAction
+                             actionWithTitle:@"No"
+                             style:UIAlertActionStyleDefault
+                             handler:^(UIAlertAction * action)
+                             {
+                                 [deleteButtonAlert dismissViewControllerAnimated:YES completion:nil];
+                                 
+                             }];
+    [deleteButtonAlert addAction:yesButton];
+    [deleteButtonAlert addAction:noButton];
     [self presentViewController:deleteButtonAlert animated:YES completion:nil];
 }
 
