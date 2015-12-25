@@ -10,6 +10,7 @@
 
 @implementation NBCoreDataManager
 
+#pragma mark - Shared Manager
 + (nonnull instancetype)sharedManager {
     
     static NBCoreDataManager *instance;
@@ -20,7 +21,7 @@
     return instance;
 }
 
-
+#pragma mark - Data Managers
 - (BOOL)saveObject{
     
     NSError *error = nil;

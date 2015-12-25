@@ -62,7 +62,7 @@
     if (cell == nil) {
         cell = [[NoteListViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tableIdentifier];
     }
-    self.modelData = self.allModelDates[indexPath.row] ;
+    self.modelData = self.allModelDates[indexPath.row];
     cell.titleLabel.text = [self.modelData title];
     cell.detailsLabel.text = [self.modelData details];
     cell.dateLabel.text = [NSDateFormatter localizedStringFromDate:self.modelData.date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
