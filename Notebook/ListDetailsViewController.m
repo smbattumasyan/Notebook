@@ -21,7 +21,9 @@
 
 @end
 
-@implementation ListDetailsViewController 
+@implementation ListDetailsViewController
+
+#pragma mark - Lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -47,6 +49,13 @@
     }
     
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - IBActions
 
 - (IBAction)deleteButtonAction:(id)sender {
     [self.coreDataManager deleteObject:self.detailsData];
@@ -92,10 +101,7 @@
 }
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 /*
 #pragma mark - Navigation

@@ -24,6 +24,9 @@
 
 @implementation NBListsViewController
 
+
+#pragma mark - View Lifecycle
+
 - (void)viewWillAppear:(BOOL)animated {
     self.allModelDates = [self.coreDataManager requestAllObjects];
     [super viewWillAppear:animated];
@@ -36,16 +39,19 @@
     self.navigationItem.title = @"Notebook";
     self.coreDataManager = [NBCoreDataManager sharedManager];
 }
-- (IBAction)addButtonAction:(UIBarButtonItem *)sender {
-    self.isAddButtonPressed = YES;
-    [self performSegueWithIdentifier:@"NBListsViewController" sender:self];
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - IBActions
+- (IBAction)addButtonAction:(UIBarButtonItem *)sender {
+    self.isAddButtonPressed = YES;
+    [self performSegueWithIdentifier:@"NBListsViewController" sender:self];
+}
+
+#pragma mark - Table View Data Source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.allModelDates count];
 }
