@@ -14,9 +14,10 @@
 @interface NotesViewController ()
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, assign) BOOL isAddButtonPressed;
+
 @property (nonatomic, strong) NSArray *notes;
-@property (nonatomic, strong) Note *aNote;
+@property (nonatomic, strong) Note    *aNote;
+@property (nonatomic, assign) BOOL     isAddButtonPressed;
 
 @property (nonatomic, strong) NBCoreDataManager *coreDataManager;
 
@@ -34,7 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.coreDataManager = [NBCoreDataManager sharedManager];
+    self.coreDataManager      = [NBCoreDataManager sharedManager];
     self.navigationItem.title = @"Notebook";
 }
 
@@ -56,11 +57,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *tableIdentifier = @"tableIdenfier";
-    NoteViewCell *cell = [tableView dequeueReusableCellWithIdentifier:tableIdentifier];
+    NoteViewCell *cell               = [tableView dequeueReusableCellWithIdentifier:tableIdentifier];
     if (cell == nil) {
-        cell = [[NoteViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tableIdentifier];
+        cell                         = [[NoteViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                           reuseIdentifier:tableIdentifier];
     }
-    cell.aNote = self.notes[indexPath.row];
+    cell.note                        = self.notes[indexPath.row];
     return cell;
 }
 
@@ -74,7 +76,7 @@
     NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
      NoteDetailsViewController *listDetailsVC = [segue destinationViewController];
     if (self.isAddButtonPressed) {
-        listDetailsVC.isAddButtonPressed = YES;
+        listDetailsVC.isAddButtonPressed      = YES;
         self.isAddButtonPressed = NO;
     } else if ([[segue identifier] isEqualToString:@"NotesViewController"]) {
         listDetailsVC.aNote = self.notes[selectedIndexPath.row];

@@ -20,7 +20,6 @@
 
 - (void)awakeFromNib {
     // Initialization codef
-    [self setNote];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -31,10 +30,12 @@
 
 #pragma mark - Private Methods
 
-- (void)setNote {
-    self.titleLabel.text = [self.aNote title];
-    self.dateLabel.text = [NSDateFormatter localizedStringFromDate:self.aNote.date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
-    self.detailsLabel.text = [self.aNote details];
+- (void)setNote:(Note *)note {
+    _note                  = note;
+    self.titleLabel.text   = [_note title];
+    self.dateLabel.text    = [NSDateFormatter localizedStringFromDate:_note.date dateStyle:NSDateFormatterShortStyle timeStyle:
+                              NSDateFormatterShortStyle];
+    self.detailsLabel.text = [_note details];
 }
 
 @end

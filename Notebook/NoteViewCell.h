@@ -11,6 +11,6 @@
 
 @interface NoteViewCell : UITableViewCell
 
-@property (nonatomic, strong) Note *aNote;
+@property (nonatomic, strong) Note *note;
 
 @end

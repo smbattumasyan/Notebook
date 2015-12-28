@@ -195,29 +195,29 @@
 		17F45B2A1C297F9E00B26B9C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				17F45B2B1C29978500B26B9C /* NoteListViewController */,
-				17F45B2C1C29979900B26B9C /* ListDetailsViewController */,
+				17F45B2B1C29978500B26B9C /* NotesViewController */,
+				17F45B2C1C29979900B26B9C /* NoteDetailsViewController */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
 		};
-		17F45B2B1C29978500B26B9C /* NoteListViewController */ = {
+		17F45B2B1C29978500B26B9C /* NotesViewController */ = {
 			isa = PBXGroup;
 			children = (
 				17F45B2D1C2997BD00B26B9C /* Cells */,
 				17F45ADF1C29721900B26B9C /* NotesViewController.h */,
 				17F45AE01C29721900B26B9C /* NotesViewController.m */,
 			);
-			name = NoteListViewController;
+			name = NotesViewController;
 			sourceTree = "<group>";
 		};
-		17F45B2C1C29979900B26B9C /* ListDetailsViewController */ = {
+		17F45B2C1C29979900B26B9C /* NoteDetailsViewController */ = {
 			isa = PBXGroup;
 			children = (
 				17F45B271C297F8600B26B9C /* NoteDetailsViewController.h */,
 				17F45B281C297F8600B26B9C /* NoteDetailsViewController.m */,
 			);
-			name = ListDetailsViewController;
+			name = NoteDetailsViewController;
 			sourceTree = "<group>";
 		};
 		17F45B2D1C2997BD00B26B9C /* Cells */ = {

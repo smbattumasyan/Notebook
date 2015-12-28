@@ -12,10 +12,10 @@
 @interface NoteDetailsViewController ()
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *navigationItem;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
-@property (weak, nonatomic) IBOutlet UITextField *titleTextField;
-@property (weak, nonatomic) IBOutlet UITextView *detailsTextView;
-@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem  *editButton;
+@property (weak, nonatomic) IBOutlet UITextField      *titleTextField;
+@property (weak, nonatomic) IBOutlet UITextView       *detailsTextView;
+@property (weak, nonatomic) IBOutlet UIButton         *deleteButton;
 
 @property (nonatomic, strong) NBCoreDataManager *coreDataManager;
 
@@ -40,29 +40,27 @@
 #pragma mark - IBActions
 
 - (IBAction)deleteButtonAction:(id)sender {
-    UIAlertController * deleteButtonAlert=   [UIAlertController
-                                              alertControllerWithTitle:@"Delete"
-                                              message:@"Are you sure to delete this Note"
-                                              preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction* yesButton = [UIAlertAction
-                                actionWithTitle:@"Yes"
-                                style:UIAlertActionStyleDefault
-                                handler:^(UIAlertAction * action)
-                                {
+    UIAlertController *deleteButtonAlert = [UIAlertController alertControllerWithTitle:@"Delete"
+                                                                                message:@"Are you sure to delete this Note" preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction *yesButton    = [UIAlertAction actionWithTitle:@"Yes"
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction *action)
+                                   {
                                     [self.coreDataManager deleteObject:self.aNote];
                                     [self.coreDataManager saveObject];
                                     [deleteButtonAlert dismissViewControllerAnimated:YES completion:nil];
-                                    [self.navigationController popViewControllerAnimated:YES];
-                                    
-                                }];
-    UIAlertAction* noButton = [UIAlertAction
-                               actionWithTitle:@"No"
-                               style:UIAlertActionStyleDefault
-                               handler:^(UIAlertAction * action)
-                               {
-                                   [deleteButtonAlert dismissViewControllerAnimated:YES completion:nil];
-                                   
-                               }];
+                                                [self.navigationController popViewControllerAnimated:YES];
+                                                                      
+                                            }];
+    UIAlertAction* noButton     = [UIAlertAction
+                                   actionWithTitle:@"No"
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action)
+                                   {
+                                       [deleteButtonAlert dismissViewControllerAnimated:YES completion:nil];
+                                       
+                                   }];
     [deleteButtonAlert addAction:yesButton];
     [deleteButtonAlert addAction:noButton];
     [self presentViewController:deleteButtonAlert animated:YES completion:nil];
@@ -76,17 +74,17 @@
         
     } else {
         if (self.isAddButtonPressed) {
-            Note *newNote = [self.coreDataManager createObject];
-            newNote.title = [self.titleTextField text];
+            Note *newNote   = [self.coreDataManager createObject];
+            newNote.title   = [self.titleTextField text];
             newNote.details = [self.detailsTextView text];
-            newNote.date = [NSDate date];
+            newNote.date    = [NSDate date];
             [self.coreDataManager saveObject];
         }
         [self.aNote setValue:[self.titleTextField text] forKey:@"title"];
         [self.aNote setValue:[self.detailsTextView text] forKey:@"details"];
         [self.coreDataManager saveObject];
         [self setTextViewEditable:YES];
-        sender.title = @"Edit";
+        sender.title        = @"Edit";
     }
 }
 
@@ -95,18 +93,20 @@
 - (void)setIBOutlets:(Note *)aNote addEditButton:(BOOL)isPressed {
     if (isPressed) {
         [self setTextViewEditable:isPressed];
-        self.editButton.title = @"Done";
-        self.navigationItem.title = [NSDateFormatter localizedStringFromDate:[NSDate date]dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
-        self.titleTextField.text = @"New Title";
+        self.editButton.title     = @"Done";
+        self.navigationItem.title = [NSDateFormatter localizedStringFromDate:[NSDate date]dateStyle:NSDateFormatterShortStyle
+                                                                   timeStyle:NSDateFormatterShortStyle];
+        self.titleTextField.text  = @"New Title";
         self.detailsTextView.text = @"New Text";
-        _deleteButton.hidden = YES;
+        _deleteButton.hidden      = YES;
     } else {
         [self setTextViewEditable:isPressed];
-        self.editButton.title = @"Edit";
-        self.titleTextField.text = [aNote title];
+        self.editButton.title     = @"Edit";
+        self.titleTextField.text  = [aNote title];
         self.detailsTextView.text = [aNote details];
-        self.navigationItem.title = [NSDateFormatter localizedStringFromDate:aNote.date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
-        _deleteButton.hidden = NO;
+        self.navigationItem.title = [NSDateFormatter localizedStringFromDate:aNote.date dateStyle:NSDateFormatterShortStyle
+                                                                   timeStyle:NSDateFormatterShortStyle];
+        _deleteButton.hidden      = NO;
     }
 }
 

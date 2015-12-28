@@ -12,6 +12,6 @@
 @interface NoteDetailsViewController : UIViewController
 
 @property (nonatomic, strong) Note *aNote;
-@property (nonatomic, assign) BOOL isAddButtonPressed;
+@property (nonatomic, assign) BOOL  isAddButtonPressed;
 
 @end
