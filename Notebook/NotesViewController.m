@@ -60,10 +60,7 @@
     if (cell == nil) {
         cell = [[NoteViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tableIdentifier];
     }
-    self.aNote = self.notes[indexPath.row];
-    cell.titleLabel.text = [self.aNote title];
-    cell.detailsLabel.text = [self.aNote details];
-    cell.dateLabel.text = [NSDateFormatter localizedStringFromDate:[self.aNote date] dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+    cell.aNote = self.notes[indexPath.row];
     return cell;
 }
 

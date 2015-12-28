@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Note.h"
 
 @interface NoteViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *detailsLabel;
+@property (nonatomic, strong) Note *aNote;
 
 @end

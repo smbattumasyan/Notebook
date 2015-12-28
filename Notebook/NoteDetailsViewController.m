@@ -29,25 +29,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.coreDataManager = [NBCoreDataManager sharedManager];
-    if (self.isAddButtonPressed) {
-        [self.titleTextField setEnabled:YES];
-        [self.detailsTextView setEditable:YES];
-        self.editButton.title = @"Done";
-        self.navigationItem.title = [NSDateFormatter localizedStringFromDate:[NSDate date]dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
-        self.titleTextField.text = @"New Title";
-        self.detailsTextView.text = @"New Text";
-        _deleteButton.hidden = YES;
-        
-    } else {
-        [self.titleTextField setEnabled:NO];
-        [self.detailsTextView setEditable:NO];
-        self.editButton.title = @"Edit";
-        self.titleTextField.text = [self.aNote title];
-        self.detailsTextView.text = [self.aNote details];
-        self.navigationItem.title = [NSDateFormatter localizedStringFromDate:self.aNote.date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
-        _deleteButton.hidden = NO;
-    }
-    
+    [self setIBOutlets:_aNote addEditButton:_isAddButtonPressed];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,9 +41,9 @@
 
 - (IBAction)deleteButtonAction:(id)sender {
     UIAlertController * deleteButtonAlert=   [UIAlertController
-                                  alertControllerWithTitle:@"Delete"
-                                  message:@"Are you sure to delete this Note"
-                                  preferredStyle:UIAlertControllerStyleAlert];
+                                              alertControllerWithTitle:@"Delete"
+                                              message:@"Are you sure to delete this Note"
+                                              preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction* yesButton = [UIAlertAction
                                 actionWithTitle:@"Yes"
                                 style:UIAlertActionStyleDefault
@@ -74,13 +56,13 @@
                                     
                                 }];
     UIAlertAction* noButton = [UIAlertAction
-                             actionWithTitle:@"No"
-                             style:UIAlertActionStyleDefault
-                             handler:^(UIAlertAction * action)
-                             {
-                                 [deleteButtonAlert dismissViewControllerAnimated:YES completion:nil];
-                                 
-                             }];
+                               actionWithTitle:@"No"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action)
+                               {
+                                   [deleteButtonAlert dismissViewControllerAnimated:YES completion:nil];
+                                   
+                               }];
     [deleteButtonAlert addAction:yesButton];
     [deleteButtonAlert addAction:noButton];
     [self presentViewController:deleteButtonAlert animated:YES completion:nil];
@@ -88,11 +70,10 @@
 
 - (IBAction)editButtonAction:(UIBarButtonItem *)sender {
     
-    if (self.titleTextField.enabled == NO) {
-        [self.titleTextField setEnabled:YES];
-        [self.detailsTextView setEditable:YES];
+    if (!self.titleTextField.enabled) {
+        [self setTextViewEditable:YES];
         sender.title = @"Done";
- 
+        
     } else {
         if (self.isAddButtonPressed) {
             Note *newNote = [self.coreDataManager createObject];
@@ -104,23 +85,49 @@
         [self.aNote setValue:[self.titleTextField text] forKey:@"title"];
         [self.aNote setValue:[self.detailsTextView text] forKey:@"details"];
         [self.coreDataManager saveObject];
-        [self.titleTextField setEnabled:NO];
-        [self.detailsTextView setEditable:NO];
+        [self setTextViewEditable:YES];
         sender.title = @"Edit";
     }
 }
 
+#pragma mark Privete Methods
 
+- (void)setIBOutlets:(Note *)aNote addEditButton:(BOOL)isPressed {
+    if (isPressed) {
+        [self setTextViewEditable:isPressed];
+        self.editButton.title = @"Done";
+        self.navigationItem.title = [NSDateFormatter localizedStringFromDate:[NSDate date]dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+        self.titleTextField.text = @"New Title";
+        self.detailsTextView.text = @"New Text";
+        _deleteButton.hidden = YES;
+    } else {
+        [self setTextViewEditable:isPressed];
+        self.editButton.title = @"Edit";
+        self.titleTextField.text = [aNote title];
+        self.detailsTextView.text = [aNote details];
+        self.navigationItem.title = [NSDateFormatter localizedStringFromDate:aNote.date dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+        _deleteButton.hidden = NO;
+    }
+}
 
+- (void)setTextViewEditable:(BOOL)status {
+    if (status) {
+        [self.titleTextField setEnabled:YES];
+        [self.detailsTextView setEditable:YES];
+    } else {
+        [self.titleTextField setEnabled:NO];
+        [self.detailsTextView setEditable:NO];
+    }
+}
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
