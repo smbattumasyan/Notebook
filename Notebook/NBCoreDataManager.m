@@ -10,7 +10,10 @@
 
 @implementation NBCoreDataManager
 
+//------------------------------------------------------------------------------------------
 #pragma mark - Shared Manager
+//------------------------------------------------------------------------------------------
+
 + (nonnull instancetype)sharedManager {
     
     static NBCoreDataManager *instance;
@@ -21,11 +24,14 @@
     return instance;
 }
 
+//------------------------------------------------------------------------------------------
 #pragma mark - Data Managers
+//------------------------------------------------------------------------------------------
+
 - (BOOL)saveObject{
     
     NSError *error = nil;
-    BOOL status = [self.managedObjectContext save:&error];    
+    BOOL status    = [self.managedObjectContext save:&error];
     if (error) {
         NSLog(@"addList error: %@", error);
     }
@@ -48,9 +54,9 @@
 
 - (nullable NSArray <Note *> *)requestAllObjects; {
     
-    NSError *error = nil;
+    NSError *error          = nil;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Note"];
-    NSArray *result =  [self.managedObjectContext executeFetchRequest:request
+    NSArray *result         = [self.managedObjectContext executeFetchRequest:request
                                                                 error:&error];
     if (error) {
         NSLog(@"requestAllObjects error: %@", error);

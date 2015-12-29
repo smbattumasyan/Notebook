@@ -23,13 +23,15 @@
 
 @implementation NoteDetailsViewController
 
+//------------------------------------------------------------------------------------------
 #pragma mark - Lifecycle
+//------------------------------------------------------------------------------------------
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.coreDataManager = [NBCoreDataManager sharedManager];
-    [self setIBOutlets:_aNote addEditButton:_isAddButtonPressed];
+    [self setIBOutlets];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,30 +39,32 @@
     // Dispose of any resources that can be recreated.
 }
 
+//------------------------------------------------------------------------------------------
 #pragma mark - IBActions
+//------------------------------------------------------------------------------------------
 
 - (IBAction)deleteButtonAction:(id)sender {
     UIAlertController *deleteButtonAlert = [UIAlertController alertControllerWithTitle:@"Delete"
                                                                                 message:@"Are you sure to delete this Note" preferredStyle:UIAlertControllerStyleAlert];
 
-    UIAlertAction *yesButton    = [UIAlertAction actionWithTitle:@"Yes"
-                                   style:UIAlertActionStyleDefault
-                                   handler:^(UIAlertAction *action)
-                                   {
-                                    [self.coreDataManager deleteObject:self.aNote];
-                                    [self.coreDataManager saveObject];
-                                    [deleteButtonAlert dismissViewControllerAnimated:YES completion:nil];
+    UIAlertAction *yesButton             = [UIAlertAction actionWithTitle:@"Yes"
+                                            style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction *action)
+                                            {
+                                             [self.coreDataManager deleteObject:self.aNote];
+                                             [self.coreDataManager saveObject];
+                                             [deleteButtonAlert dismissViewControllerAnimated:YES completion:nil];
                                                 [self.navigationController popViewControllerAnimated:YES];
                                                                       
                                             }];
-    UIAlertAction* noButton     = [UIAlertAction
-                                   actionWithTitle:@"No"
-                                   style:UIAlertActionStyleDefault
-                                   handler:^(UIAlertAction * action)
-                                   {
-                                       [deleteButtonAlert dismissViewControllerAnimated:YES completion:nil];
+    UIAlertAction* noButton              = [UIAlertAction
+                                            actionWithTitle:@"No"
+                                            style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * action)
+                                            {
+                                            [deleteButtonAlert dismissViewControllerAnimated:YES  completion:nil];
                                        
-                                   }];
+                                            }];
     [deleteButtonAlert addAction:yesButton];
     [deleteButtonAlert addAction:noButton];
     [self presentViewController:deleteButtonAlert animated:YES completion:nil];
@@ -88,11 +92,13 @@
     }
 }
 
+//------------------------------------------------------------------------------------------
 #pragma mark Privete Methods
+//------------------------------------------------------------------------------------------
 
-- (void)setIBOutlets:(Note *)aNote addEditButton:(BOOL)isPressed {
-    if (isPressed) {
-        [self setTextViewEditable:isPressed];
+- (void)setIBOutlets {
+    if (_isAddButtonPressed) {
+        [self setTextViewEditable:self.isAddButtonPressed];
         self.editButton.title     = @"Done";
         self.navigationItem.title = [NSDateFormatter localizedStringFromDate:[NSDate date]dateStyle:NSDateFormatterShortStyle
                                                                    timeStyle:NSDateFormatterShortStyle];
@@ -100,11 +106,11 @@
         self.detailsTextView.text = @"New Text";
         _deleteButton.hidden      = YES;
     } else {
-        [self setTextViewEditable:isPressed];
+        [self setTextViewEditable:self.isAddButtonPressed];
         self.editButton.title     = @"Edit";
-        self.titleTextField.text  = [aNote title];
-        self.detailsTextView.text = [aNote details];
-        self.navigationItem.title = [NSDateFormatter localizedStringFromDate:aNote.date dateStyle:NSDateFormatterShortStyle
+        self.titleTextField.text  = [_aNote title];
+        self.detailsTextView.text = [_aNote details];
+        self.navigationItem.title = [NSDateFormatter localizedStringFromDate:_aNote.date dateStyle:NSDateFormatterShortStyle
                                                                    timeStyle:NSDateFormatterShortStyle];
         _deleteButton.hidden      = NO;
     }

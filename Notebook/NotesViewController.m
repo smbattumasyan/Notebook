@@ -25,17 +25,20 @@
 
 @implementation NotesViewController
 
+//------------------------------------------------------------------------------------------
 #pragma mark - View Lifecycle
+//------------------------------------------------------------------------------------------
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.notes = [self.coreDataManager requestAllObjects];
+    _notes = [self.coreDataManager requestAllObjects];
     [self.tableView reloadData];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.coreDataManager      = [NBCoreDataManager sharedManager];
+    _coreDataManager          = [NBCoreDataManager sharedManager];
     self.navigationItem.title = @"Notebook";
 }
 
@@ -44,13 +47,19 @@
     // Dispose of any resources that can be recreated.
 }
 
+//------------------------------------------------------------------------------------------
 #pragma mark - IBActions
+//------------------------------------------------------------------------------------------
+
 - (IBAction)addButtonAction:(UIBarButtonItem *)sender {
     self.isAddButtonPressed = YES;
     [self performSegueWithIdentifier:@"NotesViewController" sender:self];
 }
 
+//------------------------------------------------------------------------------------------
 #pragma mark - Table View Data Source
+//------------------------------------------------------------------------------------------
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.notes count];
 }
@@ -70,16 +79,18 @@
     [self performSegueWithIdentifier:@"NotesViewController" sender:self];
 }
 
-
+//------------------------------------------------------------------------------------------
 #pragma mark - Navigation
+//------------------------------------------------------------------------------------------
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+    NSIndexPath *selectedIndexPath            = [self.tableView indexPathForSelectedRow];
      NoteDetailsViewController *listDetailsVC = [segue destinationViewController];
     if (self.isAddButtonPressed) {
         listDetailsVC.isAddButtonPressed      = YES;
-        self.isAddButtonPressed = NO;
+        self.isAddButtonPressed               = NO;
     } else if ([[segue identifier] isEqualToString:@"NotesViewController"]) {
-        listDetailsVC.aNote = self.notes[selectedIndexPath.row];
+        listDetailsVC.aNote                   = self.notes[selectedIndexPath.row];
     }
 }
 
