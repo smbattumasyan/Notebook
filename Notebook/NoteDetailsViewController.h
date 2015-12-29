@@ -12,7 +12,7 @@
 @interface NoteDetailsViewController : UIViewController
 
 #pragma mark - Propertes
-@property (nonatomic, strong) Note *aNote;
-@property (nonatomic, assign) BOOL  isAddButtonPressed;
+@property (strong, nonatomic) Note *aNote;
+@property (assign, nonatomic) BOOL  isAddButtonPressed;
 
 @end

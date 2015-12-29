@@ -15,10 +15,10 @@
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
-@property (nonatomic, strong) NSArray           *notes;
-@property (nonatomic, strong) Note              *aNote;
-@property (nonatomic, assign) BOOL               isAddButtonPressed;
-@property (nonatomic, strong) NBCoreDataManager *coreDataManager;
+@property (strong, nonatomic) NSArray           *notes;
+@property (strong, nonatomic) Note              *aNote;
+@property (assign, nonatomic) BOOL               isAddButtonPressed;
+@property (strong, nonatomic) NBCoreDataManager *coreDataManager;
 
 @end
 
@@ -30,7 +30,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.notes = [self.coreDataManager requestAllObjects];
+    self.notes                       = [self.coreDataManager requestAllObjects];
     [self.tableView reloadData];
 }
 

@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITextView       *detailsTextView;
 @property (weak, nonatomic) IBOutlet UIButton         *deleteButton;
 
-@property (nonatomic, strong) NBCoreDataManager *coreDataManager;
+@property (strong, nonatomic) NBCoreDataManager *coreDataManager;
 
 @end
 
