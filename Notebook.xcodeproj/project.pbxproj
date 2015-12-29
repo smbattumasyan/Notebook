@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		17A5F5161C2A78DB00FD2481 /* Note+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5F5131C2A78DB00FD2481 /* Note+CoreDataProperties.m */; };
 		17A5F5171C2A78DB00FD2481 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5F5151C2A78DB00FD2481 /* Note.m */; };
-		17A5F51D1C2A799C00FD2481 /* BaseCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5F51C1C2A799C00FD2481 /* BaseCoreDataManager.m */; };
 		17A5F5231C2A7A2100FD2481 /* NBCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5F5221C2A7A2100FD2481 /* NBCoreDataManager.m */; };
 		17F45AA81C29674F00B26B9C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F45AA71C29674F00B26B9C /* main.m */; };
 		17F45AAB1C29674F00B26B9C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F45AAA1C29674F00B26B9C /* AppDelegate.m */; };
@@ -46,8 +45,6 @@
 		17A5F5131C2A78DB00FD2481 /* Note+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Note+CoreDataProperties.m"; sourceTree = "<group>"; };
 		17A5F5141C2A78DB00FD2481 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
 		17A5F5151C2A78DB00FD2481 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
-		17A5F51B1C2A799C00FD2481 /* BaseCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCoreDataManager.h; sourceTree = "<group>"; };
-		17A5F51C1C2A799C00FD2481 /* BaseCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCoreDataManager.m; sourceTree = "<group>"; };
 		17A5F5211C2A7A2100FD2481 /* NBCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBCoreDataManager.h; sourceTree = "<group>"; };
 		17A5F5221C2A7A2100FD2481 /* NBCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBCoreDataManager.m; sourceTree = "<group>"; };
 		17F45AA31C29674F00B26B9C /* Notebook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notebook.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,8 +118,6 @@
 		17A5F51A1C2A795400FD2481 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				17A5F51B1C2A799C00FD2481 /* BaseCoreDataManager.h */,
-				17A5F51C1C2A799C00FD2481 /* BaseCoreDataManager.m */,
 				17A5F5211C2A7A2100FD2481 /* NBCoreDataManager.h */,
 				17A5F5221C2A7A2100FD2481 /* NBCoreDataManager.m */,
 			);
@@ -368,7 +363,6 @@
 				17F45AE11C29721900B26B9C /* NotesViewController.m in Sources */,
 				17F45B291C297F8600B26B9C /* NoteDetailsViewController.m in Sources */,
 				17A5F5161C2A78DB00FD2481 /* Note+CoreDataProperties.m in Sources */,
-				17A5F51D1C2A799C00FD2481 /* BaseCoreDataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,6 +11,7 @@
 
 @interface NoteDetailsViewController : UIViewController
 
+#pragma mark - Propertes
 @property (nonatomic, strong) Note *aNote;
 @property (nonatomic, assign) BOOL  isAddButtonPressed;
 

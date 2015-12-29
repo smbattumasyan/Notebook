@@ -6,15 +6,26 @@
 //  Copyright © 2015 EGS. All rights reserved.
 //
 
-#import "BaseCoreDataManager.h"
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+#import "Note.h"
 
-@interface NBCoreDataManager : BaseCoreDataManager
+@interface NBCoreDataManager : NSObject
 
+#pragma mark Properties
+@property (nonatomic, strong, readonly) NSManagedObjectContext       *managedObjectContext;
+@property (nonatomic, strong, readonly) NSManagedObjectModel         *managedObjectModel;
+@property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
+#pragma mark - Class methods
 + (nonnull instancetype)sharedManager;
 
-- (BOOL)saveObject;
+#pragma marik - Instance Methods
 - (void)deleteObject:(nonnull Note *)managedObject;
-- (nonnull Note *)createObject;
 - (nullable NSArray <Note *> *)requestAllObjects;
+- (nonnull Note *)createObject;
+- (BOOL)saveObject;
+
+- (void)saveContext;
 
 @end

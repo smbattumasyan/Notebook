@@ -11,6 +11,7 @@
 
 @interface NoteViewCell : UITableViewCell
 
+#pragma mark - Propertes
 @property (nonatomic, strong) Note *note;
 
 @end

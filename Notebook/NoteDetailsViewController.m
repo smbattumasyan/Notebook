@@ -74,7 +74,7 @@
     
     if (!self.titleTextField.enabled) {
         [self setTextViewEditable:YES];
-        sender.title = @"Done";
+        sender.title        = @"Done";
         
     } else {
         if (self.isAddButtonPressed) {
@@ -104,15 +104,15 @@
                                                                    timeStyle:NSDateFormatterShortStyle];
         self.titleTextField.text  = @"New Title";
         self.detailsTextView.text = @"New Text";
-        _deleteButton.hidden      = YES;
+        self.deleteButton.hidden  = YES;
     } else {
         [self setTextViewEditable:self.isAddButtonPressed];
         self.editButton.title     = @"Edit";
-        self.titleTextField.text  = [_aNote title];
-        self.detailsTextView.text = [_aNote details];
-        self.navigationItem.title = [NSDateFormatter localizedStringFromDate:_aNote.date dateStyle:NSDateFormatterShortStyle
+        self.titleTextField.text  = [self.aNote title];
+        self.detailsTextView.text = [self.aNote details];
+        self.navigationItem.title = [NSDateFormatter localizedStringFromDate:self.aNote.date dateStyle:NSDateFormatterShortStyle
                                                                    timeStyle:NSDateFormatterShortStyle];
-        _deleteButton.hidden      = NO;
+        self.deleteButton.hidden  = NO;
     }
 }
 

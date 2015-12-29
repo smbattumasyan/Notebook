@@ -15,10 +15,9 @@
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
-@property (nonatomic, strong) NSArray *notes;
-@property (nonatomic, strong) Note    *aNote;
-@property (nonatomic, assign) BOOL     isAddButtonPressed;
-
+@property (nonatomic, strong) NSArray           *notes;
+@property (nonatomic, strong) Note              *aNote;
+@property (nonatomic, assign) BOOL               isAddButtonPressed;
 @property (nonatomic, strong) NBCoreDataManager *coreDataManager;
 
 @end
@@ -31,15 +30,15 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    _notes = [self.coreDataManager requestAllObjects];
+    self.notes = [self.coreDataManager requestAllObjects];
     [self.tableView reloadData];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _coreDataManager          = [NBCoreDataManager sharedManager];
-    self.navigationItem.title = @"Notebook";
+    self.coreDataManager          = [NBCoreDataManager sharedManager];
+    self.navigationItem.title     = @"Notebook";
 }
 
 - (void)didReceiveMemoryWarning {
