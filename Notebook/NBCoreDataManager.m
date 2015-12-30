@@ -59,6 +59,8 @@
     
     NSError *error          = nil;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Note"];
+    NSSortDescriptor *sort  = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO selector:@selector(caseInsensitiveCompare:)];
+    request.sortDescriptors = @[sort];
     NSArray *result         = [self.managedObjectContext executeFetchRequest:request
                                                                 error:&error];
     if (error) {

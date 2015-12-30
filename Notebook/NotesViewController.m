@@ -16,7 +16,6 @@
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) NSArray           *sortedNotes;
-@property (strong, nonatomic) Note              *aNote;
 @property (assign, nonatomic) BOOL               isAddButtonPressed;
 @property (strong, nonatomic) NBCoreDataManager *coreDataManager;
 
@@ -30,11 +29,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    NSArray *notes   = [self.coreDataManager requestAllObjects];
-    self.sortedNotes = [notes sortedArrayUsingComparator:
-                                            ^(Note *obj1, Note *obj2) {
-                                                return [obj2.date compare:obj1.date];
-                                            }];
+    self.sortedNotes   = [self.coreDataManager requestAllObjects];
     [self.tableView reloadData];
 }
 
