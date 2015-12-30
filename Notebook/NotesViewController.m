@@ -15,7 +15,7 @@
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
-@property (strong, nonatomic) NSArray           *notes;
+@property (strong, nonatomic) NSArray           *sortedNotes;
 @property (strong, nonatomic) Note              *aNote;
 @property (assign, nonatomic) BOOL               isAddButtonPressed;
 @property (strong, nonatomic) NBCoreDataManager *coreDataManager;
@@ -30,7 +30,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.notes                       = [self.coreDataManager requestAllObjects];
+    NSArray *notes   = [self.coreDataManager requestAllObjects];
+    self.sortedNotes = [notes sortedArrayUsingComparator:
+                                            ^(Note *obj1, Note *obj2) {
+                                                return [obj2.date compare:obj1.date];
+                                            }];
     [self.tableView reloadData];
 }
 
@@ -60,7 +64,7 @@
 //------------------------------------------------------------------------------------------
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.notes count];
+    return [self.sortedNotes count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -70,7 +74,7 @@
         cell                         = [[NoteViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                            reuseIdentifier:tableIdentifier];
     }
-    cell.note                        = self.notes[indexPath.row];
+    cell.note                        = self.sortedNotes[indexPath.row];
     return cell;
 }
 
@@ -89,7 +93,7 @@
         listDetailsVC.isAddButtonPressed      = YES;
         self.isAddButtonPressed               = NO;
     } else if ([[segue identifier] isEqualToString:@"NotesViewController"]) {
-        listDetailsVC.aNote                   = self.notes[selectedIndexPath.row];
+        listDetailsVC.aNote                   = self.sortedNotes[selectedIndexPath.row];
     }
 }
 

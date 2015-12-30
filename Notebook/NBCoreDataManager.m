@@ -19,7 +19,6 @@
 //------------------------------------------------------------------------------------------
 
 + (nonnull instancetype)sharedManager {
-    
     static NBCoreDataManager *instance;
     if (!instance) {
         instance = [[NBCoreDataManager alloc] init];
@@ -67,7 +66,6 @@
     }
     return result;
 }
-
 
 //-------------------------------------------------------------------------------------------
 #pragma mark - Core Data Stack

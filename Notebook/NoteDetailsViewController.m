@@ -65,8 +65,8 @@
                                             [deleteButtonAlert dismissViewControllerAnimated:YES  completion:nil];
                                        
                                             }];
-    [deleteButtonAlert addAction:yesButton];
     [deleteButtonAlert addAction:noButton];
+    [deleteButtonAlert addAction:yesButton];
     [self presentViewController:deleteButtonAlert animated:YES completion:nil];
 }
 

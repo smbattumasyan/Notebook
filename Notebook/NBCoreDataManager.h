@@ -13,9 +13,9 @@
 @interface NBCoreDataManager : NSObject
 
 #pragma mark Properties
-@property (nonatomic, strong, readonly) NSManagedObjectContext       *managedObjectContext;
-@property (nonatomic, strong, readonly) NSManagedObjectModel         *managedObjectModel;
-@property (nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonnull, nonatomic, strong, readonly) NSManagedObjectContext       *managedObjectContext;
+@property (nonnull, nonatomic, strong, readonly) NSManagedObjectModel         *managedObjectModel;
+@property (nonnull, nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 #pragma mark - Class methods
 + (nonnull instancetype)sharedManager;
