@@ -13,6 +13,7 @@
 @synthesize managedObjectContext       = _managedObjectContext;
 @synthesize managedObjectModel         = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+@synthesize fetchedResultsController   = _fetchedResultsController;
 
 //------------------------------------------------------------------------------------------
 #pragma mark - Class Methods
@@ -52,21 +53,6 @@
     Note *list = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
                                                inManagedObjectContext:self.managedObjectContext];
     return list;
-}
-
-
-- (nullable NSArray <Note *> *)requestAllObjects; {
-    
-    NSError *error          = nil;
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Note"];
-    NSSortDescriptor *sort  = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO selector:@selector(caseInsensitiveCompare:)];
-    request.sortDescriptors = @[sort];
-    NSArray *result         = [self.managedObjectContext executeFetchRequest:request
-                                                                error:&error];
-    if (error) {
-        NSLog(@"requestAllObjects error: %@", error);
-    }
-    return result;
 }
 
 //-------------------------------------------------------------------------------------------
@@ -128,6 +114,33 @@
     _managedObjectContext                     = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     return _managedObjectContext;
+}
+
+- (NSFetchedResultsController *)fetchedResultsController {
+    
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    
+    NSFetchRequest *fetchRequest                            = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity                             = [NSEntityDescription
+                                   entityForName:@"Note" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSSortDescriptor *sort                                  = [[NSSortDescriptor alloc]
+                              initWithKey:@"date" ascending:NO];
+    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
+    
+    [fetchRequest setFetchBatchSize:20];
+    
+    NSFetchedResultsController *theFetchedResultsController =
+    [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                        managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil
+                                                   cacheName:nil];
+    self.fetchedResultsController                           = theFetchedResultsController;
+    _fetchedResultsController.delegate                      = self;
+    
+    return _fetchedResultsController;
 }
 
 - (void)saveContext

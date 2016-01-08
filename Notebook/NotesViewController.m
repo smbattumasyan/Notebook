@@ -15,7 +15,6 @@
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 
-@property (strong, nonatomic) NSArray           *sortedNotes;
 @property (assign, nonatomic) BOOL               isAddButtonPressed;
 @property (strong, nonatomic) NBCoreDataManager *coreDataManager;
 
@@ -29,7 +28,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.sortedNotes   = [self.coreDataManager requestAllObjects];
+    NSError *error = nil;
+    if (![self.coreDataManager.fetchedResultsController performFetch:&error]) {
+        // Update to handle the error appropriately.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        exit(-1);  // Fail
+    }
     [self.tableView reloadData];
 }
 
@@ -38,6 +42,10 @@
     // Do any additional setup after loading the view.
     self.coreDataManager          = [NBCoreDataManager sharedManager];
     self.navigationItem.title     = @"Notebook";
+}
+
+- (void)viewDidUnload {
+    self.coreDataManager.fetchedResultsController = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,7 +67,9 @@
 //------------------------------------------------------------------------------------------
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.sortedNotes count];
+    id  sectionInfo =
+    [[self.coreDataManager.fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -69,7 +79,7 @@
         cell                         = [[NoteViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                            reuseIdentifier:tableIdentifier];
     }
-    cell.note                        = self.sortedNotes[indexPath.row];
+    cell.note                        = [[self.coreDataManager fetchedResultsController] objectAtIndexPath:indexPath];
     return cell;
 }
 
@@ -88,7 +98,7 @@
         listDetailsVC.isAddButtonPressed      = YES;
         self.isAddButtonPressed               = NO;
     } else if ([[segue identifier] isEqualToString:@"NotesViewController"]) {
-        listDetailsVC.aNote                   = self.sortedNotes[selectedIndexPath.row];
+        listDetailsVC.aNote                   = [[self.coreDataManager fetchedResultsController] objectAtIndexPath:selectedIndexPath];
     }
 }
 
