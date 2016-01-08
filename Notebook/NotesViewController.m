@@ -41,7 +41,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.coreDataManager          = [NBCoreDataManager sharedManager];
-    self.navigationItem.title     = @"Notebook";
+    self.navigationItem.title     = NSLocalizedString(@"notebook", nil);
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
 }
 
 - (void)viewDidUnload {
@@ -67,8 +68,7 @@
 //------------------------------------------------------------------------------------------
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    id  sectionInfo =
-    [[self.coreDataManager.fetchedResultsController sections] objectAtIndex:section];
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.coreDataManager.fetchedResultsController sections][section];
     return [sectionInfo numberOfObjects];
 }
 
@@ -79,12 +79,36 @@
         cell                         = [[NoteViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                            reuseIdentifier:tableIdentifier];
     }
-    cell.note                        = [[self.coreDataManager fetchedResultsController] objectAtIndexPath:indexPath];
+    [self configureCell:cell atIndexPath:indexPath];
     return cell;
+}
+
+- (void)configureCell:(NoteViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    cell.note = [[self.coreDataManager fetchedResultsController] objectAtIndexPath:indexPath];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self performSegueWithIdentifier:@"NotesViewController" sender:self];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return YES if you want the specified item to be editable.
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.coreDataManager deleteObject:[[self.coreDataManager fetchedResultsController] objectAtIndexPath:indexPath]];
+        [self.coreDataManager saveObject];
+        NSError *error = nil;
+        if (![self.coreDataManager.fetchedResultsController performFetch:&error]) {
+            // Update to handle the error appropriately.
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            exit(-1);  // Fail
+        }
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView reloadData];        
+    }
 }
 
 //------------------------------------------------------------------------------------------

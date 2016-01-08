@@ -1,0 +1,27 @@
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "6HK-eK-qja"; */
+"6HK-eK-qja.text" = "Title";
+
+/* Class = "UINavigationItem"; title = "date"; ObjectID = "6KB-Nv-oJA"; */
+"6KB-Nv-oJA.title" = "date";
+
+/* Class = "UIButton"; normalTitle = "Delete"; ObjectID = "DST-mW-SGt"; */
+"DST-mW-SGt.normalTitle" = "Delete";
+
+/* Class = "UILabel"; text = "Details"; ObjectID = "Ikz-wc-Rrg"; */
+"Ikz-wc-Rrg.text" = "Details";
+
+/* Class = "UILabel"; text = "22/12/2015 10.10"; ObjectID = "XeY-LX-D6r"; */
+"XeY-LX-D6r.text" = "22/12/2015 10.10";
+
+/* Class = "UIBarButtonItem"; title = "Add"; ObjectID = "Zc2-O0-g3X"; */
+"Zc2-O0-g3X.title" = "Add";
+
+/* Class = "UITextField"; text = "title"; ObjectID = "aJR-Hs-N37"; */
+"aJR-Hs-N37.text" = "title";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "ltx-2Z-MeO"; */
+"ltx-2Z-MeO.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UIBarButtonItem"; title = "Edit"; ObjectID = "nFP-F6-os3"; */
+"nFP-F6-os3.title" = "Edit";

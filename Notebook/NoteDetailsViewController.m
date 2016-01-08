@@ -44,10 +44,10 @@
 //------------------------------------------------------------------------------------------
 
 - (IBAction)deleteButtonAction:(id)sender {
-    UIAlertController *deleteButtonAlert = [UIAlertController alertControllerWithTitle:@"Delete"
-                                                                                message:@"Are you sure to delete this Note" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *deleteButtonAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete", nil)
+                                                                                message:NSLocalizedString(@"deleteMessage", nil) preferredStyle:UIAlertControllerStyleAlert];
 
-    UIAlertAction *yesButton             = [UIAlertAction actionWithTitle:@"Yes"
+    UIAlertAction *yesButton             = [UIAlertAction actionWithTitle:NSLocalizedString(@"yes", nil)
                                             style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction *action)
                                             {
@@ -58,7 +58,7 @@
                                                                       
                                             }];
     UIAlertAction* noButton              = [UIAlertAction
-                                            actionWithTitle:@"No"
+                                            actionWithTitle:NSLocalizedString(@"no", nil)
                                             style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * action)
                                             {
@@ -74,8 +74,7 @@
     
     if (!self.titleTextField.enabled) {
         [self setTextViewEditable:YES];
-        sender.title        = @"Done";
-        
+        sender.title        = NSLocalizedString(@"done", nil);
     } else {
         if (self.isAddButtonPressed) {
             Note *newNote   = [self.coreDataManager createObject];
@@ -88,7 +87,8 @@
         [self.aNote setValue:[self.detailsTextView text] forKey:@"details"];
         [self.coreDataManager saveObject];
         [self setTextViewEditable:YES];
-        sender.title        = @"Edit";
+        sender.title        = NSLocalizedString(@"edit", nil);
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 
@@ -99,19 +99,16 @@
 - (void)setIBOutlets {
     if (_isAddButtonPressed) {
         [self setTextViewEditable:self.isAddButtonPressed];
-        self.editButton.title     = @"Done";
-        self.navigationItem.title = [NSDateFormatter localizedStringFromDate:[NSDate date]dateStyle:NSDateFormatterShortStyle
-                                                                   timeStyle:NSDateFormatterShortStyle];
-        self.titleTextField.text  = @"New Title";
-        self.detailsTextView.text = @"New Text";
+        self.editButton.title     = NSLocalizedString(@"done", nil)
+        ;
+        self.titleTextField.text  = NSLocalizedString(@"newTitle", nil);
+        self.detailsTextView.text = NSLocalizedString(@"newText", nil);
         self.deleteButton.hidden  = YES;
     } else {
         [self setTextViewEditable:self.isAddButtonPressed];
-        self.editButton.title     = @"Edit";
+        self.editButton.title     = NSLocalizedString(@"edit", nil);
         self.titleTextField.text  = [self.aNote title];
         self.detailsTextView.text = [self.aNote details];
-        self.navigationItem.title = [NSDateFormatter localizedStringFromDate:self.aNote.date dateStyle:NSDateFormatterShortStyle
-                                                                   timeStyle:NSDateFormatterShortStyle];
         self.deleteButton.hidden  = NO;
     }
 }

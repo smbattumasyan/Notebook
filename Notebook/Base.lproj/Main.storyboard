@@ -125,7 +125,7 @@
             </objects>
             <point key="canvasLocation" x="1336" y="323"/>
         </scene>
-        <!--date-->
+        <!--Note Details View Controller-->
         <scene sceneID="5sc-U1-Psd">
             <objects>
                 <viewController storyboardIdentifier="NoteDetailsViewController" id="MNg-Yl-AtL" customClass="NoteDetailsViewController" sceneMemberID="viewController">
@@ -137,18 +137,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="title" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aJR-Hs-N37">
-                                <rect key="frame" x="20" y="72" width="280" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DST-mW-SGt">
+                                <rect key="frame" x="130" y="545" width="60" height="15"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="rDc-dg-pmh"/>
-                                    <constraint firstAttribute="width" constant="280" id="yx4-T7-BVa"/>
+                                    <constraint firstAttribute="height" constant="15" id="4ki-c8-KmF"/>
+                                    <constraint firstAttribute="width" constant="60" id="4lk-3f-jZf"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                                <state key="normal" title="Delete"/>
+                                <connections>
+                                    <action selector="deleteButtonAction:" destination="MNg-Yl-AtL" eventType="touchUpInside" id="ZAb-Dj-f3P"/>
+                                </connections>
+                            </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ltx-2Z-MeO">
-                                <rect key="frame" x="4" y="110" width="312" height="427"/>
+                                <rect key="frame" x="4" y="72" width="312" height="465"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -163,31 +165,17 @@
                                     </mask>
                                 </variation>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DST-mW-SGt">
-                                <rect key="frame" x="130" y="545" width="60" height="15"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="15" id="4ki-c8-KmF"/>
-                                    <constraint firstAttribute="width" constant="60" id="4lk-3f-jZf"/>
-                                </constraints>
-                                <state key="normal" title="Delete"/>
-                                <connections>
-                                    <action selector="deleteButtonAction:" destination="MNg-Yl-AtL" eventType="touchUpInside" id="ZAb-Dj-f3P"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="mtH-7I-L8I" firstAttribute="top" secondItem="DST-mW-SGt" secondAttribute="bottom" constant="8" id="25i-eW-mbU"/>
-                            <constraint firstItem="aJR-Hs-N37" firstAttribute="centerX" secondItem="ZQL-ks-nHg" secondAttribute="centerX" id="3AY-5u-11d"/>
-                            <constraint firstItem="aJR-Hs-N37" firstAttribute="top" secondItem="fk7-6A-x1p" secondAttribute="bottom" constant="8" id="4DP-0A-b4y"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ltx-2Z-MeO" secondAttribute="trailing" constant="-12" id="6VU-1D-67c"/>
                             <constraint firstItem="mtH-7I-L8I" firstAttribute="top" secondItem="ltx-2Z-MeO" secondAttribute="bottom" id="OJy-xe-coO"/>
+                            <constraint firstItem="ltx-2Z-MeO" firstAttribute="top" secondItem="fk7-6A-x1p" secondAttribute="bottom" constant="8" id="Zts-hm-IoB"/>
                             <constraint firstItem="ltx-2Z-MeO" firstAttribute="leading" secondItem="ZQL-ks-nHg" secondAttribute="leadingMargin" constant="-12" id="aqO-Vd-YJN"/>
                             <constraint firstItem="DST-mW-SGt" firstAttribute="centerX" secondItem="ZQL-ks-nHg" secondAttribute="centerX" id="duk-15-e9z"/>
                             <constraint firstItem="DST-mW-SGt" firstAttribute="top" secondItem="ltx-2Z-MeO" secondAttribute="bottom" constant="8" id="j74-dS-jpu"/>
-                            <constraint firstItem="ltx-2Z-MeO" firstAttribute="top" secondItem="aJR-Hs-N37" secondAttribute="bottom" constant="8" id="od6-z4-k4g"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -195,7 +183,15 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="date" id="6KB-Nv-oJA">
+                    <navigationItem key="navigationItem" id="6KB-Nv-oJA">
+                        <nil key="title"/>
+                        <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="title" textAlignment="center" minimumFontSize="17" id="aJR-Hs-N37">
+                            <rect key="frame" x="96" y="7" width="128" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <animations/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="nFP-F6-os3">
                             <connections>
                                 <action selector="editButtonAction:" destination="MNg-Yl-AtL" id="WUa-vI-QJr"/>
