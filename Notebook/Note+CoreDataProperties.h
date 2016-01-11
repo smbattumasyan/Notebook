@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Note (CoreDataProperties)
 
 @property (nullable, nonatomic, retain) NSString *title;
-@property (nullable, nonatomic, retain) NSDate *date;
+@property (nullable, nonatomic, retain) NSDate   *date;
 @property (nullable, nonatomic, retain) NSString *details;
 
 @end
