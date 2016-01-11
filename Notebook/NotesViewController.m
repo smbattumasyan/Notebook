@@ -13,9 +13,9 @@
 
 @interface NotesViewController ()
 
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (weak, nonatomic  ) IBOutlet UITableView       *tableView;
 
-@property (assign, nonatomic) BOOL               isAddButtonPressed;
+@property (assign, nonatomic) BOOL              isAddButtonPressed;
 @property (strong, nonatomic) NBCoreDataManager *coreDataManager;
 
 @end
@@ -40,8 +40,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.coreDataManager          = [NBCoreDataManager sharedManager];
-    self.navigationItem.title     = NSLocalizedString(@"notebook", nil);
+    self.coreDataManager                                = [NBCoreDataManager sharedManager];
+    self.navigationItem.title                           = NSLocalizedString(@"notebook", @"notes title");
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
 }
 
@@ -68,15 +68,14 @@
 //------------------------------------------------------------------------------------------
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [self.coreDataManager.fetchedResultsController sections][section];
-    return [sectionInfo numberOfObjects];
+    return [[self.coreDataManager.fetchedResultsController.sections objectAtIndex:section] numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *tableIdentifier = @"tableIdenfier";
     NoteViewCell *cell               = [tableView dequeueReusableCellWithIdentifier:tableIdentifier];
     if (cell == nil) {
-        cell                         = [[NoteViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+    cell                             = [[NoteViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                            reuseIdentifier:tableIdentifier];
     }
     [self configureCell:cell atIndexPath:indexPath];
@@ -99,7 +98,6 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.coreDataManager deleteObject:[[self.coreDataManager fetchedResultsController] objectAtIndexPath:indexPath]];
-        [self.coreDataManager saveObject];
         NSError *error = nil;
         if (![self.coreDataManager.fetchedResultsController performFetch:&error]) {
             // Update to handle the error appropriately.
@@ -107,7 +105,6 @@
             exit(-1);  // Fail
         }
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        [self.tableView reloadData];        
     }
 }
 
@@ -116,13 +113,13 @@
 //------------------------------------------------------------------------------------------
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    NSIndexPath *selectedIndexPath            = [self.tableView indexPathForSelectedRow];
-     NoteDetailsViewController *listDetailsVC = [segue destinationViewController];
+    NSIndexPath *selectedIndexPath           = [self.tableView indexPathForSelectedRow];
+    NoteDetailsViewController *listDetailsVC = [segue destinationViewController];
     if (self.isAddButtonPressed) {
-        listDetailsVC.isAddButtonPressed      = YES;
-        self.isAddButtonPressed               = NO;
+    listDetailsVC.isAddButtonPressed         = YES;
+    self.isAddButtonPressed                  = NO;
     } else if ([[segue identifier] isEqualToString:@"NotesViewController"]) {
-        listDetailsVC.aNote                   = [[self.coreDataManager fetchedResultsController] objectAtIndexPath:selectedIndexPath];
+    listDetailsVC.aNote                      = [[self.coreDataManager fetchedResultsController] objectAtIndexPath:selectedIndexPath];
     }
 }
 

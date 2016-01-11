@@ -11,11 +11,11 @@
 
 @interface NoteDetailsViewController ()
 
-@property (weak, nonatomic) IBOutlet UINavigationItem *navigationItem;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem  *editButton;
-@property (weak, nonatomic) IBOutlet UITextField      *titleTextField;
-@property (weak, nonatomic) IBOutlet UITextView       *detailsTextView;
-@property (weak, nonatomic) IBOutlet UIButton         *deleteButton;
+@property (weak, nonatomic  ) IBOutlet UINavigationItem  *navigationItem;
+@property (weak, nonatomic  ) IBOutlet UIBarButtonItem   *editButton;
+@property (weak, nonatomic  ) IBOutlet UITextField       *titleTextField;
+@property (weak, nonatomic  ) IBOutlet UITextView        *detailsTextView;
+@property (weak, nonatomic  ) IBOutlet UIButton          *deleteButton;
 
 @property (strong, nonatomic) NBCoreDataManager *coreDataManager;
 
@@ -44,21 +44,19 @@
 //------------------------------------------------------------------------------------------
 
 - (IBAction)deleteButtonAction:(id)sender {
-    UIAlertController *deleteButtonAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete", nil)
-                                                                                message:NSLocalizedString(@"deleteMessage", nil) preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *deleteButtonAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete", @"delete alert title")
+                                                                                message:NSLocalizedString(@"deleteMessage", @"note delete message") preferredStyle:UIAlertControllerStyleAlert];
 
-    UIAlertAction *yesButton             = [UIAlertAction actionWithTitle:NSLocalizedString(@"yes", nil)
+    UIAlertAction *yesButton             = [UIAlertAction actionWithTitle:NSLocalizedString(@"yes", @"delete note alert yes button name")
                                             style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction *action)
                                             {
                                              [self.coreDataManager deleteObject:self.aNote];
-                                             [self.coreDataManager saveObject];
                                              [deleteButtonAlert dismissViewControllerAnimated:YES completion:nil];
                                                 [self.navigationController popViewControllerAnimated:YES];
-                                                                      
                                             }];
     UIAlertAction* noButton              = [UIAlertAction
-                                            actionWithTitle:NSLocalizedString(@"no", nil)
+                                            actionWithTitle:NSLocalizedString(@"no", @"delete note alert no button name")
                                             style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * action)
                                             {
@@ -74,20 +72,20 @@
     
     if (!self.titleTextField.enabled) {
         [self setTextViewEditable:YES];
-        sender.title        = NSLocalizedString(@"done", nil);
+        sender.title    = NSLocalizedString(@"done", @"note done button name");
     } else {
         if (self.isAddButtonPressed) {
-            Note *newNote   = [self.coreDataManager createObject];
-            newNote.title   = [self.titleTextField text];
-            newNote.details = [self.detailsTextView text];
-            newNote.date    = [NSDate date];
+        Note *newNote   = [self.coreDataManager createObject];
+        newNote.title   = [self.titleTextField text];
+        newNote.details = [self.detailsTextView text];
+        newNote.date    = [NSDate date];
             [self.coreDataManager saveObject];
         }
         [self.aNote setValue:[self.titleTextField text] forKey:@"title"];
         [self.aNote setValue:[self.detailsTextView text] forKey:@"details"];
         [self.coreDataManager saveObject];
         [self setTextViewEditable:YES];
-        sender.title        = NSLocalizedString(@"edit", nil);
+        sender.title    = NSLocalizedString(@"edit", @"note editing button name");
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
@@ -97,16 +95,16 @@
 //------------------------------------------------------------------------------------------
 
 - (void)setIBOutlets {
-    if (_isAddButtonPressed) {
+    if (self.isAddButtonPressed) {
         [self setTextViewEditable:self.isAddButtonPressed];
-        self.editButton.title     = NSLocalizedString(@"done", nil)
+        self.editButton.title     = NSLocalizedString(@"done", @"note done button name")
         ;
-        self.titleTextField.text  = NSLocalizedString(@"newTitle", nil);
-        self.detailsTextView.text = NSLocalizedString(@"newText", nil);
+        self.titleTextField.text  = NSLocalizedString(@"newTitle", @"new title name example");
+        self.detailsTextView.text = NSLocalizedString(@"newText", @"new text name example");
         self.deleteButton.hidden  = YES;
     } else {
         [self setTextViewEditable:self.isAddButtonPressed];
-        self.editButton.title     = NSLocalizedString(@"edit", nil);
+        self.editButton.title     = NSLocalizedString(@"edit", @"ntoe editing button name");
         self.titleTextField.text  = [self.aNote title];
         self.detailsTextView.text = [self.aNote details];
         self.deleteButton.hidden  = NO;

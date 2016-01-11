@@ -13,6 +13,6 @@
 
 #pragma mark - Propertes
 @property (strong, nonatomic) Note *aNote;
-@property (assign, nonatomic) BOOL  isAddButtonPressed;
+@property (assign, nonatomic) BOOL isAddButtonPressed;
 
 @end

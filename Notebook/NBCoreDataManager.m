@@ -48,8 +48,7 @@
     [self saveObject];
 }
 
-- (Note *)createObject {
-    
+- (Note *)createObject {    
     Note *list = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
                                                inManagedObjectContext:self.managedObjectContext];
     return list;
@@ -79,25 +78,25 @@
     if (_persistentStoreCoordinator != nil) {
         return _persistentStoreCoordinator;
     }
-    
+
     // Create the coordinator and store
-    
-    _persistentStoreCoordinator                = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    NSURL *storeURL                            = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Notebook.sqlite"];
-    NSError *error                             = nil;
-    NSString *failureReason                    = @"There was an error creating or loading the application's saved data.";
+
+    _persistentStoreCoordinator            = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    NSURL *storeURL                        = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Notebook.sqlite"];
+    NSError *error                         = nil;
+    NSString *failureReason                = @"There was an error creating or loading the application's saved data.";
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
         // Report any error we got.
-        NSMutableDictionary *dict              = [NSMutableDictionary dictionary];
-        dict[NSLocalizedDescriptionKey]        = @"Failed to initialize the application's saved data";
-        dict[NSLocalizedFailureReasonErrorKey] = failureReason;
-        dict[NSUnderlyingErrorKey]             = error;
-        error                                  = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
+    NSMutableDictionary *dict              = [NSMutableDictionary dictionary];
+    dict[NSLocalizedDescriptionKey]        = @"Failed to initialize the application's saved data";
+    dict[NSLocalizedFailureReasonErrorKey] = failureReason;
+    dict[NSUnderlyingErrorKey]             = error;
+    error                                  = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
         // Replace this with code to handle the error appropriately.
         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
     }
-    
+
     return _persistentStoreCoordinator;
 }
 
@@ -106,7 +105,7 @@
     if (_managedObjectContext != nil) {
         return _managedObjectContext;
     }
-    
+
     NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
     if (!coordinator) {
         return nil;
@@ -117,29 +116,29 @@
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {
-    
+
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
     }
-    
-    NSFetchRequest *fetchRequest                            = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity                             = [NSEntityDescription
+
+    NSFetchRequest *fetchRequest       = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity        = [NSEntityDescription
                                    entityForName:@"Note" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
-    
-    NSSortDescriptor *sort                                  = [[NSSortDescriptor alloc]
+
+    NSSortDescriptor *sort             = [[NSSortDescriptor alloc]
                               initWithKey:@"date" ascending:NO];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
-    
+
     [fetchRequest setFetchBatchSize:20];
-    
+
     NSFetchedResultsController *theFetchedResultsController =
     [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                         managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil
                                                    cacheName:nil];
-    self.fetchedResultsController                           = theFetchedResultsController;
-    _fetchedResultsController.delegate                      = self;
-    
+    _fetchedResultsController          = theFetchedResultsController;
+    _fetchedResultsController.delegate = self;
+
     return _fetchedResultsController;
 }
 
@@ -154,6 +153,5 @@
         }
     }
 }
-
 
 @end
