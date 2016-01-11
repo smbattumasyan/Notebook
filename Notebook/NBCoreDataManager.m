@@ -20,12 +20,13 @@
 //------------------------------------------------------------------------------------------
 
 + (nonnull instancetype)sharedManager {
-    static NBCoreDataManager *instance;
-    if (!instance) {
-        instance = [[NBCoreDataManager alloc] init];
-    }
+    static NBCoreDataManager *sharedInstance = nil;
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{
+    sharedInstance                           = [[NBCoreDataManager alloc] init];
+    });
     
-    return instance;
+    return sharedInstance;
 }
 
 //------------------------------------------------------------------------------------------
