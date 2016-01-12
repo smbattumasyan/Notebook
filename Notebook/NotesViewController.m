@@ -13,8 +13,14 @@
 
 @interface NotesViewController ()
 
-@property (weak, nonatomic  ) IBOutlet UITableView       *tableView;
+//------------------------------------------------------------------------------------------
+#pragma mark - IBOutlets
+//------------------------------------------------------------------------------------------
+@property (weak, nonatomic  ) IBOutlet UITableView *tableView;
 
+//------------------------------------------------------------------------------------------
+#pragma mark - Private Properties
+//------------------------------------------------------------------------------------------
 @property (assign, nonatomic) BOOL              isAddButtonPressed;
 @property (strong, nonatomic) NBCoreDataManager *coreDataManager;
 
@@ -75,7 +81,7 @@
     static NSString *tableIdentifier = @"tableIdenfier";
     NoteViewCell *cell               = [tableView dequeueReusableCellWithIdentifier:tableIdentifier];
     if (cell == nil) {
-    cell                             = [[NoteViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+        cell = [[NoteViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                            reuseIdentifier:tableIdentifier];
     }
     [self configureCell:cell atIndexPath:indexPath];
@@ -116,10 +122,10 @@
     NSIndexPath *selectedIndexPath           = [self.tableView indexPathForSelectedRow];
     NoteDetailsViewController *listDetailsVC = [segue destinationViewController];
     if (self.isAddButtonPressed) {
-    listDetailsVC.isAddButtonPressed         = YES;
-    self.isAddButtonPressed                  = NO;
+        listDetailsVC.isAddButtonPressed = YES;
+        self.isAddButtonPressed          = NO;
     } else if ([[segue identifier] isEqualToString:@"NotesViewController"]) {
-    listDetailsVC.aNote                      = [[self.coreDataManager fetchedResultsController] objectAtIndexPath:selectedIndexPath];
+        listDetailsVC.aNote = [[self.coreDataManager fetchedResultsController] objectAtIndexPath:selectedIndexPath];
     }
 }
 

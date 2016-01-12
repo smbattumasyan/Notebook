@@ -12,11 +12,11 @@
 
 /* NoteDetailsViewController */
 
-"done" = "Done";
-"edit" = "Edit";
-"yes" = "Yes";
-"no" = "No";
-"delete" = "Delete";
+"done"          = "Done";
+"edit"          = "Edit";
+"yes"           = "Yes";
+"no"            = "No";
+"delete"        = "Delete";
 "deleteMessage" = "Are you sure to delete this Note";
-"newTitle" = "New Title";
-"newText" = "New Text";
+"newTitle"      = "New Title";
+"newText"       = "New Text";

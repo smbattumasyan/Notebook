@@ -11,12 +11,18 @@
 
 @interface NoteDetailsViewController ()
 
-@property (weak, nonatomic  ) IBOutlet UINavigationItem  *navigationItem;
-@property (weak, nonatomic  ) IBOutlet UIBarButtonItem   *editButton;
-@property (weak, nonatomic  ) IBOutlet UITextField       *titleTextField;
-@property (weak, nonatomic  ) IBOutlet UITextView        *detailsTextView;
-@property (weak, nonatomic  ) IBOutlet UIButton          *deleteButton;
+//------------------------------------------------------------------------------------------
+#pragma mark - IBOutlets
+//------------------------------------------------------------------------------------------
+@property (weak, nonatomic  ) IBOutlet UINavigationItem *navigationItem;
+@property (weak, nonatomic  ) IBOutlet UIBarButtonItem  *editButton;
+@property (weak, nonatomic  ) IBOutlet UITextField      *titleTextField;
+@property (weak, nonatomic  ) IBOutlet UITextView       *detailsTextView;
+@property (weak, nonatomic  ) IBOutlet UIButton         *deleteButton;
 
+//------------------------------------------------------------------------------------------
+#pragma mark - Private Methods
+//------------------------------------------------------------------------------------------
 @property (strong, nonatomic) NBCoreDataManager *coreDataManager;
 
 @end
@@ -61,7 +67,7 @@
                                             handler:^(UIAlertAction * action)
                                             {
                                             [deleteButtonAlert dismissViewControllerAnimated:YES  completion:nil];
-                                       
+
                                             }];
     [deleteButtonAlert addAction:noButton];
     [deleteButtonAlert addAction:yesButton];
@@ -75,17 +81,17 @@
         sender.title    = NSLocalizedString(@"done", @"note done button name");
     } else {
         if (self.isAddButtonPressed) {
-        Note *newNote   = [self.coreDataManager createObject];
-        newNote.title   = [self.titleTextField text];
-        newNote.details = [self.detailsTextView text];
-        newNote.date    = [NSDate date];
+            Note *newNote   = [self.coreDataManager createObject];
+            newNote.title   = [self.titleTextField text];
+            newNote.details = [self.detailsTextView text];
+            newNote.date    = [NSDate date];
             [self.coreDataManager saveObject];
         }
         [self.aNote setValue:[self.titleTextField text] forKey:@"title"];
         [self.aNote setValue:[self.detailsTextView text] forKey:@"details"];
         [self.coreDataManager saveObject];
         [self setTextViewEditable:YES];
-        sender.title    = NSLocalizedString(@"edit", @"note editing button name");
+        sender.title = NSLocalizedString(@"edit", @"note editing button name");
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
