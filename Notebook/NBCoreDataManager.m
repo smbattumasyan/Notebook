@@ -44,15 +44,25 @@
     return status;
 }
 
-- (void)deleteObject:(Note *)managedObject {
+- (void)deleteNote:(Note *)managedObject {
     [self.managedObjectContext deleteObject:managedObject];
     [self saveObject];
 }
 
-- (Note *)createObject {    
+- (Note *)createNote {    
     Note *list = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
                                                inManagedObjectContext:self.managedObjectContext];
     return list;
+}
+
+- (void)deleteFolder:(Folder *)managedObject {
+    [self.managedObjectContext deleteObject:managedObject];
+    [self saveObject];
+}
+
+- (Folder *)createFolder {
+    Folder *folder = [NSEntityDescription insertNewObjectForEntityForName:@"Folder" inManagedObjectContext:self.managedObjectContext];
+    return folder;
 }
 
 //-------------------------------------------------------------------------------------------
@@ -116,7 +126,7 @@
     return _managedObjectContext;
 }
 
-- (NSFetchedResultsController *)fetchedResultsController {
+- (NSFetchedResultsController *)fetchedResultsController:(NSString *)entityName sortKey:(NSString *)sortKey predicate:(NSString *)predicateString {
 
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
@@ -124,13 +134,18 @@
 
     NSFetchRequest *fetchRequest       = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity        = [NSEntityDescription
-                                   entityForName:@"Note" inManagedObjectContext:self.managedObjectContext];
+                                   entityForName:entityName inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
 
     NSSortDescriptor *sort             = [[NSSortDescriptor alloc]
-                              initWithKey:@"date" ascending:NO];
+                              initWithKey:sortKey ascending:NO];
+    NSLog(@"%@",predicateString);
+    if (predicateString) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"folderName ==%@",predicateString];
+        [fetchRequest setPredicate:predicate];
+    }
+    
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
-
     [fetchRequest setFetchBatchSize:20];
 
     NSFetchedResultsController *theFetchedResultsController =
@@ -139,7 +154,7 @@
                                                    cacheName:nil];
     _fetchedResultsController          = theFetchedResultsController;
     _fetchedResultsController.delegate = self;
-
+    
     return _fetchedResultsController;
 }
 

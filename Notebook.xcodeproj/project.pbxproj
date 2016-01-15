@@ -8,9 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		174FE89A1C3FE24D004C9FDB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 174FE89C1C3FE24D004C9FDB /* Localizable.strings */; };
-		17A5F5161C2A78DB00FD2481 /* Note+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5F5131C2A78DB00FD2481 /* Note+CoreDataProperties.m */; };
-		17A5F5171C2A78DB00FD2481 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5F5151C2A78DB00FD2481 /* Note.m */; };
+		17927DD91C466B0200FC1490 /* FoldersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17927DD81C466B0200FC1490 /* FoldersViewController.m */; };
 		17A5F5231C2A7A2100FD2481 /* NBCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 17A5F5221C2A7A2100FD2481 /* NBCoreDataManager.m */; };
+		17BA89571C48F22A00B5FFA7 /* Note+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 17BA89501C48F22A00B5FFA7 /* Note+CoreDataProperties.m */; };
+		17BA89581C48F22A00B5FFA7 /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 17BA89521C48F22A00B5FFA7 /* Note.m */; };
+		17BA89591C48F22A00B5FFA7 /* Folder+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 17BA89541C48F22A00B5FFA7 /* Folder+CoreDataProperties.m */; };
+		17BA895A1C48F22A00B5FFA7 /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 17BA89561C48F22A00B5FFA7 /* Folder.m */; };
 		17F45AA81C29674F00B26B9C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F45AA71C29674F00B26B9C /* main.m */; };
 		17F45AAB1C29674F00B26B9C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F45AAA1C29674F00B26B9C /* AppDelegate.m */; };
 		17F45AB11C29674F00B26B9C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17F45AAF1C29674F00B26B9C /* Main.storyboard */; };
@@ -46,12 +49,18 @@
 		174FE8A11C3FE292004C9FDB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		174FE8A21C3FE297004C9FDB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		174FE8A31C3FE298004C9FDB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		17A5F5121C2A78DB00FD2481 /* Note+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Note+CoreDataProperties.h"; sourceTree = "<group>"; };
-		17A5F5131C2A78DB00FD2481 /* Note+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Note+CoreDataProperties.m"; sourceTree = "<group>"; };
-		17A5F5141C2A78DB00FD2481 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
-		17A5F5151C2A78DB00FD2481 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
+		17927DD71C466B0200FC1490 /* FoldersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoldersViewController.h; sourceTree = "<group>"; };
+		17927DD81C466B0200FC1490 /* FoldersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoldersViewController.m; sourceTree = "<group>"; };
 		17A5F5211C2A7A2100FD2481 /* NBCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NBCoreDataManager.h; sourceTree = "<group>"; };
 		17A5F5221C2A7A2100FD2481 /* NBCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NBCoreDataManager.m; sourceTree = "<group>"; };
+		17BA894F1C48F22A00B5FFA7 /* Note+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Note+CoreDataProperties.h"; sourceTree = "<group>"; };
+		17BA89501C48F22A00B5FFA7 /* Note+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Note+CoreDataProperties.m"; sourceTree = "<group>"; };
+		17BA89511C48F22A00B5FFA7 /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
+		17BA89521C48F22A00B5FFA7 /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
+		17BA89531C48F22A00B5FFA7 /* Folder+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Folder+CoreDataProperties.h"; sourceTree = "<group>"; };
+		17BA89541C48F22A00B5FFA7 /* Folder+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Folder+CoreDataProperties.m"; sourceTree = "<group>"; };
+		17BA89551C48F22A00B5FFA7 /* Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Folder.h; sourceTree = "<group>"; };
+		17BA89561C48F22A00B5FFA7 /* Folder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Folder.m; sourceTree = "<group>"; };
 		17F45AA31C29674F00B26B9C /* Notebook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notebook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17F45AA71C29674F00B26B9C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		17F45AA91C29674F00B26B9C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -100,6 +109,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		17927DDA1C466B3700FC1490 /* FoldersViewController */ = {
+			isa = PBXGroup;
+			children = (
+				17927DD71C466B0200FC1490 /* FoldersViewController.h */,
+				17927DD81C466B0200FC1490 /* FoldersViewController.m */,
+			);
+			name = FoldersViewController;
+			sourceTree = "<group>";
+		};
 		17A5F5181C2A78EB00FD2481 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -112,10 +130,8 @@
 		17A5F5191C2A791600FD2481 /* Entity Models */ = {
 			isa = PBXGroup;
 			children = (
-				17A5F5121C2A78DB00FD2481 /* Note+CoreDataProperties.h */,
-				17A5F5131C2A78DB00FD2481 /* Note+CoreDataProperties.m */,
-				17A5F5141C2A78DB00FD2481 /* Note.h */,
-				17A5F5151C2A78DB00FD2481 /* Note.m */,
+				17E0ACF21C47C94C00D8B2C1 /* Folder */,
+				17E0ACF11C47C94600D8B2C1 /* Note */,
 			);
 			name = "Entity Models";
 			sourceTree = "<group>";
@@ -127,6 +143,28 @@
 				17A5F5221C2A7A2100FD2481 /* NBCoreDataManager.m */,
 			);
 			name = Managers;
+			sourceTree = "<group>";
+		};
+		17E0ACF11C47C94600D8B2C1 /* Note */ = {
+			isa = PBXGroup;
+			children = (
+				17BA894F1C48F22A00B5FFA7 /* Note+CoreDataProperties.h */,
+				17BA89501C48F22A00B5FFA7 /* Note+CoreDataProperties.m */,
+				17BA89511C48F22A00B5FFA7 /* Note.h */,
+				17BA89521C48F22A00B5FFA7 /* Note.m */,
+			);
+			name = Note;
+			sourceTree = "<group>";
+		};
+		17E0ACF21C47C94C00D8B2C1 /* Folder */ = {
+			isa = PBXGroup;
+			children = (
+				17BA89531C48F22A00B5FFA7 /* Folder+CoreDataProperties.h */,
+				17BA89541C48F22A00B5FFA7 /* Folder+CoreDataProperties.m */,
+				17BA89551C48F22A00B5FFA7 /* Folder.h */,
+				17BA89561C48F22A00B5FFA7 /* Folder.m */,
+			);
+			name = Folder;
 			sourceTree = "<group>";
 		};
 		17F45A9A1C29674E00B26B9C = {
@@ -198,6 +236,7 @@
 				17F45AAA1C29674F00B26B9C /* AppDelegate.m */,
 				17F45B2B1C29978500B26B9C /* NotesViewController */,
 				17F45B2C1C29979900B26B9C /* NoteDetailsViewController */,
+				17927DDA1C466B3700FC1490 /* FoldersViewController */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -361,15 +400,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17A5F5171C2A78DB00FD2481 /* Note.m in Sources */,
+				17BA89591C48F22A00B5FFA7 /* Folder+CoreDataProperties.m in Sources */,
 				17F45B301C2997FD00B26B9C /* NoteViewCell.m in Sources */,
 				17A5F5231C2A7A2100FD2481 /* NBCoreDataManager.m in Sources */,
 				17F45AAB1C29674F00B26B9C /* AppDelegate.m in Sources */,
 				17F45AB41C29674F00B26B9C /* Notebook.xcdatamodeld in Sources */,
 				17F45AA81C29674F00B26B9C /* main.m in Sources */,
+				17BA89581C48F22A00B5FFA7 /* Note.m in Sources */,
+				17BA895A1C48F22A00B5FFA7 /* Folder.m in Sources */,
+				17927DD91C466B0200FC1490 /* FoldersViewController.m in Sources */,
 				17F45AE11C29721900B26B9C /* NotesViewController.m in Sources */,
 				17F45B291C297F8600B26B9C /* NoteDetailsViewController.m in Sources */,
-				17A5F5161C2A78DB00FD2481 /* Note+CoreDataProperties.m in Sources */,
+				17BA89571C48F22A00B5FFA7 /* Note+CoreDataProperties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

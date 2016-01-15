@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "Note.h"
+#import "Folder.h"
 
 @interface NoteDetailsViewController : UIViewController
 
 #pragma mark - Propertes
 @property (strong, nonatomic) Note *aNote;
+@property (strong, nonatomic) Folder *aFolder;
 @property (assign, nonatomic) BOOL isAddButtonPressed;
 
 @end

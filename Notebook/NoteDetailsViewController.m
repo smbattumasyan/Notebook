@@ -57,7 +57,7 @@
                                             style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction *action)
                                             {
-                                             [self.coreDataManager deleteObject:self.aNote];
+                                             [self.coreDataManager deleteNote:self.aNote];
                                              [deleteButtonAlert dismissViewControllerAnimated:YES completion:nil];
                                                 [self.navigationController popViewControllerAnimated:YES];
                                             }];
@@ -81,10 +81,11 @@
         sender.title    = NSLocalizedString(@"done", @"note done button name");
     } else {
         if (self.isAddButtonPressed) {
-            Note *newNote   = [self.coreDataManager createObject];
+            Note *newNote   = [self.coreDataManager createNote];
             newNote.title   = [self.titleTextField text];
             newNote.details = [self.detailsTextView text];
             newNote.date    = [NSDate date];
+            newNote.folderName = self.aFolder.folderName;
             [self.coreDataManager saveObject];
         }
         [self.aNote setValue:[self.titleTextField text] forKey:@"title"];

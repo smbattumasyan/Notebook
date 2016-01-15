@@ -1,5 +1,5 @@
 //
-//  Note+CoreDataProperties.h
+//  Folder+CoreDataProperties.h
 //  Notebook
 //
 //  Created by Smbat Tumasyan on 1/15/16.
@@ -9,17 +9,15 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "Note.h"
+#import "Folder.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Note (CoreDataProperties)
+@interface Folder (CoreDataProperties)
 
 @property (nullable, nonatomic, retain) NSDate   *date;
-@property (nullable, nonatomic, retain) NSString *details;
 @property (nullable, nonatomic, retain) NSString *folderName;
-@property (nullable, nonatomic, retain) NSString *title;
-@property (nullable, nonatomic, retain) Folder   *folder;
+@property (nullable, nonatomic, retain) Note     *note;
 
 @end
 

@@ -20,3 +20,11 @@
 "deleteMessage" = "Are you sure to delete this Note";
 "newTitle"      = "New Title";
 "newText"       = "New Text";
+
+/* FoldersViewController */
+
+"folders"       = "Folders";
+"folder"        = "Folder";
+"folderName"    = "Folder name";
+"folderMessage" = "Write folder Name";
+"cancel"        = "Cancel";

@@ -12,11 +12,21 @@
 
 /* NoteDetailsViewController */
 
-"done" = "Done";
-"edit" = "Edit";
-"yes" = "Yes";
-"no" = "No";
-"delete" = "Delete";
+"done"          = "Done";
+"edit"          = "Edit";
+"yes"           = "Yes";
+"no"            = "No";
+"delete"        = "Delete";
 "deleteMessage" = "Are you sure to delete this Note";
-"newTitle" = "New Title";
-"newText" = "New Text";
+"newTitle"      = "New Title";
+"newText"       = "New Text";
+
+/* FoldersViewController */
+
+"folders"       = "Folders";
+"folder"        = "Folder";
+"folderName"    = "Folder name";
+"folderMessage" = "Write folder Name";
+"cancel"        = "Cancel";
+"ok"            = "OK";
+"nameExist"     = "This name already exist";

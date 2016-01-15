@@ -1,15 +1,15 @@
 //
-//  Note.m
+//  Folder.m
 //  Notebook
 //
 //  Created by Smbat Tumasyan on 1/15/16.
 //  Copyright © 2016 EGS. All rights reserved.
 //
 
-#import "Note.h"
 #import "Folder.h"
+#import "Note.h"
 
-@implementation Note
+@implementation Folder
 
 // Insert code here to add functionality to your managed object subclass
 

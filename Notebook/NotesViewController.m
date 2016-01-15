@@ -34,6 +34,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    self.coreDataManager                          = [NBCoreDataManager sharedManager];
+    self.coreDataManager.fetchedResultsController = nil;
+    [self.coreDataManager fetchedResultsController:@"Note" sortKey:@"date" predicate:self.folder.folderName];
     NSError *error = nil;
     if (![self.coreDataManager.fetchedResultsController performFetch:&error]) {
         // Update to handle the error appropriately.
@@ -103,7 +106,7 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.coreDataManager deleteObject:[[self.coreDataManager fetchedResultsController] objectAtIndexPath:indexPath]];
+        [self.coreDataManager deleteNote:[[self.coreDataManager fetchedResultsController] objectAtIndexPath:indexPath]];
         NSError *error = nil;
         if (![self.coreDataManager.fetchedResultsController performFetch:&error]) {
             // Update to handle the error appropriately.
@@ -122,6 +125,7 @@
     NSIndexPath *selectedIndexPath           = [self.tableView indexPathForSelectedRow];
     NoteDetailsViewController *listDetailsVC = [segue destinationViewController];
     if (self.isAddButtonPressed) {
+        listDetailsVC.aFolder = self.folder;
         listDetailsVC.isAddButtonPressed = YES;
         self.isAddButtonPressed          = NO;
     } else if ([[segue identifier] isEqualToString:@"NotesViewController"]) {

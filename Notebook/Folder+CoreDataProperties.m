@@ -1,5 +1,5 @@
 //
-//  Note+CoreDataProperties.m
+//  Folder+CoreDataProperties.m
 //  Notebook
 //
 //  Created by Smbat Tumasyan on 1/15/16.
@@ -9,14 +9,12 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "Note+CoreDataProperties.h"
+#import "Folder+CoreDataProperties.h"
 
-@implementation Note (CoreDataProperties)
+@implementation Folder (CoreDataProperties)
 
 @dynamic date;
-@dynamic details;
 @dynamic folderName;
-@dynamic title;
-@dynamic folder;
+@dynamic note;
 
 @end

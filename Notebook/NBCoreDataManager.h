@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "Note.h"
+#import "Folder.h"
 
 @interface NBCoreDataManager : NSObject<NSFetchedResultsControllerDelegate>
 
@@ -22,10 +23,13 @@
 + (nonnull instancetype)sharedManager;
 
 #pragma marik - Instance Methods
-- (void)deleteObject:(nonnull Note *)managedObject;
-- (nonnull Note *)createObject;
+- (void)deleteNote:(nonnull Note *)managedObject;
+- (nonnull Note *)createNote;
 - (BOOL)saveObject;
+- (void)deleteFolder:(nonnull Folder *)managedObject;
+- (nonnull Folder *)createFolder;
+
 
 - (void)saveContext;
-
+- (nullable NSFetchedResultsController *)fetchedResultsController:(nullable NSString *)entityName sortKey:(nullable NSString *)sortKey predicate:(nullable NSString *)predicateString;
 @end
