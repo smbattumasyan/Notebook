@@ -139,7 +139,6 @@
 
     NSSortDescriptor *sort             = [[NSSortDescriptor alloc]
                               initWithKey:sortKey ascending:NO];
-    NSLog(@"%@",predicateString);
     if (predicateString) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"folderName ==%@",predicateString];
         [fetchRequest setPredicate:predicate];

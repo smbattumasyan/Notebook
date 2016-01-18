@@ -132,7 +132,6 @@
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         [self setFetchedResultsController:@"Note" sortKey:@"date" predicate:folderName];
         for (Note *note in [self.coreDataManager.fetchedResultsController fetchedObjects]) {
-             NSLog(@"%@ %@",note.folderName, note.title);
             [self.coreDataManager deleteNote:note];
         }
         [self setFetchedResultsController:@"Folder" sortKey:@"date" predicate:nil];

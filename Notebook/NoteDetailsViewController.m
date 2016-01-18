@@ -81,16 +81,9 @@
         sender.title    = NSLocalizedString(@"done", @"note done button name");
     } else {
         if (self.isAddButtonPressed) {
-            Note *newNote   = [self.coreDataManager createNote];
-            newNote.title   = [self.titleTextField text];
-            newNote.details = [self.detailsTextView text];
-            newNote.date    = [NSDate date];
-            newNote.folderName = self.aFolder.folderName;
-            [self.coreDataManager saveObject];
+            [self createNewNote];
         }
-        [self.aNote setValue:[self.titleTextField text] forKey:@"title"];
-        [self.aNote setValue:[self.detailsTextView text] forKey:@"details"];
-        [self.coreDataManager saveObject];
+        [self saveChangedValue];
         [self setTextViewEditable:YES];
         sender.title = NSLocalizedString(@"edit", @"note editing button name");
         [self.navigationController popViewControllerAnimated:YES];
@@ -126,6 +119,21 @@
         [self.titleTextField setEnabled:NO];
         [self.detailsTextView setEditable:NO];
     }
+}
+
+- (void)createNewNote {
+    Note *newNote   = [self.coreDataManager createNote];
+    newNote.title   = [self.titleTextField text];
+    newNote.details = [self.detailsTextView text];
+    newNote.date    = [NSDate date];
+    newNote.folderName = self.aFolder.folderName;
+    [self.coreDataManager saveObject];
+}
+
+- (void)saveChangedValue {
+    [self.aNote setValue:[self.titleTextField text] forKey:@"title"];
+    [self.aNote setValue:[self.detailsTextView text] forKey:@"details"];
+    [self.coreDataManager saveObject];
 }
 
 /*
