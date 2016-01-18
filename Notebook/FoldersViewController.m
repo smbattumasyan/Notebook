@@ -32,15 +32,9 @@
 #pragma mark - View Lifecycle
 //------------------------------------------------------------------------------------------
 -(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     self.coreDataManager                          = [NBCoreDataManager sharedManager];
-    self.coreDataManager.fetchedResultsController = nil;
-    [self.coreDataManager fetchedResultsController:@"Folder" sortKey:@"date" predicate:nil];
-    NSError *error                                = nil;
-    if (![self.coreDataManager.fetchedResultsController performFetch:&error]) {
-        // Update to handle the error appropriately.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        exit(-1);  // Fail
-    }
+    [self setFetchedResultsController:@"Folder" sortKey:@"date" predicate:nil];
 }
 
 - (void)viewDidLoad {
@@ -70,7 +64,6 @@
 
         textField.placeholder  = NSLocalizedString(@"folderName", @"textField text");
         textField.keyboardType = UIKeyboardTypeDefault;
-
     }];
     UIAlertAction *okButton = [UIAlertAction actionWithTitle:NSLocalizedString(@"ok", @"ok button name") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
         UITextField *textField = addFolderAlert.textFields[0];
@@ -82,17 +75,9 @@
             folder.folderName                             = textField.text;
             folder.date                                   = [NSDate date];
             [self.coreDataManager saveObject];
-            self.coreDataManager.fetchedResultsController = nil;
-            [self.coreDataManager fetchedResultsController:@"Folder" sortKey:@"date" predicate:nil];
-            NSError *error                                = nil;
-            if (![self.coreDataManager.fetchedResultsController performFetch:&error]) {
-                // Update to handle the error appropriately.
-                NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-                exit(-1);  // Fail
-            }
+            [self setFetchedResultsController:@"Folder" sortKey:@"data" predicate:nil];
             [self.tableView reloadData];
         }
-        
     }];
     UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", @"cancel button name") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
 
@@ -145,25 +130,12 @@
             exit(-1);  // Fail
         }
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        self.coreDataManager.fetchedResultsController = nil;
-        [self.coreDataManager fetchedResultsController:@"Note" sortKey:@"date" predicate:folderName];
-        
-        if (![self.coreDataManager.fetchedResultsController performFetch:&error]) {
-            // Update to handle the error appropriately.
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            exit(-1);  // Fail
-        }
+        [self setFetchedResultsController:@"Note" sortKey:@"date" predicate:folderName];
         for (Note *note in [self.coreDataManager.fetchedResultsController fetchedObjects]) {
              NSLog(@"%@ %@",note.folderName, note.title);
             [self.coreDataManager deleteNote:note];
         }
-        self.coreDataManager.fetchedResultsController = nil;
-        [self.coreDataManager fetchedResultsController:@"Folder" sortKey:@"date" predicate:nil];
-        if (![self.coreDataManager.fetchedResultsController performFetch:&error]) {
-            // Update to handle the error appropriately.
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            exit(-1);  // Fail
-        }
+        [self setFetchedResultsController:@"Folder" sortKey:@"date" predicate:nil];
     }
 }
 
@@ -172,18 +144,22 @@
 //------------------------------------------------------------------------------------------
 
 -(BOOL)checkFolders:(NSString *)folderName {
+    [self setFetchedResultsController:@"Folder" sortKey:@"date" predicate:folderName];
+    if ([[self.coreDataManager.fetchedResultsController fetchedObjects] count] > 0) {
+        return YES;
+    }
+    return NO;
+}
+
+-(void)setFetchedResultsController:(NSString *)entityName sortKey:(NSString *)sortKey predicate:(NSString *)predicate{
     self.coreDataManager.fetchedResultsController = nil;
-    [self.coreDataManager fetchedResultsController:@"Folder" sortKey:@"date" predicate:folderName];
+    [self.coreDataManager fetchedResultsController:entityName sortKey:sortKey predicate:predicate];
     NSError *error                                = nil;
     if (![self.coreDataManager.fetchedResultsController performFetch:&error]) {
         // Update to handle the error appropriately.
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         exit(-1);  // Fail
     }
-    if ([[self.coreDataManager.fetchedResultsController fetchedObjects] count] > 0) {
-        return YES;
-    }
-    return NO;
 }
 
 //------------------------------------------------------------------------------------------
