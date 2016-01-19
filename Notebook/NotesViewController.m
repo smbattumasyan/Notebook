@@ -34,27 +34,21 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.coreDataManager                          = [NBCoreDataManager sharedManager];
-    self.coreDataManager.fetchedResultsController = nil;
-    [self.coreDataManager fetchedResultsController:@"Note" sortKey:@"date" predicate:self.folder.folderName];
-    NSError *error = nil;
-    if (![self.coreDataManager.fetchedResultsController performFetch:&error]) {
-        // Update to handle the error appropriately.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        exit(-1);  // Fail
-    }
+    
+    [self setFetchedResultsController:@"Note" sortKey:@"date" predicate:self.folder.folderName];
     [self.tableView reloadData];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
     self.coreDataManager                                = [NBCoreDataManager sharedManager];
     self.navigationItem.title                           = NSLocalizedString(@"notebook", @"notes title");
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
 }
 
 - (void)viewDidUnload {
+    
     self.coreDataManager.fetchedResultsController = nil;
 }
 
@@ -68,6 +62,7 @@
 //------------------------------------------------------------------------------------------
 
 - (IBAction)addButtonAction:(UIBarButtonItem *)sender {
+    
     self.isAddButtonPressed = YES;
     [self performSegueWithIdentifier:@"NotesViewController" sender:self];
 }
@@ -77,10 +72,12 @@
 //------------------------------------------------------------------------------------------
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
     return [[self.coreDataManager.fetchedResultsController.sections objectAtIndex:section] numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     static NSString *tableIdentifier = @"tableIdenfier";
     NoteViewCell *cell               = [tableView dequeueReusableCellWithIdentifier:tableIdentifier];
     if (cell == nil) {
@@ -92,10 +89,12 @@
 }
 
 - (void)configureCell:(NoteViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    
     cell.note = [[self.coreDataManager fetchedResultsController] objectAtIndexPath:indexPath];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     [self performSegueWithIdentifier:@"NotesViewController" sender:self];
 }
 
@@ -105,6 +104,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.coreDataManager deleteNote:[[self.coreDataManager fetchedResultsController] objectAtIndexPath:indexPath]];
         NSError *error = nil;
@@ -118,10 +118,27 @@
 }
 
 //------------------------------------------------------------------------------------------
+#pragma mark - Private Methods
+//------------------------------------------------------------------------------------------
+
+-(void)setFetchedResultsController:(NSString *)entityName sortKey:(NSString *)sortKey predicate:(NSString *)predicate{
+    
+    self.coreDataManager.fetchedResultsController = nil;
+    [self.coreDataManager fetchedResultsController:entityName sortKey:sortKey predicate:predicate];
+    NSError *error                                = nil;
+    if (![self.coreDataManager.fetchedResultsController performFetch:&error]) {
+        // Update to handle the error appropriately.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        exit(-1);  // Fail
+    }
+}
+
+//------------------------------------------------------------------------------------------
 #pragma mark - Navigation
 //------------------------------------------------------------------------------------------
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
     NSIndexPath *selectedIndexPath           = [self.tableView indexPathForSelectedRow];
     NoteDetailsViewController *listDetailsVC = [segue destinationViewController];
     if (self.isAddButtonPressed) {

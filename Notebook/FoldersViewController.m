@@ -33,6 +33,7 @@
 //------------------------------------------------------------------------------------------
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
     self.coreDataManager                          = [NBCoreDataManager sharedManager];
     [self setFetchedResultsController:@"Folder" sortKey:@"date" predicate:nil];
 }
@@ -45,6 +46,7 @@
 }
 
 - (void)viewDidUnload {
+    
     self.coreDataManager.fetchedResultsController = nil;
 }
 
@@ -71,11 +73,7 @@
             addFolderAlert.message = NSLocalizedString(@"nameExist", @"exist name message");
             [self presentViewController:addFolderAlert animated:YES completion:nil];
         } else {
-            Folder *folder                                = [self.coreDataManager createFolder];
-            folder.folderName                             = textField.text;
-            folder.date                                   = [NSDate date];
-            [self.coreDataManager saveObject];
-            [self setFetchedResultsController:@"Folder" sortKey:@"data" predicate:nil];
+            [self createFolder:textField.text];
             [self.tableView reloadData];
         }
     }];
@@ -85,7 +83,6 @@
     [addFolderAlert addAction:okButton];
     [addFolderAlert addAction:cancelButton];
     [self presentViewController:addFolderAlert animated:YES completion:nil];
-   
 }
 
 
@@ -94,10 +91,12 @@
 //------------------------------------------------------------------------------------------
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
     return [[self.coreDataManager.fetchedResultsController.sections objectAtIndex:section] numberOfObjects];;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     static NSString *tableIdentifier = @"folderVCIdentifier";
     UITableViewCell *cell            = [tableView dequeueReusableCellWithIdentifier:tableIdentifier];
     if (!cell) {
@@ -109,6 +108,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     [self performSegueWithIdentifier:@"FoldersViewController" sender:self];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -119,6 +119,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         Folder *folder       = [[self.coreDataManager fetchedResultsController] objectAtIndexPath:indexPath];
         NSString *folderName = folder.folderName;
@@ -143,6 +144,7 @@
 //------------------------------------------------------------------------------------------
 
 -(BOOL)checkFolders:(NSString *)folderName {
+    
     [self setFetchedResultsController:@"Folder" sortKey:@"date" predicate:folderName];
     if ([[self.coreDataManager.fetchedResultsController fetchedObjects] count] > 0) {
         return YES;
@@ -150,7 +152,8 @@
     return NO;
 }
 
--(void)setFetchedResultsController:(NSString *)entityName sortKey:(NSString *)sortKey predicate:(NSString *)predicate{
+-(void)setFetchedResultsController:(NSString *)entityName sortKey:(NSString *)sortKey predicate:(NSString *)predicate {
+    
     self.coreDataManager.fetchedResultsController = nil;
     [self.coreDataManager fetchedResultsController:entityName sortKey:sortKey predicate:predicate];
     NSError *error                                = nil;
@@ -159,6 +162,15 @@
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         exit(-1);  // Fail
     }
+}
+
+- (void)createFolder:(NSString *)folderName {
+    
+    Folder *folder    = [self.coreDataManager createFolder];
+    folder.folderName = folderName;
+    folder.date       = [NSDate date];
+    [self.coreDataManager saveObject];
+    [self setFetchedResultsController:@"Folder" sortKey:@"date" predicate:nil];
 }
 
 //------------------------------------------------------------------------------------------

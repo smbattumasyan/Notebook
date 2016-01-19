@@ -35,7 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
     self.coreDataManager = [NBCoreDataManager sharedManager];
     [self setIBOutlets];
 }
@@ -50,6 +50,7 @@
 //------------------------------------------------------------------------------------------
 
 - (IBAction)deleteButtonAction:(id)sender {
+    
     UIAlertController *deleteButtonAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete", @"delete alert title")
                                                                                 message:NSLocalizedString(@"deleteMessage", @"note delete message") preferredStyle:UIAlertControllerStyleAlert];
 
@@ -95,6 +96,7 @@
 //------------------------------------------------------------------------------------------
 
 - (void)setIBOutlets {
+    
     if (self.isAddButtonPressed) {
         [self setTextViewEditable:self.isAddButtonPressed];
         self.editButton.title     = NSLocalizedString(@"done", @"note done button name")
@@ -113,6 +115,7 @@
 
 - (void)setTextViewEditable:(BOOL)status {
     if (status) {
+        
         [self.titleTextField setEnabled:YES];
         [self.detailsTextView setEditable:YES];
     } else {
@@ -122,6 +125,7 @@
 }
 
 - (void)createNewNote {
+    
     Note *newNote   = [self.coreDataManager createNote];
     newNote.title   = [self.titleTextField text];
     newNote.details = [self.detailsTextView text];
@@ -131,6 +135,7 @@
 }
 
 - (void)saveChangedValue {
+    
     [self.aNote setValue:[self.titleTextField text] forKey:@"title"];
     [self.aNote setValue:[self.detailsTextView text] forKey:@"details"];
     [self.coreDataManager saveObject];
