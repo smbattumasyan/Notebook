@@ -84,13 +84,8 @@
         cell = [[NoteViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                            reuseIdentifier:tableIdentifier];
     }
-    [self configureCell:cell atIndexPath:indexPath];
-    return cell;
-}
-
-- (void)configureCell:(NoteViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    
     cell.note = [[self.coreDataManager fetchedResultsController] objectAtIndexPath:indexPath];
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
