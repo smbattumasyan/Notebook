@@ -46,22 +46,26 @@
 }
 
 - (void)deleteNote:(Note *)managedObject {
+    
     [self.managedObjectContext deleteObject:managedObject];
     [self saveObject];
 }
 
-- (Note *)createNote {    
+- (Note *)createNote {
+    
     Note *list = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
                                                inManagedObjectContext:self.managedObjectContext];
     return list;
 }
 
 - (void)deleteFolder:(Folder *)managedObject {
+    
     [self.managedObjectContext deleteObject:managedObject];
     [self saveObject];
 }
 
 - (Folder *)createFolder {
+    
     Folder *folder = [NSEntityDescription insertNewObjectForEntityForName:@"Folder" inManagedObjectContext:self.managedObjectContext];
     return folder;
 }
