@@ -54,7 +54,7 @@
     UIAlertController *deleteButtonAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete", @"delete alert title")
                                                                                 message:NSLocalizedString(@"deleteMessage", @"note delete message") preferredStyle:UIAlertControllerStyleAlert];
 
-    UIAlertAction *yesButton             = [UIAlertAction actionWithTitle:NSLocalizedString(@"yes", @"delete note alert yes button name")
+    UIAlertAction *yesButton = [UIAlertAction actionWithTitle:NSLocalizedString(@"yes", @"delete note alert yes button name")
                                             style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction *action)
                                             {
@@ -62,7 +62,7 @@
                                              [deleteButtonAlert dismissViewControllerAnimated:YES completion:nil];
                                                 [self.navigationController popViewControllerAnimated:YES];
                                             }];
-    UIAlertAction* noButton              = [UIAlertAction
+    UIAlertAction* noButton  = [UIAlertAction
                                             actionWithTitle:NSLocalizedString(@"no", @"delete note alert no button name")
                                             style:UIAlertActionStyleDefault
                                             handler:^(UIAlertAction * action)

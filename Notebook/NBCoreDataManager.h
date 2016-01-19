@@ -17,7 +17,7 @@
 @property (nonnull, nonatomic, strong, readonly) NSManagedObjectContext       *managedObjectContext;
 @property (nonnull, nonatomic, strong, readonly) NSManagedObjectModel         *managedObjectModel;
 @property (nonnull, nonatomic, strong, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (nullable, nonatomic, retain         ) NSFetchedResultsController   * fetchedResultsController;
+@property (nullable, nonatomic, retain         ) NSFetchedResultsController   *fetchedResultsController;
 
 #pragma mark - Class methods
 + (nonnull instancetype)sharedManager;
