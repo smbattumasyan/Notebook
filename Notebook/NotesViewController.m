@@ -42,9 +42,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.coreDataManager                                = [NBCoreDataManager sharedManager];
-    self.navigationItem.title                           = NSLocalizedString(@"notebook", @"notes title");
-    self.tableView.allowsMultipleSelectionDuringEditing = NO;
+    self.navigationItem.title = NSLocalizedString(@"notebook", @"notes title");
 }
 
 - (void)viewDidUnload {
@@ -116,8 +114,9 @@
 #pragma mark - Private Methods
 //------------------------------------------------------------------------------------------
 
--(void)setFetchedResultsController:(NSString *)entityName sortKey:(NSString *)sortKey predicate:(NSString *)predicate{
+-(void)setFetchedResultsController:(NSString *)entityName sortKey:(NSString *)sortKey predicate:(NSString *)predicate {
     
+    self.coreDataManager                          = [NBCoreDataManager sharedManager];
     self.coreDataManager.fetchedResultsController = nil;
     [self.coreDataManager fetchedResultsController:entityName sortKey:sortKey predicate:predicate];
     NSError *error                                = nil;

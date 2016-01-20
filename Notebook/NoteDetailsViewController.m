@@ -36,7 +36,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.coreDataManager = [NBCoreDataManager sharedManager];
     [self setIBOutlets];
 }
 
@@ -97,16 +96,16 @@
 
 - (void)setIBOutlets {
     
+    self.coreDataManager = [NBCoreDataManager sharedManager];
+    [self setTextViewEditable:self.isAddButtonPressed];
     if (self.isAddButtonPressed) {
-        [self setTextViewEditable:self.isAddButtonPressed];
         self.editButton.title     = NSLocalizedString(@"done", @"note done button name")
         ;
         self.titleTextField.text  = NSLocalizedString(@"newTitle", @"new title name example");
         self.detailsTextView.text = NSLocalizedString(@"newText", @"new text name example");
         self.deleteButton.hidden  = YES;
     } else {
-        [self setTextViewEditable:self.isAddButtonPressed];
-        self.editButton.title     = NSLocalizedString(@"edit", @"ntoe editing button name");
+        self.editButton.title     = NSLocalizedString(@"edit", @"note editing button name");
         self.titleTextField.text  = [self.aNote title];
         self.detailsTextView.text = [self.aNote details];
         self.deleteButton.hidden  = NO;

@@ -234,9 +234,9 @@
 			children = (
 				17F45AA91C29674F00B26B9C /* AppDelegate.h */,
 				17F45AAA1C29674F00B26B9C /* AppDelegate.m */,
+				17927DDA1C466B3700FC1490 /* FoldersViewController */,
 				17F45B2B1C29978500B26B9C /* NotesViewController */,
 				17F45B2C1C29979900B26B9C /* NoteDetailsViewController */,
-				17927DDA1C466B3700FC1490 /* FoldersViewController */,
 			);
 			name = Controller;
 			sourceTree = "<group>";

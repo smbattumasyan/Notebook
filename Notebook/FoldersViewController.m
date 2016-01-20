@@ -16,6 +16,7 @@
 //------------------------------------------------------------------------------------------
 #pragma mark - IBOutlets
 //------------------------------------------------------------------------------------------
+
 @property (weak, nonatomic  ) IBOutlet UITableView *tableView;
 
 //------------------------------------------------------------------------------------------
@@ -34,8 +35,8 @@
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.coreDataManager                          = [NBCoreDataManager sharedManager];
     [self setFetchedResultsController:@"Folder" sortKey:@"date" predicate:nil];
+    [self.tableView reloadData];
 }
 
 - (void)viewDidLoad {
@@ -80,8 +81,8 @@
     UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", @"cancel button name") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
 
     }];
-    [addFolderAlert addAction:okButton];
     [addFolderAlert addAction:cancelButton];
+    [addFolderAlert addAction:okButton];
     [self presentViewController:addFolderAlert animated:YES completion:nil];
 }
 
@@ -92,7 +93,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [[self.coreDataManager.fetchedResultsController.sections objectAtIndex:section] numberOfObjects];;
+    return [[self.coreDataManager.fetchedResultsController.sections objectAtIndex:section] numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -103,7 +104,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tableIdentifier];
     }
     Folder *folder      = [[self.coreDataManager fetchedResultsController] objectAtIndexPath:indexPath];
-    cell.textLabel.text = folder.folderName;
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ (%ld)",folder.folderName,(long)[self countOfNotes:folder.folderName]];
     return cell;
 }
 
@@ -154,6 +155,7 @@
 
 -(void)setFetchedResultsController:(NSString *)entityName sortKey:(NSString *)sortKey predicate:(NSString *)predicate {
     
+    self.coreDataManager = [NBCoreDataManager sharedManager];
     self.coreDataManager.fetchedResultsController = nil;
     [self.coreDataManager fetchedResultsController:entityName sortKey:sortKey predicate:predicate];
     NSError *error                                = nil;
@@ -173,6 +175,13 @@
     [self setFetchedResultsController:@"Folder" sortKey:@"date" predicate:nil];
 }
 
+- (NSInteger)countOfNotes:(NSString *)predicate {
+    [self setFetchedResultsController:@"Note" sortKey:@"date" predicate:predicate];
+    NSInteger countOfObject = [[self.coreDataManager.fetchedResultsController.sections objectAtIndex:0] numberOfObjects];
+    [self setFetchedResultsController:@"Folder" sortKey:@"date" predicate:nil];
+    return countOfObject;
+}
+
 //------------------------------------------------------------------------------------------
 #pragma mark - Navigation
 //------------------------------------------------------------------------------------------
@@ -183,8 +192,8 @@
     // Pass the selected object to the new view controller.
     NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
     if ([[segue identifier] isEqualToString:@"FoldersViewController"]) {
-        NotesViewController *noteViewController       = [segue destinationViewController];
-        noteViewController.folder                     = [[self.coreDataManager fetchedResultsController] objectAtIndexPath:selectedIndexPath];
+        NotesViewController *noteViewController = [segue destinationViewController];
+        noteViewController.folder               = [[self.coreDataManager fetchedResultsController] objectAtIndexPath:selectedIndexPath];
     }
 }
 
