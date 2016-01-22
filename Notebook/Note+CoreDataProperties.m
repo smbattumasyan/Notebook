@@ -2,7 +2,7 @@
 //  Note+CoreDataProperties.m
 //  Notebook
 //
-//  Created by Smbat Tumasyan on 1/15/16.
+//  Created by Smbat Tumasyan on 1/21/16.
 //  Copyright © 2016 EGS. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu

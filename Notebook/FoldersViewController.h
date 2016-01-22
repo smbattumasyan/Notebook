@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FoldersViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@interface FoldersViewController : UIViewController
 
 @end

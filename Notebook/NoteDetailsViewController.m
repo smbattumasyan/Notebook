@@ -78,7 +78,7 @@
     
     if (!self.titleTextField.enabled) {
         [self setTextViewEditable:YES];
-        sender.title    = NSLocalizedString(@"done", @"note done button name");
+        sender.title = NSLocalizedString(@"done", @"note done button name");
     } else {
         if (self.isAddButtonPressed) {
             [self createNewNote];
