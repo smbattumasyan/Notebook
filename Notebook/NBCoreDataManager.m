@@ -24,7 +24,7 @@
     static NBCoreDataManager *sharedInstance = nil;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
-    sharedInstance                           = [[NBCoreDataManager alloc] init];
+    sharedInstance = [[NBCoreDataManager alloc] init];
     });
     
     return sharedInstance;
@@ -51,11 +51,17 @@
     [self saveObject];
 }
 
-- (Note *)createNote {
+- (Note *)addNote:( nullable NSDictionary *)details {
     
-    Note *list = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
+    Note *aNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note"
                                                inManagedObjectContext:self.managedObjectContext];
-    return list;
+    aNote.name = details[@"name"];
+    aNote.details = details[@"details"];
+    aNote.date = details[@"date"];
+    aNote.folder = details[@"folder"];
+    [self saveContext];
+    
+    return aNote;
 }
 
 - (void)deleteFolder:(Folder *)managedObject {
@@ -64,12 +70,16 @@
     [self saveObject];
 }
 
-- (Folder *)createFolder {
+- (nullable Folder *)addFolder:(nullable NSDictionary *)details
+{
+    Folder *aFolder = [NSEntityDescription insertNewObjectForEntityForName:@"Folder" inManagedObjectContext:self.managedObjectContext];
+    aFolder.name    = details[@"name"];
+    aFolder.date    = [NSDate date];
     
-    Folder *folder = [NSEntityDescription insertNewObjectForEntityForName:@"Folder" inManagedObjectContext:self.managedObjectContext];
-    return folder;
+    [self saveContext];
+    
+    return aFolder;
 }
-
 //-------------------------------------------------------------------------------------------
 #pragma mark - Core Data Stack
 //-------------------------------------------------------------------------------------------
@@ -99,6 +109,7 @@
 
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     NSURL *storeURL             = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Notebook.sqlite"];
+    NSLog(@"storeURL %@", storeURL);
     NSError *error              = nil;
     NSString *failureReason     = @"There was an error creating or loading the application's saved data.";
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
@@ -131,36 +142,72 @@
     return _managedObjectContext;
 }
 
-- (NSFetchedResultsController *)fetchedResultsController:(NSString *)entityName sortKey:(NSString *)sortKey predicate:(NSString *)predicateString {
 
-    if (_fetchedResultsController != nil) {
-        return _fetchedResultsController;
+//-------------------------------------------------------------------------------------------
+#pragma mark - Fetch Result Controller
+//-------------------------------------------------------------------------------------------
+
+- (nullable NSFetchedResultsController *)fetchedResultsController:(FetchRequestEntityType)entity {
+    NSFetchedResultsController *fetch = [[NSFetchedResultsController alloc] initWithFetchRequest:[self setFetchRequestForEntity:entity] managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"local"];
+    NSError *error = nil;
+   
+    if( ! [fetch performFetch: &error] ) {
+        NSLog( @"Error Description: %@", [error userInfo] );
     }
-
-    NSFetchRequest *fetchRequest       = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity        = [NSEntityDescription
-                                   entityForName:entityName inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
-
-    NSSortDescriptor *sort             = [[NSSortDescriptor alloc]
-                              initWithKey:sortKey ascending:NO];
-    if (predicateString) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"folderName ==%@",predicateString];
-        [fetchRequest setPredicate:predicate];
-    }
-    
-    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
-    [fetchRequest setFetchBatchSize:20];
-
-    NSFetchedResultsController *theFetchedResultsController =
-    [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-                                        managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil
-                                                   cacheName:nil];
-    _fetchedResultsController          = theFetchedResultsController;
-    _fetchedResultsController.delegate = self;
-    
-    return _fetchedResultsController;
+    return fetch;
 }
+
+
+- (nullable NSFetchedResultsController *)fetchedResultsControllerFor: (Folder *)folder {
+    
+    NSFetchRequest *request          = [NSFetchRequest fetchRequestWithEntityName:@"Note"];
+    NSPredicate *predicate           = [NSPredicate predicateWithFormat:@"folder == %@", folder];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"date" ascending: NO];
+
+    [request setPredicate:predicate];
+    [request setSortDescriptors: @[sortDescriptor]];
+
+    NSFetchedResultsController *fetch = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                                                            managedObjectContext:self.managedObjectContext
+                                                                              sectionNameKeyPath:nil cacheName:nil];
+    NSError *error = nil;
+    if( ! [fetch performFetch: &error] ) {
+        NSLog( @"Error Description: %@", [error userInfo] );
+    }
+    return fetch;
+}
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - Private Methods
+//-------------------------------------------------------------------------------------------
+-(NSFetchRequest *)setFetchRequestForEntity:(FetchRequestEntityType)entity
+{
+    NSSortDescriptor *sortDescriptor;
+    NSFetchRequest   *request;
+    
+    switch (entity) {
+        case FetchRequestEntityTypeNote:{
+            request        = [NSFetchRequest fetchRequestWithEntityName:@"Note"];
+            sortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"name" ascending: NO];
+            break;
+        }
+        case FetchRequestEntityTypeFolder:{
+            request        = [NSFetchRequest fetchRequestWithEntityName:@"Folder"];
+            sortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"date" ascending: NO];
+            break;
+        }
+            break;
+        default:
+            break;
+    }
+    [request setSortDescriptors: @[sortDescriptor]];
+    
+    return request;
+}
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - Core Data Saving support
+//-------------------------------------------------------------------------------------------
 
 - (void)saveContext
 {

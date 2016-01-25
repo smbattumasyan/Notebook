@@ -11,7 +11,7 @@
 #import "NoteViewCell.h"
 #import "NBCoreDataManager.h"
 
-@interface NotesViewController ()
+@interface NotesViewController () <NSFetchedResultsControllerDelegate>
 
 //------------------------------------------------------------------------------------------
 #pragma mark - IBOutlets
@@ -23,6 +23,7 @@
 //------------------------------------------------------------------------------------------
 @property (assign, nonatomic) BOOL              isAddButtonPressed;
 @property (strong, nonatomic) NBCoreDataManager *coreDataManager;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 @end
 
@@ -32,34 +33,24 @@
 #pragma mark - View Lifecycle
 //------------------------------------------------------------------------------------------
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    [self setFetchedResultsController:@"Note" sortKey:@"date" predicate:self.folder.folderName];
-    [self.tableView reloadData];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self loadData];
     self.navigationItem.title = NSLocalizedString(@"notebook", @"notes title");
 }
 
-- (void)viewDidUnload {
-    
-    self.coreDataManager.fetchedResultsController = nil;
-}
-
 - (void)didReceiveMemoryWarning {
+    
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 //------------------------------------------------------------------------------------------
 #pragma mark - IBActions
 //------------------------------------------------------------------------------------------
 
-- (IBAction)addButtonAction:(UIBarButtonItem *)sender {
+- (IBAction)addButtonAction:(UIBarButtonItem *)sender{
     
     self.isAddButtonPressed = YES;
     [self performSegueWithIdentifier:@"NotesViewController" sender:self];
@@ -71,7 +62,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [[self.coreDataManager.fetchedResultsController.sections objectAtIndex:section] numberOfObjects];
+    return [[self.fetchedResultsController.sections objectAtIndex:section] numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -82,7 +73,7 @@
         cell = [[NoteViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                            reuseIdentifier:tableIdentifier];
     }
-    cell.note = [[self.coreDataManager fetchedResultsController] objectAtIndexPath:indexPath];
+    cell.note = [self.fetchedResultsController objectAtIndexPath:indexPath];
     return cell;
 }
 
@@ -99,14 +90,14 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.coreDataManager deleteNote:[[self.coreDataManager fetchedResultsController] objectAtIndexPath:indexPath]];
+        [self.coreDataManager deleteNote:[self.fetchedResultsController objectAtIndexPath:indexPath]];
         NSError *error = nil;
-        if (![self.coreDataManager.fetchedResultsController performFetch:&error]) {
+        if (![self.fetchedResultsController performFetch:&error]) {
             // Update to handle the error appropriately.
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             exit(-1);  // Fail
         }
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+  //      [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 
@@ -114,18 +105,63 @@
 #pragma mark - Private Methods
 //------------------------------------------------------------------------------------------
 
--(void)setFetchedResultsController:(NSString *)entityName sortKey:(NSString *)sortKey predicate:(NSString *)predicate {
+-(void)loadData {
     
-    self.coreDataManager                          = [NBCoreDataManager sharedManager];
-    self.coreDataManager.fetchedResultsController = nil;
-    [self.coreDataManager fetchedResultsController:entityName sortKey:sortKey predicate:predicate];
-    NSError *error                                = nil;
-    if (![self.coreDataManager.fetchedResultsController performFetch:&error]) {
-        // Update to handle the error appropriately.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        exit(-1);  // Fail
+    self.coreDataManager                   = [NBCoreDataManager sharedManager];
+    self.fetchedResultsController          = [self.coreDataManager fetchedResultsControllerFor:self.folder];
+    self.fetchedResultsController.delegate = self;
+}
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - NSFetchedResultsControllerDelegate
+//-------------------------------------------------------------------------------------------
+
+- (void)controllerWillChangeContent: (NSFetchedResultsController *)controller
+{
+    
+    [self.tableView beginUpdates];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    
+    [self.tableView endUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath
+{
+    
+    NSLog(@"type = %lu", (unsigned long)type);
+    
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertRowsAtIndexPaths: @[newIndexPath]
+                                  withRowAnimation: UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteRowsAtIndexPaths: @[indexPath]
+                                  withRowAnimation: UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self.tableView reloadRowsAtIndexPaths: @[indexPath]
+                                  withRowAnimation: UITableViewRowAnimationAutomatic];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [self.tableView deleteRowsAtIndexPaths: @[indexPath]
+                                  withRowAnimation: UITableViewRowAnimationFade];
+            [self.tableView insertRowsAtIndexPaths: @[newIndexPath]
+                                  withRowAnimation: UITableViewRowAnimationFade];
+            break;
     }
 }
+
 
 //------------------------------------------------------------------------------------------
 #pragma mark - Navigation
@@ -140,7 +176,7 @@
         listDetailsVC.isAddButtonPressed = YES;
         self.isAddButtonPressed          = NO;
     } else if ([[segue identifier] isEqualToString:@"NotesViewController"]) {
-        listDetailsVC.aNote = [[self.coreDataManager fetchedResultsController] objectAtIndexPath:selectedIndexPath];
+        listDetailsVC.aNote = [self.fetchedResultsController objectAtIndexPath:selectedIndexPath];
     }
 }
 

@@ -36,6 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self loadData];
     [self setIBOutlets];
 }
 
@@ -81,9 +82,11 @@
         sender.title = NSLocalizedString(@"done", @"note done button name");
     } else {
         if (self.isAddButtonPressed) {
-            [self createNewNote];
+            [self createNote];
+        }else {
+            [self saveChangedValue];
         }
-        [self saveChangedValue];
+
         [self setTextViewEditable:YES];
         sender.title = NSLocalizedString(@"edit", @"note editing button name");
         [self.navigationController popViewControllerAnimated:YES];
@@ -94,9 +97,13 @@
 #pragma mark Privete Methods
 //------------------------------------------------------------------------------------------
 
-- (void)setIBOutlets {
+- (void)loadData {
     
     self.coreDataManager = [NBCoreDataManager sharedManager];
+}
+
+- (void)setIBOutlets {
+
     [self setTextViewEditable:self.isAddButtonPressed];
     if (self.isAddButtonPressed) {
         self.editButton.title     = NSLocalizedString(@"done", @"note done button name")
@@ -106,7 +113,7 @@
         self.deleteButton.hidden  = YES;
     } else {
         self.editButton.title     = NSLocalizedString(@"edit", @"note editing button name");
-        self.titleTextField.text  = [self.aNote title];
+        self.titleTextField.text  = [self.aNote  name];
         self.detailsTextView.text = [self.aNote details];
         self.deleteButton.hidden  = NO;
     }
@@ -123,19 +130,17 @@
     }
 }
 
-- (void)createNewNote {
+- (void)createNote {
     
-    Note *newNote   = [self.coreDataManager createNote];
-    newNote.title   = [self.titleTextField text];
-    newNote.details = [self.detailsTextView text];
-    newNote.date    = [NSDate date];
-    newNote.folderName = self.aFolder.folderName;
-    [self.coreDataManager saveObject];
+    [self.coreDataManager addNote:@{@"name":self.titleTextField.text,
+                                    @"details":self.detailsTextView.text,
+                                    @"date": [NSDate date],
+                                    @"folder": self.aFolder}];
 }
 
 - (void)saveChangedValue {
     
-    [self.aNote setValue:[self.titleTextField text] forKey:@"title"];
+    [self.aNote setValue:[self.titleTextField text] forKey:@"name"];
     [self.aNote setValue:[self.detailsTextView text] forKey:@"details"];
     [self.coreDataManager saveObject];
 }

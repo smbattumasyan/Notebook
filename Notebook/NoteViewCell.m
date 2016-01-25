@@ -28,7 +28,7 @@
 
 - (void)setNote:(Note *)note {
     _note                  = note;
-    self.titleLabel.text   = [_note title];
+    self.titleLabel.text   = [_note name];
     self.dateLabel.text    = [NSDateFormatter localizedStringFromDate:_note.date dateStyle:NSDateFormatterShortStyle timeStyle:
                               NSDateFormatterShortStyle];
     self.detailsLabel.text = [_note details];

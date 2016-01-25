@@ -11,7 +11,22 @@
 #import "Note.h"
 #import "Folder.h"
 
-@interface NBCoreDataManager : NSObject<NSFetchedResultsControllerDelegate>
+typedef NS_ENUM (NSInteger, FetchRequestEntityType) {
+    /**
+     *  Fetch request for not specified entity
+     */
+    FetchRequestEntityTypeNone,
+    /**
+     *  Fetch request for Note entity
+     */
+    FetchRequestEntityTypeNote,
+    /**
+     *  Fetch request for Folder entity
+     */
+    FetchRequestEntityTypeFolder,
+};
+
+@interface NBCoreDataManager : NSObject
 
 #pragma mark Properties
 @property (nonnull, nonatomic, strong, readonly) NSManagedObjectContext       *managedObjectContext;
@@ -24,12 +39,15 @@
 
 #pragma marik - Instance Methods
 - (void)deleteNote:(nonnull Note *)managedObject;
-- (nonnull Note *)createNote;
+- (nonnull Note *)addNote:(nullable NSDictionary *)details;
 - (BOOL)saveObject;
 - (void)deleteFolder:(nonnull Folder *)managedObject;
-- (nonnull Folder *)createFolder;
 
+- (nullable NSFetchedResultsController *)fetchedResultsController:(FetchRequestEntityType)entity;
+- (nullable NSFetchedResultsController *)fetchedResultsControllerFor: (nonnull Folder *)folder;
 
 - (void)saveContext;
-- (nullable NSFetchedResultsController *)fetchedResultsController:(nullable NSString *)entityName sortKey:(nullable NSString *)sortKey predicate:(nullable NSString *)predicateString;
+
+- (nullable Folder *)addFolder:(nullable NSDictionary *)details;
+
 @end

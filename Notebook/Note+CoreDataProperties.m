@@ -2,7 +2,7 @@
 //  Note+CoreDataProperties.m
 //  Notebook
 //
-//  Created by Smbat Tumasyan on 1/21/16.
+//  Created by Smbat Tumasyan on 1/22/16.
 //  Copyright © 2016 EGS. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -15,8 +15,7 @@
 
 @dynamic date;
 @dynamic details;
-@dynamic folderName;
-@dynamic title;
+@dynamic name;
 @dynamic folder;
 
 @end

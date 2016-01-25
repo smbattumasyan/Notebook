@@ -24,6 +24,7 @@
 //------------------------------------------------------------------------------------------
 
 @property (strong, nonatomic) NBCoreDataManager *coreDataManager;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 @end
 
@@ -32,23 +33,11 @@
 //------------------------------------------------------------------------------------------
 #pragma mark - View Lifecycle
 //------------------------------------------------------------------------------------------
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    [self setFetchedResultsController:@"Folder" sortKey:@"date" predicate:nil];
-//    [self.tableView reloadData];
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
+  
+    [self loadData];
     self.title = NSLocalizedString(@"folders", @"Folders Title");
-}
-
-- (void)viewDidUnload {
-    
-    self.coreDataManager.fetchedResultsController = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,22 +59,14 @@
     }];
     UIAlertAction *okButton = [UIAlertAction actionWithTitle:NSLocalizedString(@"ok", @"ok button name") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
         UITextField *textField = addFolderAlert.textFields[0];
-        if ([self checkFolders:textField.text]) {
-            addFolderAlert.message = NSLocalizedString(@"nameExist", @"exist name message");
-            [self presentViewController:addFolderAlert animated:YES completion:nil];
-        } else {
             [self createFolder:textField.text];
-            [self.tableView reloadData];
-        }
     }];
     UIAlertAction *cancelButton = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", @"cancel button name") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
-
     }];
     [addFolderAlert addAction:cancelButton];
     [addFolderAlert addAction:okButton];
     [self presentViewController:addFolderAlert animated:YES completion:nil];
 }
-
 
 //------------------------------------------------------------------------------------------
 #pragma mark - Table View Data Source
@@ -93,7 +74,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [[self.coreDataManager.fetchedResultsController.sections objectAtIndex:section] numberOfObjects];
+    return [[self.fetchedResultsController.sections objectAtIndex:section] numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -103,8 +84,8 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tableIdentifier];
     }
-    Folder *folder      = [[self.coreDataManager fetchedResultsController] objectAtIndexPath:indexPath];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ (%ld)",folder.folderName,(long)[self countOfNotes:folder.folderName]];
+    Folder *folder      = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ (%ld)",folder.name,folder.notes.count];
     return cell;
 }
 
@@ -122,65 +103,25 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        Folder *folder       = [[self.coreDataManager fetchedResultsController] objectAtIndexPath:indexPath];
-        NSString *folderName = folder.folderName;
-        [self.coreDataManager deleteFolder:[[self.coreDataManager fetchedResultsController] objectAtIndexPath:indexPath]];
-        NSError *error       = nil;
-        if (![self.coreDataManager.fetchedResultsController performFetch:&error]) {
-            // Update to handle the error appropriately.
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            exit(-1);  // Fail
-        }
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        [self setFetchedResultsController:@"Note" sortKey:@"date" predicate:folderName];
-        for (Note *note in [self.coreDataManager.fetchedResultsController fetchedObjects]) {
-            [self.coreDataManager deleteNote:note];
-        }
-        [self setFetchedResultsController:@"Folder" sortKey:@"date" predicate:nil];
+        [self.coreDataManager deleteFolder:[self.fetchedResultsController objectAtIndexPath:indexPath]];
     }
 }
-
 
 //------------------------------------------------------------------------------------------
 #pragma mark Privete Methods
 //------------------------------------------------------------------------------------------
 
--(BOOL)checkFolders:(NSString *)folderName {
+-(void)loadData {
     
-    [self setFetchedResultsController:@"Folder" sortKey:@"date" predicate:folderName];
-    if ([[self.coreDataManager.fetchedResultsController fetchedObjects] count] > 0) {
-        return YES;
-    }
-    return NO;
-}
-
--(void)setFetchedResultsController:(NSString *)entityName sortKey:(NSString *)sortKey predicate:(NSString *)predicate {
-    
-    self.coreDataManager = [NBCoreDataManager sharedManager];
-    self.coreDataManager.fetchedResultsController = nil;
-    [self.coreDataManager fetchedResultsController:entityName sortKey:sortKey predicate:predicate];
-    NSError *error                                = nil;
-    if (![self.coreDataManager.fetchedResultsController performFetch:&error]) {
-        // Update to handle the error appropriately.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        exit(-1);  // Fail
-    }
+   self.coreDataManager                   = [NBCoreDataManager sharedManager];
+   self.fetchedResultsController          = [self.coreDataManager fetchedResultsController:FetchRequestEntityTypeFolder];
+   self.fetchedResultsController.delegate = self;
 }
 
 - (void)createFolder:(NSString *)folderName {
     
-    Folder *folder    = [self.coreDataManager createFolder];
-    folder.folderName = folderName;
-    folder.date       = [NSDate date];
-    
-    [self setFetchedResultsController:@"Folder" sortKey:@"date" predicate:nil];
-}
-
-- (NSInteger)countOfNotes:(NSString *)predicate {
-    [self setFetchedResultsController:@"Note" sortKey:@"date" predicate:predicate];
-    NSInteger countOfObject = [[self.coreDataManager.fetchedResultsController.sections objectAtIndex:0] numberOfObjects];
-    [self setFetchedResultsController:@"Folder" sortKey:@"date" predicate:nil];
-    return countOfObject;
+    [self.coreDataManager addFolder:@{@"name":folderName,
+                                      @"date":[NSDate date]}];
 }
 
 //-------------------------------------------------------------------------------------------
@@ -189,6 +130,7 @@
 
 - (void)controllerWillChangeContent: (NSFetchedResultsController *)controller
 {
+    
     [self.tableView beginUpdates];
 }
 
@@ -231,10 +173,6 @@
     }
 }
 
-
-
-
-
 //------------------------------------------------------------------------------------------
 #pragma mark - Navigation
 //------------------------------------------------------------------------------------------
@@ -246,9 +184,8 @@
     NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
     if ([[segue identifier] isEqualToString:@"FoldersViewController"]) {
         NotesViewController *noteViewController = [segue destinationViewController];
-        noteViewController.folder               = [[self.coreDataManager fetchedResultsController] objectAtIndexPath:selectedIndexPath];
+        noteViewController.folder               = [self.fetchedResultsController objectAtIndexPath:selectedIndexPath];
     }
 }
-
 
 @end
