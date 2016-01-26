@@ -109,7 +109,7 @@
 -(void)loadData {
     
     self.coreDataManager                   = [NBCoreDataManager sharedManager];
-    self.fetchedResultsController          = [self.coreDataManager fetchedResultsControllerFor:self.folder searchBar:self.notesSearchBar.text];
+    self.fetchedResultsController          = [self.coreDataManager fetchedResultsControllerFor:self.folder];
     self.fetchedResultsController.delegate = self;
     self.notesSearchBar.delegate = self;
 }
@@ -123,11 +123,13 @@
     NSError *error = nil;
     if (searchText.length > 0)
     {
-        NSPredicate *predicate =[NSPredicate predicateWithFormat:@"name contains[cd] %@", searchText];
+        NSLog(@"________%@",self.fetchedResultsController.fetchedObjects);
+        NSPredicate *predicate =[NSPredicate predicateWithFormat:@"name contains[cd] %@ and folder == %@", searchText, self.folder];
         [self.fetchedResultsController.fetchRequest setPredicate:predicate];
+        NSLog(@"%@",self.fetchedResultsController.fetchedObjects);
     }
     else {
-        [self.fetchedResultsController.fetchRequest setPredicate:nil];
+        self.fetchedResultsController = [self.coreDataManager fetchedResultsControllerFor:self.folder];
     }
     
     if (![[self fetchedResultsController] performFetch:&error]) {

@@ -159,14 +159,10 @@
     return fetch;
 }
 
-- (nullable NSFetchedResultsController *)fetchedResultsControllerFor: (Folder *)folder searchBar:(NSString *)searchBar {
+- (nullable NSFetchedResultsController *)fetchedResultsControllerFor: (Folder *)folder {
     
     NSFetchRequest *request          = [NSFetchRequest fetchRequestWithEntityName:@"Note"];
     NSPredicate *predicate           = [NSPredicate predicateWithFormat:@"folder == %@", folder];
-    if ([searchBar length] > 0) {
-        NSPredicate *pred = [NSPredicate predicateWithFormat:@"name CONTAINS[c] %@", searchBar];
-        [request setPredicate:pred];
-    }
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey: @"date" ascending: NO];
 
     [request setPredicate:predicate];
