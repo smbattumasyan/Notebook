@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="tableIdentifier" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="88" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FTp-VF-aE0">
-                                <rect key="frame" x="-4" y="0.0" width="328" height="568"/>
+                                <rect key="frame" x="-4" y="116" width="328" height="452"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="tableIdenfier" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="tableIdenfier" rowHeight="88" id="NXG-bg-QUd" customClass="NoteViewCell">
@@ -86,17 +86,26 @@
                                     <outlet property="delegate" destination="GUy-2j-vmY" id="QNF-cG-TFw"/>
                                 </connections>
                             </tableView>
+                            <searchBar contentMode="redraw" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UyD-j5-Zpf">
+                                <rect key="frame" x="0.0" y="72" width="320" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="FTp-VF-aE0" firstAttribute="leading" secondItem="fKU-xQ-TjH" secondAttribute="leadingMargin" constant="-20" id="2l1-pf-NPG"/>
                             <constraint firstAttribute="trailingMargin" secondItem="FTp-VF-aE0" secondAttribute="trailing" constant="-20" id="66b-HX-yNW"/>
                             <constraint firstItem="beo-4s-8rm" firstAttribute="top" secondItem="FTp-VF-aE0" secondAttribute="bottom" id="9Hk-lM-YV6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="UyD-j5-Zpf" secondAttribute="trailing" constant="-20" id="DoI-e3-FCf"/>
                             <constraint firstItem="FTp-VF-aE0" firstAttribute="top" secondItem="yxM-Xf-Jnp" secondAttribute="bottom" constant="-64" id="PzN-5Q-vaM"/>
                             <constraint firstItem="FTp-VF-aE0" firstAttribute="top" secondItem="fKU-xQ-TjH" secondAttribute="topMargin" constant="64" id="TWO-5c-duQ"/>
+                            <constraint firstItem="UyD-j5-Zpf" firstAttribute="leading" secondItem="fKU-xQ-TjH" secondAttribute="leadingMargin" constant="-20" id="fuZ-wG-cGn"/>
+                            <constraint firstItem="FTp-VF-aE0" firstAttribute="top" secondItem="UyD-j5-Zpf" secondAttribute="bottom" id="jIo-AU-0R2"/>
+                            <constraint firstItem="UyD-j5-Zpf" firstAttribute="top" secondItem="yxM-Xf-Jnp" secondAttribute="bottom" constant="8" id="vpN-mZ-ZWI"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="PzN-5Q-vaM"/>
                                 <exclude reference="TWO-5c-duQ"/>
                             </mask>
                         </variation>
@@ -110,6 +119,7 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="notesSearchBar" destination="UyD-j5-Zpf" id="4bf-gR-S6m"/>
                         <outlet property="tableView" destination="FTp-VF-aE0" id="CQg-qs-Jaj"/>
                         <segue destination="MNg-Yl-AtL" kind="show" identifier="NotesViewController" id="YKv-kX-sd6"/>
                     </connections>

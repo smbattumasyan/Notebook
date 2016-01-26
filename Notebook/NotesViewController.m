@@ -11,12 +11,13 @@
 #import "NoteViewCell.h"
 #import "NBCoreDataManager.h"
 
-@interface NotesViewController () <NSFetchedResultsControllerDelegate>
+@interface NotesViewController () <NSFetchedResultsControllerDelegate, UISearchBarDelegate>
 
 //------------------------------------------------------------------------------------------
 #pragma mark - IBOutlets
 //------------------------------------------------------------------------------------------
 @property (weak, nonatomic  ) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UISearchBar *notesSearchBar;
 
 //------------------------------------------------------------------------------------------
 #pragma mark - Private Properties
@@ -108,8 +109,41 @@
 -(void)loadData {
     
     self.coreDataManager                   = [NBCoreDataManager sharedManager];
-    self.fetchedResultsController          = [self.coreDataManager fetchedResultsControllerFor:self.folder];
+    self.fetchedResultsController          = [self.coreDataManager fetchedResultsControllerFor:self.folder searchBar:self.notesSearchBar.text];
     self.fetchedResultsController.delegate = self;
+    self.notesSearchBar.delegate = self;
+}
+
+//-------------------------------------------------------------------------------------------
+#pragma mark - Search Bar
+//-------------------------------------------------------------------------------------------
+
+- (void)filterContentForSearchText:(NSString*)searchText
+{
+    NSError *error = nil;
+    if (searchText.length > 0)
+    {
+        NSPredicate *predicate =[NSPredicate predicateWithFormat:@"name contains[cd] %@", searchText];
+        [self.fetchedResultsController.fetchRequest setPredicate:predicate];
+    }
+    else {
+        [self.fetchedResultsController.fetchRequest setPredicate:nil];
+    }
+    
+    if (![[self fetchedResultsController] performFetch:&error]) {
+        // Handle error
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        exit(-1);  // Fail
+    }
+    
+    [self.tableView reloadData];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self filterContentForSearchText:self.notesSearchBar.text];
+}
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    [self filterContentForSearchText:self.notesSearchBar.text];
 }
 
 //-------------------------------------------------------------------------------------------
@@ -161,7 +195,6 @@
             break;
     }
 }
-
 
 //------------------------------------------------------------------------------------------
 #pragma mark - Navigation

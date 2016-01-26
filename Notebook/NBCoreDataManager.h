@@ -44,7 +44,7 @@ typedef NS_ENUM (NSInteger, FetchRequestEntityType) {
 - (void)deleteFolder:(nonnull Folder *)managedObject;
 
 - (nullable NSFetchedResultsController *)fetchedResultsController:(FetchRequestEntityType)entity;
-- (nullable NSFetchedResultsController *)fetchedResultsControllerFor: (nonnull Folder *)folder;
+- (nullable NSFetchedResultsController *)fetchedResultsControllerFor: (nonnull Folder *)folder searchBar:(nullable NSString *)searchBar;
 
 - (void)saveContext;
 
