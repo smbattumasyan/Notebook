@@ -21,10 +21,13 @@
 		17F45AE11C29721900B26B9C /* NotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F45AE01C29721900B26B9C /* NotesViewController.m */; };
 		17F45B291C297F8600B26B9C /* NoteDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F45B281C297F8600B26B9C /* NoteDetailsViewController.m */; };
 		17F45B301C2997FD00B26B9C /* NoteViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 17F45B2F1C2997FD00B26B9C /* NoteViewCell.m */; };
+		800B006B1C57973400665E54 /* FoldersModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 800B006A1C57973400665E54 /* FoldersModel.m */; };
+		800B006F1C57AE0D00665E54 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 800B006E1C57AE0D00665E54 /* IntroViewController.m */; };
 		808E35371C5206E700D9971C /* Folder+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 808E35301C5206E700D9971C /* Folder+CoreDataProperties.m */; };
 		808E35381C5206E700D9971C /* Folder.m in Sources */ = {isa = PBXBuildFile; fileRef = 808E35321C5206E700D9971C /* Folder.m */; };
 		808E35391C5206E700D9971C /* Note+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 808E35341C5206E700D9971C /* Note+CoreDataProperties.m */; };
 		808E353A1C5206E700D9971C /* Note.m in Sources */ = {isa = PBXBuildFile; fileRef = 808E35361C5206E700D9971C /* Note.m */; };
+		80FDA74F1C58E05C008DA498 /* NotesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 80FDA74E1C58E05C008DA498 /* NotesModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +77,10 @@
 		17F45B281C297F8600B26B9C /* NoteDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteDetailsViewController.m; sourceTree = "<group>"; };
 		17F45B2E1C2997FD00B26B9C /* NoteViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoteViewCell.h; sourceTree = "<group>"; };
 		17F45B2F1C2997FD00B26B9C /* NoteViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoteViewCell.m; sourceTree = "<group>"; };
+		800B00691C57973400665E54 /* FoldersModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoldersModel.h; sourceTree = "<group>"; };
+		800B006A1C57973400665E54 /* FoldersModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoldersModel.m; sourceTree = "<group>"; };
+		800B006D1C57AE0D00665E54 /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
+		800B006E1C57AE0D00665E54 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
 		808E352F1C5206E700D9971C /* Folder+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Folder+CoreDataProperties.h"; sourceTree = "<group>"; };
 		808E35301C5206E700D9971C /* Folder+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Folder+CoreDataProperties.m"; sourceTree = "<group>"; };
 		808E35311C5206E700D9971C /* Folder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Folder.h; sourceTree = "<group>"; };
@@ -82,6 +89,8 @@
 		808E35341C5206E700D9971C /* Note+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Note+CoreDataProperties.m"; sourceTree = "<group>"; };
 		808E35351C5206E700D9971C /* Note.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Note.h; sourceTree = "<group>"; };
 		808E35361C5206E700D9971C /* Note.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Note.m; sourceTree = "<group>"; };
+		80FDA74D1C58E05C008DA498 /* NotesModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesModel.h; sourceTree = "<group>"; };
+		80FDA74E1C58E05C008DA498 /* NotesModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,18 +131,18 @@
 			isa = PBXGroup;
 			children = (
 				17A5F51A1C2A795400FD2481 /* Managers */,
-				17A5F5191C2A791600FD2481 /* Entity Models */,
+				17A5F5191C2A791600FD2481 /* Models */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
 		};
-		17A5F5191C2A791600FD2481 /* Entity Models */ = {
+		17A5F5191C2A791600FD2481 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				17E0ACF21C47C94C00D8B2C1 /* Folder */,
 				17E0ACF11C47C94600D8B2C1 /* Note */,
 			);
-			name = "Entity Models";
+			name = Models;
 			sourceTree = "<group>";
 		};
 		17A5F51A1C2A795400FD2481 /* Managers */ = {
@@ -148,10 +157,9 @@
 		17E0ACF11C47C94600D8B2C1 /* Note */ = {
 			isa = PBXGroup;
 			children = (
-				808E35331C5206E700D9971C /* Note+CoreDataProperties.h */,
-				808E35341C5206E700D9971C /* Note+CoreDataProperties.m */,
-				808E35351C5206E700D9971C /* Note.h */,
-				808E35361C5206E700D9971C /* Note.m */,
+				80FDA7501C58E064008DA498 /* Model */,
+				80FDA74D1C58E05C008DA498 /* NotesModel.h */,
+				80FDA74E1C58E05C008DA498 /* NotesModel.m */,
 			);
 			name = Note;
 			sourceTree = "<group>";
@@ -159,10 +167,9 @@
 		17E0ACF21C47C94C00D8B2C1 /* Folder */ = {
 			isa = PBXGroup;
 			children = (
-				808E352F1C5206E700D9971C /* Folder+CoreDataProperties.h */,
-				808E35301C5206E700D9971C /* Folder+CoreDataProperties.m */,
-				808E35311C5206E700D9971C /* Folder.h */,
-				808E35321C5206E700D9971C /* Folder.m */,
+				800B006C1C57974D00665E54 /* Model */,
+				800B00691C57973400665E54 /* FoldersModel.h */,
+				800B006A1C57973400665E54 /* FoldersModel.m */,
 			);
 			name = Folder;
 			sourceTree = "<group>";
@@ -234,6 +241,7 @@
 			children = (
 				17F45AA91C29674F00B26B9C /* AppDelegate.h */,
 				17F45AAA1C29674F00B26B9C /* AppDelegate.m */,
+				800B00701C57AE1700665E54 /* IntroViewController */,
 				17927DDA1C466B3700FC1490 /* FoldersViewController */,
 				17F45B2B1C29978500B26B9C /* NotesViewController */,
 				17F45B2C1C29979900B26B9C /* NoteDetailsViewController */,
@@ -267,6 +275,37 @@
 				17F45B2F1C2997FD00B26B9C /* NoteViewCell.m */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		800B006C1C57974D00665E54 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				808E352F1C5206E700D9971C /* Folder+CoreDataProperties.h */,
+				808E35301C5206E700D9971C /* Folder+CoreDataProperties.m */,
+				808E35311C5206E700D9971C /* Folder.h */,
+				808E35321C5206E700D9971C /* Folder.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		800B00701C57AE1700665E54 /* IntroViewController */ = {
+			isa = PBXGroup;
+			children = (
+				800B006D1C57AE0D00665E54 /* IntroViewController.h */,
+				800B006E1C57AE0D00665E54 /* IntroViewController.m */,
+			);
+			name = IntroViewController;
+			sourceTree = "<group>";
+		};
+		80FDA7501C58E064008DA498 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				808E35331C5206E700D9971C /* Note+CoreDataProperties.h */,
+				808E35341C5206E700D9971C /* Note+CoreDataProperties.m */,
+				808E35351C5206E700D9971C /* Note.h */,
+				808E35361C5206E700D9971C /* Note.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -404,14 +443,17 @@
 				17A5F5231C2A7A2100FD2481 /* NBCoreDataManager.m in Sources */,
 				17F45AAB1C29674F00B26B9C /* AppDelegate.m in Sources */,
 				808E353A1C5206E700D9971C /* Note.m in Sources */,
+				800B006B1C57973400665E54 /* FoldersModel.m in Sources */,
 				808E35391C5206E700D9971C /* Note+CoreDataProperties.m in Sources */,
 				17F45AB41C29674F00B26B9C /* Notebook.xcdatamodeld in Sources */,
 				808E35371C5206E700D9971C /* Folder+CoreDataProperties.m in Sources */,
+				80FDA74F1C58E05C008DA498 /* NotesModel.m in Sources */,
 				17F45AA81C29674F00B26B9C /* main.m in Sources */,
 				17927DD91C466B0200FC1490 /* FoldersViewController.m in Sources */,
 				17F45AE11C29721900B26B9C /* NotesViewController.m in Sources */,
 				17F45B291C297F8600B26B9C /* NoteDetailsViewController.m in Sources */,
 				808E35381C5206E700D9971C /* Folder.m in Sources */,
+				800B006F1C57AE0D00665E54 /* IntroViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

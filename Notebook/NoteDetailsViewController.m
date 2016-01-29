@@ -33,14 +33,16 @@
 #pragma mark - Lifecycle
 //------------------------------------------------------------------------------------------
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
-    [self loadData];
+//    [self loadData];
     [self setIBOutlets];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -49,33 +51,35 @@
 #pragma mark - IBActions
 //------------------------------------------------------------------------------------------
 
-- (IBAction)deleteButtonAction:(id)sender {
-    
-    UIAlertController *deleteButtonAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete", @"delete alert title")
-                                                                                message:NSLocalizedString(@"deleteMessage", @"note delete message") preferredStyle:UIAlertControllerStyleAlert];
-
-    UIAlertAction *yesButton = [UIAlertAction actionWithTitle:NSLocalizedString(@"yes", @"delete note alert yes button name")
-                                            style:UIAlertActionStyleDefault
-                                            handler:^(UIAlertAction *action)
-                                            {
-                                             [self.coreDataManager deleteNote:self.aNote];
-                                             [deleteButtonAlert dismissViewControllerAnimated:YES completion:nil];
-                                                [self.navigationController popViewControllerAnimated:YES];
-                                            }];
-    UIAlertAction* noButton  = [UIAlertAction
-                                            actionWithTitle:NSLocalizedString(@"no", @"delete note alert no button name")
-                                            style:UIAlertActionStyleDefault
-                                            handler:^(UIAlertAction * action)
-                                            {
-                                            [deleteButtonAlert dismissViewControllerAnimated:YES  completion:nil];
-
-                                            }];
-    [deleteButtonAlert addAction:noButton];
-    [deleteButtonAlert addAction:yesButton];
-    [self presentViewController:deleteButtonAlert animated:YES completion:nil];
+- (IBAction)deleteButtonAction:(id)sender
+{
+//    
+//    UIAlertController *deleteButtonAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete", @"delete alert title")
+//                                                                                message:NSLocalizedString(@"deleteMessage", @"note delete message") preferredStyle:UIAlertControllerStyleAlert];
+//
+//    UIAlertAction *yesButton = [UIAlertAction actionWithTitle:NSLocalizedString(@"yes", @"delete note alert yes button name")
+//                                            style:UIAlertActionStyleDefault
+//                                            handler:^(UIAlertAction *action)
+//                                            {
+//                                             [self.coreDataManager deleteNote:self.aNote];
+//                                             [deleteButtonAlert dismissViewControllerAnimated:YES completion:nil];
+//                                                [self.navigationController popViewControllerAnimated:YES];
+//                                            }];
+//    UIAlertAction* noButton  = [UIAlertAction
+//                                            actionWithTitle:NSLocalizedString(@"no", @"delete note alert no button name")
+//                                            style:UIAlertActionStyleDefault
+//                                            handler:^(UIAlertAction * action)
+//                                            {
+//                                            [deleteButtonAlert dismissViewControllerAnimated:YES  completion:nil];
+//
+//                                            }];
+//    [deleteButtonAlert addAction:noButton];
+//    [deleteButtonAlert addAction:yesButton];
+//    [self presentViewController:deleteButtonAlert animated:YES completion:nil];
 }
 
-- (IBAction)editButtonAction:(UIBarButtonItem *)sender {
+- (IBAction)editButtonAction:(UIBarButtonItem *)sender
+{
     
     if (!self.titleTextField.enabled) {
         [self setTextViewEditable:YES];
@@ -97,12 +101,8 @@
 #pragma mark Privete Methods
 //------------------------------------------------------------------------------------------
 
-- (void)loadData {
-    
-    self.coreDataManager = [NBCoreDataManager sharedManager];
-}
-
-- (void)setIBOutlets {
+- (void)setIBOutlets
+{
 
     [self setTextViewEditable:self.isAddButtonPressed];
     if (self.isAddButtonPressed) {
@@ -119,7 +119,8 @@
     }
 }
 
-- (void)setTextViewEditable:(BOOL)status {
+- (void)setTextViewEditable:(BOOL)status
+{
     if (status) {
         
         [self.titleTextField setEnabled:YES];
@@ -130,19 +131,21 @@
     }
 }
 
-- (void)createNote {
+- (void)createNote
+{
     
-    [self.coreDataManager addNote:@{@"name":self.titleTextField.text,
+    [self.notesModel addNote:@{@"name":self.titleTextField.text,
                                     @"details":self.detailsTextView.text,
                                     @"date": [NSDate date],
                                     @"folder": self.aFolder}];
 }
 
-- (void)saveChangedValue {
+- (void)saveChangedValue
+{
     
-    [self.aNote setValue:[self.titleTextField text] forKey:@"name"];
-    [self.aNote setValue:[self.detailsTextView text] forKey:@"details"];
-    [self.coreDataManager saveObject];
+//    [self.aNote setValue:[self.titleTextField text] forKey:@"name"];
+//    [self.aNote setValue:[self.detailsTextView text] forKey:@"details"];
+//    [self.coreDataManager saveObject];
 }
 
 /*

@@ -113,7 +113,7 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="notesSearchBar" destination="UyD-j5-Zpf" id="nnc-te-Fxg"/>
+                        <outlet property="notesSearchBar" destination="UyD-j5-Zpf" id="6f9-ru-NrU"/>
                         <outlet property="tableView" destination="FTp-VF-aE0" id="CQg-qs-Jaj"/>
                         <segue destination="MNg-Yl-AtL" kind="show" identifier="NotesViewController" id="YKv-kX-sd6"/>
                     </connections>
@@ -145,8 +145,8 @@
                                     <action selector="deleteButtonAction:" destination="MNg-Yl-AtL" eventType="touchUpInside" id="ZAb-Dj-f3P"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ltx-2Z-MeO">
-                                <rect key="frame" x="4" y="72" width="312" height="465"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ltx-2Z-MeO">
+                                <rect key="frame" x="4" y="8" width="312" height="465"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="427" id="gjQ-Gs-3Qp"/>
@@ -217,12 +217,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="ZMa-GL-9MC" kind="relationship" relationship="rootViewController" id="iik-qS-UaP"/>
+                        <segue destination="dbi-k8-U7E" kind="relationship" relationship="rootViewController" id="LRb-wp-NQf"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OFF-PO-8Ot" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="588" y="323"/>
+            <point key="canvasLocation" x="175" y="323"/>
         </scene>
         <!--Folders View Controller-->
         <scene sceneID="GW4-0V-t74">
@@ -244,8 +244,8 @@
                                     <outlet property="delegate" destination="ZMa-GL-9MC" id="Em1-Z2-EX3"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NrJ-D1-9MC">
-                                <rect key="frame" x="220" y="476" width="80" height="20"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NrJ-D1-9MC">
+                                <rect key="frame" x="224" y="476" width="80" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="IAC-tv-Llc"/>
                                     <constraint firstAttribute="width" constant="80" id="imW-wP-00u"/>
@@ -277,6 +277,46 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qz0-3O-dDn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="957" y="323"/>
+        </scene>
+        <!--Intro View Controller-->
+        <scene sceneID="ebx-ki-FBJ">
+            <objects>
+                <viewController id="dbi-k8-U7E" customClass="IntroViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Sei-C8-Kk2"/>
+                        <viewControllerLayoutGuide type="bottom" id="2SE-MV-yh4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ElZ-V0-dSh">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="14H-oT-1RW">
+                                <rect key="frame" x="137" y="237" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="pZ7-m9-Clu"/>
+                                    <constraint firstAttribute="width" constant="46" id="scO-bZ-6Ie"/>
+                                </constraints>
+                                <state key="normal" title="Open"/>
+                                <connections>
+                                    <action selector="openButtonAction:" destination="dbi-k8-U7E" eventType="touchUpInside" id="jwf-Ol-ogv"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="14H-oT-1RW" firstAttribute="centerX" secondItem="ElZ-V0-dSh" secondAttribute="centerX" id="7LV-V9-020"/>
+                            <constraint firstItem="14H-oT-1RW" firstAttribute="centerY" secondItem="ElZ-V0-dSh" secondAttribute="centerY" id="qUO-2z-nn7"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="3Qt-Ry-UjF"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="ZMa-GL-9MC" kind="show" identifier="IntroViewController" id="qGO-4X-Sn9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eJO-Ut-6aW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="581" y="323"/>
         </scene>
     </scenes>
 </document>

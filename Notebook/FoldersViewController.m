@@ -10,6 +10,8 @@
 #import "NBCoreDataManager.h"
 #import "Folder.h"
 #import "NotesViewController.h"
+#import "FoldersModel.h"
+#import "NotesModel.h"
 
 @interface FoldersViewController () <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate>
 
@@ -17,14 +19,11 @@
 #pragma mark - IBOutlets
 //------------------------------------------------------------------------------------------
 
-@property (weak, nonatomic  ) IBOutlet UITableView *tableView;
+@property (weak, nonatomic ) IBOutlet UITableView *tableView;
 
 //------------------------------------------------------------------------------------------
 #pragma mark - Private Properties
 //------------------------------------------------------------------------------------------
-
-@property (strong, nonatomic) NBCoreDataManager *coreDataManager;
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 @end
 
@@ -36,7 +35,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-    [self loadData];
+    [self initFetchResultControlelr];
+    
     self.title = NSLocalizedString(@"folders", @"Folders Title");
 }
 
@@ -74,7 +74,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [[self.fetchedResultsController.sections objectAtIndex:section] numberOfObjects];
+    return [[self.folderModel.fetchedResultsController.sections objectAtIndex:section] numberOfObjects];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -84,7 +84,7 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tableIdentifier];
     }
-    Folder *folder      = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    Folder *folder      = [self.folderModel.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = [NSString stringWithFormat:@"%@ (%ld)",folder.name,folder.notes.count];
     return cell;
 }
@@ -103,25 +103,25 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.coreDataManager deleteFolder:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+        [self.folderModel deleteFolder:[self.folderModel.fetchedResultsController objectAtIndexPath:indexPath]];
     }
 }
 
 //------------------------------------------------------------------------------------------
-#pragma mark Privete Methods
+#pragma mark Private Methods
 //------------------------------------------------------------------------------------------
 
--(void)loadData {
+-(void)initFetchResultControlelr
+{
     
-   self.coreDataManager                   = [NBCoreDataManager sharedManager];
-   self.fetchedResultsController          = [self.coreDataManager fetchedResultsController:FetchRequestEntityTypeFolder];
-   self.fetchedResultsController.delegate = self;
+   self.folderModel.fetchedResultsController.delegate = self;
 }
 
-- (void)createFolder:(NSString *)folderName {
+- (void)createFolder:(NSString *)folderName
+{
     
-    [self.coreDataManager addFolder:@{@"name":folderName,
-                                      @"date":[NSDate date]}];
+    [self.folderModel addFolder:@{@"name":folderName,
+                                  @"date":[NSDate date]}];
 }
 
 //-------------------------------------------------------------------------------------------
@@ -130,7 +130,6 @@
 
 - (void)controllerWillChangeContent: (NSFetchedResultsController *)controller
 {
-    
     [self.tableView beginUpdates];
 }
 
@@ -183,8 +182,11 @@
     // Pass the selected object to the new view controller.
     NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
     if ([[segue identifier] isEqualToString:@"FoldersViewController"]) {
+        NotesModel *notesModel                  = [[NotesModel alloc] init];
+        notesModel.coreDataManager              = self.folderModel.coreDataManager;
         NotesViewController *noteViewController = [segue destinationViewController];
-        noteViewController.folder               = [self.fetchedResultsController objectAtIndexPath:selectedIndexPath];
+        noteViewController.folder               = [self.folderModel.fetchedResultsController objectAtIndexPath:selectedIndexPath];
+        noteViewController.notesModel           = notesModel;
     }
 }
 
