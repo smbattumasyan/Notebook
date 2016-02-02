@@ -10,13 +10,14 @@
 #import "Note.h"
 #import "Folder.h"
 #import "NotesModel.h"
+#import "NotesDataController.h"
 
 @interface NoteDetailsViewController : UIViewController
 
 #pragma mark - Propertes
 @property (strong, nonatomic) Note *aNote;
 @property (strong, nonatomic) Folder *aFolder;
-@property (strong, nonatomic) NotesModel *notesModel;
+@property (strong, nonatomic) NotesDataController *dataController;
 @property (assign, nonatomic) BOOL isAddButtonPressed;
 
 @end

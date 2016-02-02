@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "FoldersModel.h"
 
+@class FoldersDataController;
+
 @interface FoldersViewController : UIViewController
 
-@property (strong, nonatomic) FoldersModel *folderModel;
+#pragma mark - Propertes
+@property (strong, nonatomic ) FoldersDataController *dataController;
 
 @end

@@ -88,7 +88,6 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="GUy-2j-vmY" id="Z5f-qo-fw6"/>
                                     <outlet property="delegate" destination="GUy-2j-vmY" id="QNF-cG-TFw"/>
                                 </connections>
                             </tableView>
@@ -240,8 +239,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="468"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="ZMa-GL-9MC" id="6RY-UD-gNe"/>
-                                    <outlet property="delegate" destination="ZMa-GL-9MC" id="Em1-Z2-EX3"/>
+                                    <outlet property="delegate" destination="ZMa-GL-9MC" id="nHJ-K4-OPK"/>
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NrJ-D1-9MC">

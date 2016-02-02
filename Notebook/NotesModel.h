@@ -18,7 +18,7 @@
 
 - (void)deleteNote:(nonnull Note *)managedObject;
 - (nullable Note *)addNote:( nullable NSDictionary *)details;
-- (NSFetchedResultsController *)fetchedResultsControllerWithPredicate:(NSPredicate *)predicate;
+- (nonnull NSFetchedResultsController *)fetchedResultsControllerWithPredicate:(nullable NSPredicate *)predicate;
 
 
 @end

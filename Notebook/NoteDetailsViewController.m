@@ -23,7 +23,7 @@
 //------------------------------------------------------------------------------------------
 #pragma mark - Private Methods
 //------------------------------------------------------------------------------------------
-@property (strong, nonatomic) NBCoreDataManager *coreDataManager;
+
 
 @end
 
@@ -53,34 +53,33 @@
 
 - (IBAction)deleteButtonAction:(id)sender
 {
-//    
-//    UIAlertController *deleteButtonAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete", @"delete alert title")
-//                                                                                message:NSLocalizedString(@"deleteMessage", @"note delete message") preferredStyle:UIAlertControllerStyleAlert];
-//
-//    UIAlertAction *yesButton = [UIAlertAction actionWithTitle:NSLocalizedString(@"yes", @"delete note alert yes button name")
-//                                            style:UIAlertActionStyleDefault
-//                                            handler:^(UIAlertAction *action)
-//                                            {
-//                                             [self.coreDataManager deleteNote:self.aNote];
-//                                             [deleteButtonAlert dismissViewControllerAnimated:YES completion:nil];
-//                                                [self.navigationController popViewControllerAnimated:YES];
-//                                            }];
-//    UIAlertAction* noButton  = [UIAlertAction
-//                                            actionWithTitle:NSLocalizedString(@"no", @"delete note alert no button name")
-//                                            style:UIAlertActionStyleDefault
-//                                            handler:^(UIAlertAction * action)
-//                                            {
-//                                            [deleteButtonAlert dismissViewControllerAnimated:YES  completion:nil];
-//
-//                                            }];
-//    [deleteButtonAlert addAction:noButton];
-//    [deleteButtonAlert addAction:yesButton];
-//    [self presentViewController:deleteButtonAlert animated:YES completion:nil];
+    
+    UIAlertController *deleteButtonAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete", @"delete alert title")
+                                                                                message:NSLocalizedString(@"deleteMessage", @"note delete message") preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction *yesButton = [UIAlertAction actionWithTitle:NSLocalizedString(@"yes", @"delete note alert yes button name")
+                                            style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction *action)
+                                            {
+                                             [self.dataController.notesModel deleteNote:self.aNote];
+                                             [deleteButtonAlert dismissViewControllerAnimated:YES completion:nil];
+                                                [self.navigationController popViewControllerAnimated:YES];
+                                            }];
+    UIAlertAction* noButton  = [UIAlertAction
+                                            actionWithTitle:NSLocalizedString(@"no", @"delete note alert no button name")
+                                            style:UIAlertActionStyleDefault
+                                            handler:^(UIAlertAction * action)
+                                            {
+                                            [deleteButtonAlert dismissViewControllerAnimated:YES  completion:nil];
+
+                                            }];
+    [deleteButtonAlert addAction:noButton];
+    [deleteButtonAlert addAction:yesButton];
+    [self presentViewController:deleteButtonAlert animated:YES completion:nil];
 }
 
 - (IBAction)editButtonAction:(UIBarButtonItem *)sender
 {
-    
     if (!self.titleTextField.enabled) {
         [self setTextViewEditable:YES];
         sender.title = NSLocalizedString(@"done", @"note done button name");
@@ -132,9 +131,8 @@
 }
 
 - (void)createNote
-{
-    
-    [self.notesModel addNote:@{@"name":self.titleTextField.text,
+{    
+    [self.dataController.notesModel addNote:@{@"name":self.titleTextField.text,
                                     @"details":self.detailsTextView.text,
                                     @"date": [NSDate date],
                                     @"folder": self.aFolder}];
@@ -142,10 +140,9 @@
 
 - (void)saveChangedValue
 {
-    
-//    [self.aNote setValue:[self.titleTextField text] forKey:@"name"];
-//    [self.aNote setValue:[self.detailsTextView text] forKey:@"details"];
-//    [self.coreDataManager saveObject];
+    [self.aNote setValue:[self.titleTextField text] forKey:@"name"];
+    [self.aNote setValue:[self.detailsTextView text] forKey:@"details"];
+    [self.dataController.notesModel.coreDataManager saveContext];
 }
 
 /*

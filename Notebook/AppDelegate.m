@@ -15,7 +15,8 @@
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
     
     return YES;
 }
@@ -48,7 +49,5 @@
     // Saves changes in the application's managed object context before the application terminates.
 //    [[NBCoreDataManager sharedManager] saveContext];
 }
-
-
 
 @end

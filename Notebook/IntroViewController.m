@@ -9,6 +9,7 @@
 #import "IntroViewController.h"
 #import "FoldersModel.h"
 #import "FoldersViewController.h"
+#import "FoldersDataController.h"
 
 @interface IntroViewController ()
 
@@ -16,9 +17,14 @@
 
 @implementation IntroViewController
 
+//------------------------------------------------------------------------------------------
+#pragma mark - View Lifecycle
+//------------------------------------------------------------------------------------------
+
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
     [self performSegueWithIdentifier:@"IntroViewController" sender:self];
 }
 
@@ -32,17 +38,21 @@
     [self performSegueWithIdentifier:@"IntroViewController" sender:self];
 }
 
+//------------------------------------------------------------------------------------------
 #pragma mark - Navigation
+//------------------------------------------------------------------------------------------
+
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
     if ([segue.identifier isEqualToString:@"IntroViewController"]) {
         
         FoldersViewController *foldersViewController = [segue destinationViewController];
         FoldersModel *foldersModel                   = [[FoldersModel alloc] init];
         foldersModel.coreDataManager                 = [NBCoreDataManager createInstance];
 
-        foldersViewController.folderModel            = foldersModel;
+        foldersViewController.dataController             = [FoldersDataController createInstance];
+        foldersViewController.dataController.folderModel = foldersModel;
     }
 }
 

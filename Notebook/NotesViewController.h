@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "Folder.h"
 #import "NotesModel.h"
+#import "NotesDataController.h"
 
-@interface NotesViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface NotesViewController : UIViewController
 
 #pragma mark - Propertes
 @property (strong, nonatomic) Folder *folder;
-@property (strong, nonatomic) NotesModel *notesModel;
+@property (strong, nonatomic) NotesDataController *dataController;
 
 @end

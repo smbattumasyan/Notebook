@@ -11,8 +11,7 @@
 @implementation NotesModel
 
 - (void)deleteNote:(Note *)managedObject
-{
-    
+{    
     [self.coreDataManager.managedObjectContext deleteObject:managedObject];
     [self.coreDataManager saveContext];
 }
